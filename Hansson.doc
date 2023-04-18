@@ -1,0 +1,501 @@
+{\rtf1\adeflang1025\ansi\ansicpg1252\uc1\adeff0\deff0\stshfdbch0\stshfloch0\stshfhich0\stshfbi0\deflang2057\deflangfe2057{\fonttbl{\f0\froman\fcharset0\fprq2{\*\panose 02020603050405020304}Times New Roman;}{\f2\fmodern\fcharset0\fprq1{\*\panose 02070309020205020404}Courier New;}{\f41\froman\fcharset238\fprq2 Times New Roman CE;}
+{\f42\froman\fcharset204\fprq2 Times New Roman Cyr;}{\f44\froman\fcharset161\fprq2 Times New Roman Greek;}{\f45\froman\fcharset162\fprq2 Times New Roman Tur;}{\f46\fbidi \froman\fcharset177\fprq2 Times New Roman (Hebrew);}
+{\f47\fbidi \froman\fcharset178\fprq2 Times New Roman (Arabic);}{\f48\froman\fcharset186\fprq2 Times New Roman Baltic;}{\f49\froman\fcharset163\fprq2 Times New Roman (Vietnamese);}{\f61\fmodern\fcharset238\fprq1 Courier New CE;}
+{\f62\fmodern\fcharset204\fprq1 Courier New Cyr;}{\f64\fmodern\fcharset161\fprq1 Courier New Greek;}{\f65\fmodern\fcharset162\fprq1 Courier New Tur;}{\f66\fbidi \fmodern\fcharset177\fprq1 Courier New (Hebrew);}
+{\f67\fbidi \fmodern\fcharset178\fprq1 Courier New (Arabic);}{\f68\fmodern\fcharset186\fprq1 Courier New Baltic;}{\f69\fmodern\fcharset163\fprq1 Courier New (Vietnamese);}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;
+\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;
+\red128\green128\blue128;\red192\green192\blue192;}{\stylesheet{\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs24\alang1025 \ltrch\fcs0 \fs24\lang2057\langfe2057\cgrid\langnp2057\langfenp2057 
+\snext0 \styrsid9921531 Normal;}{\*\cs10 \additive \ssemihidden Default Paragraph Font;}{\*
+\ts11\tsrowd\trftsWidthB3\trpaddl108\trpaddr108\trpaddfl3\trpaddft3\trpaddfb3\trpaddfr3\tblind0\tblindtype3\tscellwidthfts0\tsvertalt\tsbrdrt\tsbrdrl\tsbrdrb\tsbrdrr\tsbrdrdgl\tsbrdrdgr\tsbrdrh\tsbrdrv 
+\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs20 \ltrch\fcs0 \fs20\lang1024\langfe1024\cgrid\langnp1024\langfenp1024 \snext11 \ssemihidden Normal Table;}{
+\s15\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af2\afs20\alang1025 \ltrch\fcs0 \f2\fs20\lang2057\langfe2057\cgrid\langnp2057\langfenp2057 \sbasedon0 \snext15 \slink16 \styrsid15609970 Plain Text;}{\*
+\cs16 \additive \rtlch\fcs1 \af2\afs20 \ltrch\fcs0 \f2\fs20 \sbasedon10 \slink15 \slocked \ssemihidden Plain Text Char;}}
+{\*\latentstyles\lsdstimax156\lsdlockeddef0{\lsdlockedexcept Normal;heading 1;heading 2;heading 3;heading 4;heading 5;heading 6;heading 7;heading 8;heading 9;toc 1;toc 2;toc 3;toc 4;toc 5;toc 6;toc 7;toc 8;toc 9;caption;Title;Default Paragraph Font;Subtitle;Strong;Emphasis;Table Grid;}}
+{\*\rsidtbl \rsid888\rsid4415\rsid4727\rsid5814\rsid7620\rsid8204\rsid12316\rsid13772\rsid13954\rsid23224\rsid87792\rsid143287\rsid146204\rsid156579\rsid162348\rsid163238\rsid203182\rsid227407\rsid271893\rsid274246\rsid274852\rsid284573\rsid290610
+\rsid328861\rsid333324\rsid334189\rsid335478\rsid337807\rsid344394\rsid347950\rsid351378\rsid357258\rsid393413\rsid396981\rsid402228\rsid409710\rsid411658\rsid414548\rsid417731\rsid425149\rsid464936\rsid471053\rsid479477\rsid480541\rsid541832\rsid553624
+\rsid555501\rsid611404\rsid658584\rsid672490\rsid672895\rsid724681\rsid725847\rsid727746\rsid733123\rsid739316\rsid745759\rsid753182\rsid797840\rsid797903\rsid798384\rsid802570\rsid806522\rsid812810\rsid853644\rsid855669\rsid867767\rsid871914\rsid879731
+\rsid879788\rsid883528\rsid922546\rsid924758\rsid926058\rsid926287\rsid926314\rsid928929\rsid929082\rsid935180\rsid938538\rsid946229\rsid948480\rsid989245\rsid1001204\rsid1001586\rsid1056135\rsid1060407\rsid1075868\rsid1075943\rsid1119863\rsid1120228
+\rsid1130697\rsid1135369\rsid1140325\rsid1141569\rsid1142959\rsid1144174\rsid1145082\rsid1181270\rsid1186435\rsid1187412\rsid1189403\rsid1191337\rsid1202014\rsid1203883\rsid1255934\rsid1263108\rsid1265797\rsid1273339\rsid1311787\rsid1314358\rsid1328805
+\rsid1334519\rsid1335616\rsid1337261\rsid1339350\rsid1343237\rsid1382006\rsid1396939\rsid1399407\rsid1402065\rsid1407373\rsid1407428\rsid1445998\rsid1453918\rsid1470056\rsid1473564\rsid1510773\rsid1511986\rsid1515787\rsid1524228\rsid1529253\rsid1531287
+\rsid1531416\rsid1537480\rsid1578976\rsid1580377\rsid1586423\rsid1590058\rsid1597859\rsid1602284\rsid1638821\rsid1639099\rsid1642842\rsid1643056\rsid1652274\rsid1652861\rsid1661016\rsid1711693\rsid1712031\rsid1712684\rsid1716610\rsid1718962\rsid1720239
+\rsid1726632\rsid1728113\rsid1772099\rsid1775219\rsid1780095\rsid1847303\rsid1863798\rsid1905868\rsid1907482\rsid1907758\rsid1914706\rsid1914794\rsid1922014\rsid1928713\rsid1983851\rsid1984798\rsid1987673\rsid1988596\rsid1989493\rsid1990559\rsid1994480
+\rsid2037846\rsid2038764\rsid2051283\rsid2060356\rsid2105721\rsid2105966\rsid2106236\rsid2107492\rsid2109494\rsid2162718\rsid2167759\rsid2172158\rsid2172943\rsid2177329\rsid2231067\rsid2238719\rsid2243309\rsid2245272\rsid2260591\rsid2295867\rsid2303148
+\rsid2303228\rsid2312748\rsid2315141\rsid2325639\rsid2362592\rsid2370490\rsid2373926\rsid2375355\rsid2378472\rsid2445300\rsid2453004\rsid2454253\rsid2454767\rsid2491037\rsid2492953\rsid2494196\rsid2507576\rsid2516231\rsid2562142\rsid2574649\rsid2629037
+\rsid2650622\rsid2652043\rsid2653534\rsid2689898\rsid2691341\rsid2691623\rsid2693132\rsid2694249\rsid2696800\rsid2753806\rsid2756964\rsid2759712\rsid2761728\rsid2772546\rsid2779287\rsid2779834\rsid2825439\rsid2838812\rsid2846341\rsid2888764\rsid2892103
+\rsid2894073\rsid2899499\rsid2902386\rsid2904163\rsid2905522\rsid2906687\rsid2912244\rsid2950121\rsid2950724\rsid2951500\rsid2961994\rsid2971423\rsid2973912\rsid3020044\rsid3023602\rsid3026353\rsid3036933\rsid3080483\rsid3081966\rsid3089159\rsid3099649
+\rsid3099700\rsid3103655\rsid3111416\rsid3111783\rsid3112235\rsid3156962\rsid3162185\rsid3165258\rsid3166270\rsid3166966\rsid3171965\rsid3219885\rsid3236384\rsid3239076\rsid3239808\rsid3285672\rsid3286698\rsid3299838\rsid3305739\rsid3308760\rsid3352103
+\rsid3359132\rsid3368842\rsid3374048\rsid3408437\rsid3411634\rsid3425609\rsid3429386\rsid3433744\rsid3476724\rsid3479315\rsid3486273\rsid3486424\rsid3488676\rsid3491940\rsid3503224\rsid3503429\rsid3542149\rsid3542352\rsid3543532\rsid3546295\rsid3556252
+\rsid3557930\rsid3563370\rsid3570338\rsid3570461\rsid3605406\rsid3611294\rsid3612600\rsid3628605\rsid3634723\rsid3676633\rsid3683594\rsid3687580\rsid3736773\rsid3740440\rsid3752822\rsid3754019\rsid3756333\rsid3757056\rsid3759984\rsid3761909\rsid3803774
+\rsid3807692\rsid3809152\rsid3810131\rsid3810827\rsid3811441\rsid3814334\rsid3816556\rsid3872563\rsid3877184\rsid3884160\rsid3933399\rsid3934678\rsid3936443\rsid3954404\rsid3957079\rsid3958951\rsid4016324\rsid4025194\rsid4063847\rsid4094692\rsid4133152
+\rsid4140866\rsid4147133\rsid4151264\rsid4196021\rsid4198128\rsid4200294\rsid4206031\rsid4216832\rsid4224612\rsid4225818\rsid4281236\rsid4292017\rsid4327197\rsid4328694\rsid4332915\rsid4342505\rsid4344907\rsid4354141\rsid4412357\rsid4416032\rsid4416916
+\rsid4461525\rsid4467870\rsid4469451\rsid4470655\rsid4471084\rsid4471523\rsid4473761\rsid4488372\rsid4537067\rsid4539207\rsid4554388\rsid4607643\rsid4618085\rsid4655886\rsid4655915\rsid4656473\rsid4659388\rsid4662435\rsid4663847\rsid4664469\rsid4741229
+\rsid4741885\rsid4751061\rsid4786551\rsid4787784\rsid4798188\rsid4798291\rsid4805070\rsid4806793\rsid4852428\rsid4872857\rsid4882166\rsid4922988\rsid4923033\rsid4929891\rsid4930963\rsid4932769\rsid4935689\rsid4938258\rsid4938950\rsid4981681\rsid4985844
+\rsid4990864\rsid4997766\rsid5009811\rsid5010016\rsid5011988\rsid5012171\rsid5069076\rsid5072815\rsid5073261\rsid5074199\rsid5078560\rsid5113622\rsid5131968\rsid5140778\rsid5184546\rsid5192094\rsid5195054\rsid5200838\rsid5201677\rsid5205248\rsid5245597
+\rsid5256838\rsid5260493\rsid5263083\rsid5308452\rsid5316429\rsid5322336\rsid5331121\rsid5332270\rsid5334892\rsid5337095\rsid5340013\rsid5378528\rsid5381722\rsid5382679\rsid5395216\rsid5398504\rsid5404562\rsid5405992\rsid5456182\rsid5459953\rsid5462541
+\rsid5506798\rsid5514382\rsid5517768\rsid5527029\rsid5575473\rsid5582063\rsid5589977\rsid5599348\rsid5650521\rsid5654942\rsid5656430\rsid5660972\rsid5665124\rsid5666657\rsid5717840\rsid5720657\rsid5727835\rsid5787302\rsid5795542\rsid5797997\rsid5908372
+\rsid5911376\rsid5911704\rsid5912397\rsid5915666\rsid5919534\rsid5922615\rsid5970725\rsid5980211\rsid5981349\rsid5986714\rsid5988704\rsid6031422\rsid6038063\rsid6049309\rsid6051250\rsid6055073\rsid6101655\rsid6101745\rsid6108664\rsid6109118\rsid6112977
+\rsid6116605\rsid6177790\rsid6225956\rsid6294446\rsid6300861\rsid6316447\rsid6320352\rsid6323332\rsid6358393\rsid6359720\rsid6364954\rsid6368850\rsid6386129\rsid6389715\rsid6428237\rsid6433579\rsid6437803\rsid6438584\rsid6439116\rsid6441017\rsid6442406
+\rsid6445184\rsid6488966\rsid6510464\rsid6514729\rsid6563360\rsid6564921\rsid6566070\rsid6572588\rsid6578443\rsid6584923\rsid6620353\rsid6622707\rsid6625437\rsid6632908\rsid6645303\rsid6649488\rsid6696398\rsid6712033\rsid6713335\rsid6750724\rsid6754535
+\rsid6764504\rsid6767635\rsid6768181\rsid6777083\rsid6815959\rsid6826931\rsid6833030\rsid6839470\rsid6891835\rsid6898523\rsid6904043\rsid6947994\rsid6951360\rsid6952619\rsid6963926\rsid7015367\rsid7027861\rsid7040300\rsid7093103\rsid7096322\rsid7103295
+\rsid7103757\rsid7106756\rsid7146789\rsid7148158\rsid7159368\rsid7164469\rsid7167730\rsid7171565\rsid7212364\rsid7221032\rsid7224929\rsid7225879\rsid7239334\rsid7241200\rsid7274603\rsid7278877\rsid7282778\rsid7284720\rsid7295094\rsid7297559\rsid7344487
+\rsid7352107\rsid7357224\rsid7363332\rsid7408476\rsid7423412\rsid7424909\rsid7430759\rsid7431444\rsid7432399\rsid7471810\rsid7476282\rsid7481985\rsid7482944\rsid7487344\rsid7496860\rsid7555534\rsid7562847\rsid7621002\rsid7634675\rsid7668759\rsid7675168
+\rsid7680071\rsid7682931\rsid7686455\rsid7686495\rsid7686794\rsid7690059\rsid7694725\rsid7699259\rsid7734909\rsid7736983\rsid7744762\rsid7748833\rsid7760893\rsid7763740\rsid7765864\rsid7799380\rsid7810786\rsid7818013\rsid7822721\rsid7878578\rsid7879825
+\rsid7937927\rsid7945798\rsid7956203\rsid7999072\rsid8003063\rsid8021794\rsid8064576\rsid8067780\rsid8079993\rsid8088393\rsid8088960\rsid8091461\rsid8131739\rsid8133574\rsid8154549\rsid8195933\rsid8196698\rsid8206272\rsid8222647\rsid8258620\rsid8262824
+\rsid8269116\rsid8277336\rsid8277927\rsid8286402\rsid8288517\rsid8324437\rsid8324851\rsid8326793\rsid8329775\rsid8330983\rsid8338334\rsid8339828\rsid8349243\rsid8352102\rsid8355832\rsid8399630\rsid8416076\rsid8418398\rsid8420120\rsid8463578\rsid8465297
+\rsid8478341\rsid8482701\rsid8484177\rsid8485410\rsid8525833\rsid8531005\rsid8540778\rsid8548063\rsid8548973\rsid8593833\rsid8597262\rsid8599946\rsid8601504\rsid8606863\rsid8656955\rsid8660885\rsid8662117\rsid8669169\rsid8674440\rsid8676883\rsid8721214
+\rsid8737064\rsid8739794\rsid8793128\rsid8795872\rsid8807538\rsid8809194\rsid8855455\rsid8858382\rsid8860801\rsid8860979\rsid8862175\rsid8868061\rsid8871253\rsid8874467\rsid8913417\rsid8921534\rsid8924745\rsid8926625\rsid8932387\rsid8942961\rsid8986474
+\rsid8987668\rsid8987923\rsid8988454\rsid8992812\rsid8996446\rsid9000450\rsid9009159\rsid9049490\rsid9055078\rsid9057131\rsid9059761\rsid9063616\rsid9067452\rsid9067730\rsid9070065\rsid9072387\rsid9110708\rsid9113044\rsid9127103\rsid9132310\rsid9192404
+\rsid9193747\rsid9194604\rsid9196466\rsid9202534\rsid9203645\rsid9249942\rsid9251391\rsid9255025\rsid9267623\rsid9269678\rsid9271141\rsid9313661\rsid9315205\rsid9322208\rsid9322916\rsid9328251\rsid9329884\rsid9330048\rsid9333337\rsid9335554\rsid9378110
+\rsid9443865\rsid9444277\rsid9444630\rsid9452456\rsid9503047\rsid9505189\rsid9505225\rsid9510186\rsid9513081\rsid9518124\rsid9526547\rsid9574249\rsid9577168\rsid9579558\rsid9589651\rsid9639779\rsid9656775\rsid9661327\rsid9711791\rsid9713479\rsid9764935
+\rsid9777849\rsid9791709\rsid9796158\rsid9833925\rsid9848454\rsid9854718\rsid9858222\rsid9858963\rsid9897253\rsid9903179\rsid9921531\rsid9972047\rsid9989230\rsid9991176\rsid9991378\rsid10031742\rsid10038515\rsid10043103\rsid10044658\rsid10056801
+\rsid10109756\rsid10122014\rsid10161304\rsid10161493\rsid10166362\rsid10168339\rsid10168385\rsid10172700\rsid10175870\rsid10176316\rsid10176946\rsid10177340\rsid10177382\rsid10178445\rsid10186002\rsid10240748\rsid10249886\rsid10254124\rsid10255469
+\rsid10291882\rsid10298260\rsid10303801\rsid10306753\rsid10309938\rsid10314127\rsid10318804\rsid10359844\rsid10360949\rsid10366338\rsid10373902\rsid10383164\rsid10423848\rsid10425701\rsid10434678\rsid10449048\rsid10449769\rsid10451623\rsid10452480
+\rsid10488235\rsid10496007\rsid10499155\rsid10500157\rsid10504522\rsid10506014\rsid10517442\rsid10551615\rsid10555204\rsid10565734\rsid10577425\rsid10624706\rsid10626880\rsid10636323\rsid10642139\rsid10645136\rsid10683555\rsid10685754\rsid10692651
+\rsid10693250\rsid10707435\rsid10708779\rsid10714877\rsid10748441\rsid10767539\rsid10773459\rsid10779989\rsid10823794\rsid10825301\rsid10830733\rsid10838456\rsid10842089\rsid10879405\rsid10888426\rsid10896143\rsid10899338\rsid10902308\rsid10904605
+\rsid10905799\rsid10967191\rsid10968206\rsid10969511\rsid11015723\rsid11022156\rsid11025027\rsid11027520\rsid11037048\rsid11042083\rsid11076209\rsid11077209\rsid11077709\rsid11078082\rsid11082604\rsid11086602\rsid11087702\rsid11099032\rsid11108337
+\rsid11150990\rsid11152141\rsid11153984\rsid11158711\rsid11161379\rsid11167085\rsid11170225\rsid11222316\rsid11228214\rsid11275568\rsid11280888\rsid11290008\rsid11290526\rsid11299780\rsid11300268\rsid11338370\rsid11357078\rsid11366627\rsid11406317
+\rsid11408191\rsid11408309\rsid11411646\rsid11412110\rsid11419212\rsid11427998\rsid11428573\rsid11429702\rsid11433716\rsid11484151\rsid11484438\rsid11496218\rsid11535664\rsid11547689\rsid11561928\rsid11566983\rsid11630513\rsid11630700\rsid11668066
+\rsid11683569\rsid11684928\rsid11688514\rsid11689243\rsid11690443\rsid11695501\rsid11697539\rsid11735529\rsid11738961\rsid11741144\rsid11741996\rsid11751992\rsid11758903\rsid11760665\rsid11761453\rsid11803274\rsid11803499\rsid11809053\rsid11817058
+\rsid11821185\rsid11862691\rsid11867572\rsid11876185\rsid11878014\rsid11929381\rsid11940908\rsid11948676\rsid11956415\rsid11998771\rsid12003726\rsid12004954\rsid12015842\rsid12017672\rsid12064026\rsid12075965\rsid12125445\rsid12125571\rsid12126389
+\rsid12129186\rsid12141081\rsid12141273\rsid12191624\rsid12193490\rsid12196014\rsid12196069\rsid12200153\rsid12209831\rsid12221712\rsid12259938\rsid12266367\rsid12277863\rsid12322415\rsid12329788\rsid12330616\rsid12332628\rsid12336634\rsid12339351
+\rsid12339411\rsid12353178\rsid12389985\rsid12404927\rsid12458368\rsid12460204\rsid12466684\rsid12471180\rsid12473082\rsid12475090\rsid12517939\rsid12519748\rsid12528528\rsid12531395\rsid12536411\rsid12545773\rsid12549598\rsid12586846\rsid12590461
+\rsid12596292\rsid12654014\rsid12678288\rsid12726422\rsid12734563\rsid12737779\rsid12740835\rsid12742900\rsid12797753\rsid12800272\rsid12811175\rsid12850120\rsid12861901\rsid12866757\rsid12868808\rsid12877807\rsid12912044\rsid12915129\rsid12933913
+\rsid12934717\rsid12941638\rsid12996956\rsid12998448\rsid12998553\rsid13004041\rsid13050965\rsid13111241\rsid13117299\rsid13123373\rsid13125468\rsid13126205\rsid13128938\rsid13130905\rsid13137904\rsid13138224\rsid13173398\rsid13175445\rsid13181078
+\rsid13186895\rsid13202245\rsid13242143\rsid13252518\rsid13254274\rsid13257482\rsid13259300\rsid13304863\rsid13312710\rsid13318834\rsid13320103\rsid13320586\rsid13328955\rsid13375113\rsid13379793\rsid13381278\rsid13383140\rsid13384842\rsid13390299
+\rsid13394589\rsid13449934\rsid13524807\rsid13572400\rsid13582007\rsid13583875\rsid13588835\rsid13637960\rsid13641063\rsid13650322\rsid13651942\rsid13661144\rsid13699717\rsid13710343\rsid13717090\rsid13717905\rsid13719293\rsid13727647\rsid13728846
+\rsid13729195\rsid13779692\rsid13831717\rsid13852291\rsid13852319\rsid13902047\rsid13914462\rsid13916824\rsid13916962\rsid13921581\rsid13968672\rsid13981749\rsid13987174\rsid13989104\rsid14026831\rsid14053064\rsid14056743\rsid14096791\rsid14099006
+\rsid14100692\rsid14109651\rsid14121526\rsid14228018\rsid14239944\rsid14244113\rsid14245822\rsid14287645\rsid14287666\rsid14289978\rsid14295647\rsid14295708\rsid14303426\rsid14312235\rsid14315185\rsid14356342\rsid14361394\rsid14372162\rsid14427574
+\rsid14431464\rsid14438947\rsid14443307\rsid14444760\rsid14446678\rsid14446932\rsid14448070\rsid14448495\rsid14489139\rsid14489559\rsid14496357\rsid14501123\rsid14501147\rsid14559542\rsid14575842\rsid14581511\rsid14615003\rsid14629431\rsid14644164
+\rsid14689230\rsid14691967\rsid14693987\rsid14696000\rsid14712370\rsid14752723\rsid14754323\rsid14758101\rsid14764871\rsid14770775\rsid14772342\rsid14773622\rsid14776215\rsid14822074\rsid14825489\rsid14829112\rsid14945607\rsid14954906\rsid14960844
+\rsid14968398\rsid14973296\rsid15037274\rsid15038127\rsid15039892\rsid15074559\rsid15080965\rsid15149758\rsid15151607\rsid15155250\rsid15165600\rsid15168372\rsid15211430\rsid15222115\rsid15231382\rsid15235701\rsid15236386\rsid15274334\rsid15276556
+\rsid15293040\rsid15293752\rsid15296169\rsid15338425\rsid15348595\rsid15356743\rsid15360872\rsid15367650\rsid15406240\rsid15408858\rsid15418265\rsid15422406\rsid15423327\rsid15471759\rsid15478790\rsid15482247\rsid15493967\rsid15494361\rsid15494573
+\rsid15533138\rsid15541601\rsid15543196\rsid15550403\rsid15603588\rsid15603718\rsid15608372\rsid15608856\rsid15609970\rsid15611283\rsid15615855\rsid15616192\rsid15620211\rsid15625224\rsid15667334\rsid15683953\rsid15685608\rsid15685841\rsid15686902
+\rsid15691520\rsid15695622\rsid15737901\rsid15741320\rsid15742449\rsid15746617\rsid15803090\rsid15810241\rsid15814368\rsid15862341\rsid15862683\rsid15865740\rsid15872950\rsid15874423\rsid15888131\rsid15931190\rsid15939869\rsid15956084\rsid15994439
+\rsid16000493\rsid16009414\rsid16010435\rsid16012738\rsid16061231\rsid16082385\rsid16084703\rsid16086752\rsid16088572\rsid16139109\rsid16143394\rsid16144412\rsid16194573\rsid16198219\rsid16206195\rsid16212901\rsid16214498\rsid16215662\rsid16220040
+\rsid16255517\rsid16259073\rsid16259916\rsid16263616\rsid16265305\rsid16270431\rsid16272099\rsid16284796\rsid16334424\rsid16338078\rsid16384903\rsid16385592\rsid16396176\rsid16410968\rsid16416660\rsid16463805\rsid16518895\rsid16520670\rsid16524511
+\rsid16527351\rsid16528539\rsid16535614\rsid16538314\rsid16546044\rsid16595822\rsid16648509\rsid16668508\rsid16713347\rsid16716077\rsid16727024\rsid16730509\rsid16730905}{\*\generator Microsoft Word 11.0.0000;}{\info
+{\title Asecodes atripes (Girault), 1915}{\author jsn}{\operator jsn}{\creatim\yr2011\mo7\dy15\hr11\min55}{\revtim\yr2011\mo7\dy15\hr11\min55}{\version2}{\edmins1}{\nofpages8}{\nofwords1887}{\nofchars10759}{\*\company The Natural History Museum}
+{\nofcharsws12621}{\vern24615}{\*\password 00000000}}{\*\xmlnstbl {\xmlns1 http://schemas.microsoft.com/office/word/2003/wordml}{\xmlns2 urn:schemas-microsoft-com:office:smarttags}}
+\paperw11906\paperh16838\margl1152\margr1152\margt1440\margb1440\gutter0\ltrsect 
+\widowctrl\ftnbj\aenddoc\donotembedsysfont0\donotembedlingdata0\grfdocevents0\validatexml1\showplaceholdtext0\ignoremixedcontent0\saveinvalidxml0\showxmlerrors1\noxlattoyen\expshrtn\noultrlspc\dntblnsbdb\nospaceforul\formshade\horzdoc\dgmargin\dghspace180
+\dgvspace180\dghorigin1701\dgvorigin1984\dghshow1\dgvshow1
+\jexpand\viewkind4\viewscale100\pgbrdrhead\pgbrdrfoot\splytwnine\ftnlytwnine\htmautsp\nolnhtadjtbl\useltbaln\alntblind\lytcalctblwd\lyttblrtgr\lnbrkrule\nobrkwrptbl\snaptogridincell\allowfieldendsel\wrppunct
+\asianbrkrule\rsidroot11222316\newtblstyruls\nogrowautofit \fet0{\*\wgrffmtfilter 013f}\ilfomacatclnup0\ltrpar \sectd \ltrsect\linex0\headery708\footery708\colsx708\endnhere\sectlinegrid360\sectdefaultcl\sectrsid15609970\sftnbj {\*\pnseclvl1
+\pnucrm\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang {\pntxta )}}{\*\pnseclvl5
+\pndec\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl6\pnlcltr\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang 
+{\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}\pard\plain \ltrpar\s15\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid15609970 \rtlch\fcs1 \af2\afs20\alang1025 
+\ltrch\fcs0 \f2\fs20\lang2057\langfe2057\cgrid\langnp2057\langfenp2057 {\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923\charrsid15609970 
+\par 
+\par 
+\par 
+\par 
+\par Asecodes atripes (Girault), 1915
+\par Asecodes auriceps Ashmead, 1894
+\par Asecodes caterinae Viggiani, 1978
+\par Asecodes congruens (Nees), 1834
+\par Asecodes delucchii (Boucek), 1971
+\par Asecodes erxias ({\*\xmlopen\xmlns2{\factoidname place}}{\*\xmlopen\xmlns2{\factoidname City}}Walker{\*\xmlclose}{\*\xmlclose}), 1848
+\par Asecodes galerucae {\*\xmlopen\xmlns2{\factoidname PersonName}}Askew{\*\xmlclose}, 1978
+\par Asecodes hispinarum Boucek, 1988
+\par Asecodes hyperion Graham, 1963
+\par Asecodes lagus ({\*\xmlopen\xmlns2{\factoidname place}}{\*\xmlopen\xmlns2{\factoidname City}}Walker{\*\xmlclose}{\*\xmlclose}), 1838
+\par Asecodes lucens (Nees), 1834
+\par Asecodes notandus (Silvestri), 1914
+\par Asecodes orilatum Hansson, 1996
+\par Asecodes politum (Hansson), 1994
+\par Asecodes reticulatum (Kamijo), 1986
+\par Asecodes sapporense Kamijo, 1986
+\par Asecodes sinense (Ling), 2000
+\par Asecodes suzukii Kamijo, 1986
+\par Asecodes turcicum (Nees), 1834
+\par Asecodes violaceum (Ferri\'8are), 1936}{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923 
+\par 
+\par }{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923\charrsid15609970 
+\par Chrysonotomyia abdita Hansson, 2004
+\par Chrysonotomyia acutangula Hansson, 2004
+\par Chrysonotomyia aemilia (Girault), 1917
+\par Chrysonotomyia aenea (Girault), 1913
+\par Chrysonotomyia aeneicoxa (Dodd), 1917
+\par Chrysonotomyia aenella (Girault), 1915
+\par Chrysonotomyia alajuelae Hansson, 2004
+\par Chrysonotomyia albicornis Hansson, 2004
+\par Chrysonotomyia albicoxa Hansson, 2004
+\par Chrysonotomyia albifascia Hansson, 2004
+\par Chrysonotomyia albifemur (Girault), 1915
+\par Chrysonotomyia albipes (Girault & Dodd), 1913
+\par Chrysonotomyia albogilva Hansson, 2004
+\par Chrysonotomyia alpigena Hansson, 2004
+\par Chrysonotomyia altamirae Hansson, 2004
+\par Chrysonotomyia ambonata Hansson, 2004
+\par Chrysonotomyia appannai (Chandy Kurian), 1953
+\par Chrysonotomyia arenalicola Hansson, 2004
+\par Chrysonotomyia aurea (Girault), 1913
+\par Chrysonotomyia auricorpus (Girault & Dodd), 1915
+\par Chrysonotomyia auripunctata (Ashmead), 1894
+\par Chrysonotomyia babayanzi Myartseva & Kurashev, 1991
+\par Chrysonotomyia barbata Hansson, 2004
+\par Chrysonotomyia bifasciata (Girault), 1913
+\par Chrysonotomyia bimaculata Hansson, 2004
+\par Chrysonotomyia bivittata Hansson, 2004
+\par Chrysonotomyia brevicornis (Girault), 1913
+\par 
+\par 
+\par 
+\par \page 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par Chrysonotomyia burrufascia Hansson, 2004
+\par Chrysonotomyia cardinalis Hansson, 2004
+\par Chrysonotomyia caribensis Hansson, 2004
+\par Chrysonotomyia casacocae Hansson, 2004
+\par Chrysonotomyia cecropiae Hansson, 2004
+\par Chrysonotomyia ciliata (Ashmead), 1894
+\par Chrysonotomyia citrinigaster Hansson, 2004
+\par Chrysonotomyia clariscutellum (Girault), 1913
+\par Chrysonotomyia claviger Paniagua & Hansson, 2009
+\par Chrysonotomyia cnecosoma Hansson, 2004
+\par Chrysonotomyia conostegiae Hansson, 2004
+\par Chrysonotomyia consobrina (Girault), 1913
+\par Chrysonotomyia corallina Hansson, 2004
+\par Chrysonotomyia cornigera Hansson, 2004
+\par Chrysonotomyia corynata Hansson, 2004
+\par Chrysonotomyia costaricana }{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923 \'d6}{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923\charrsid15609970 zdikmen, 2011
+\par Chrysonotomyia crassipes Hansson, 2004
+\par Chrysonotomyia crinipennis Hansson, 2004
+\par Chrysonotomyia crotapha Hansson, 2004
+\par Chrysonotomyia deltaceps Hansson, 2004
+\par Chrysonotomyia dictyota Hansson, 2004
+\par Chrysonotomyia dinomerinx Hansson, 2004
+\par Chrysonotomyia disticha Hansson, 2004
+\par Chrysonotomyia dolichogaster Hansson, 2004
+\par Chrysonotomyia dolichura Hansson, 2004
+\par Chrysonotomyia dominicana Gumovsky, 2001
+\par Chrysonotomyia douglassi (Girault), 1913
+\par Chrysonotomyia dubia (Girault), 1913
+\par Chrysonotomyia dumasi (Girault), 1915
+\par Chrysonotomyia dussiae Paniagua & Hansson, 2009
+\par Chrysonotomyia elongata (Sureshan & Narendran), 2001
+\par Chrysonotomyia epacra Hansson, 2004
+\par Chrysonotomyia erugata Hansson, 2004
+\par Chrysonotomyia etiellae (Risbec), 1955
+\par Chrysonotomyia fasciata Hansson, 2004
+\par Chrysonotomyia fasciatipennis (Girault), 1913
+\par Chrysonotomyia foersteri (Girault), 1913
+\par Chrysonotomyia froudei (Girault), 1922
+\par Chrysonotomyia galbina Hansson, 2004
+\par Chrysonotomyia germanica (Erd\'94s), 1956
+\par Chrysonotomyia glabriscutellum (Girault), 1915
+\par Chrysonotomyia godoyae Hansson, 2004
+\par Chrysonotomyia grandis (Girault), 1913
+\par Chrysonotomyia grossa Hansson, 2004
+\par Chrysonotomyia helvola Hansson, 2004
+\par Chrysonotomyia hyalinipennis (Khan & Shafee), 1980
+\par Chrysonotomyia indigitus Hansson, 2004
+\par Chrysonotomyia ingagena Hansson, 2004
+\par Chrysonotomyia jimenezi Hansson, 2004
+\par Chrysonotomyia karakalensis Myartseva & Kurashev, 1991
+\par 
+\par 
+\par 
+\par \page 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par Chrysonotomyia laevis Hansson, 2004
+\par Chrysonotomyia laeviscuta Hansson, 2004
+\par Chrysonotomyia lapierrei Hansson, 2004
+\par Chrysonotomyia latistipes Hansson, 2004
+\par Chrysonotomyia lavirgenensis Hansson, 2004
+\par Chrysonotomyia leibnitzi (Girault), 1913
+\par Chrysonotomyia leucocera Hansson, 2004
+\par Chrysonotomyia leucopus (Ashmead), 1894
+\par Chrysonotomyia leucotela Hansson, 2004
+\par Chrysonotomyia limbata Hansson, 2004
+\par Chrysonotomyia lioceps Hansson, 2004
+\par Chrysonotomyia liosoma Hansson, 2004
+\par Chrysonotomyia livida (Ashmead), 1894
+\par Chrysonotomyia locustivora (Rohwer), 1921
+\par Chrysonotomyia longa (Girault), 1915
+\par Chrysonotomyia longicaudata Paniagua & Hansson, 2009
+\par Chrysonotomyia longiclava Shafee & Rizvi, 1988
+\par Chrysonotomyia longiscuta Hansson, 2004
+\par Chrysonotomyia longissima Hansson, 2004
+\par Chrysonotomyia machaeriae Paniagua & Hansson, 2009
+\par Chrysonotomyia mackayensis (Girault), 1915
+\par Chrysonotomyia macrura Hansson, 2004
+\par Chrysonotomyia maculata (Delucchi), 1962
+\par Chrysonotomyia maculatipennis (Girault), 1913
+\par Chrysonotomyia magnifica (Girault), 1913
+\par Chrysonotomyia malabarica (Narendran & Surekha), 1992
+\par Chrysonotomyia maurogaster Hansson, 2004
+\par Chrysonotomyia mayri (Girault), 1915
+\par Chrysonotomyia megalops Hansson, 2004
+\par Chrysonotomyia melasoma Hansson, 2004
+\par Chrysonotomyia metallica (Ashmead), 1894
+\par Chrysonotomyia micraulax Hansson, 2004
+\par Chrysonotomyia mira (Girault), 1934
+\par Chrysonotomyia montigena Hansson, 2004
+\par Chrysonotomyia multitincta Hansson, 2004
+\par Chrysonotomyia nectandrigena Hansson, 2004
+\par Chrysonotomyia neeigena Hansson, 2004
+\par Chrysonotomyia nigripes (Girault), 1913
+\par Chrysonotomyia niveicornis Hansson, 2004
+\par Chrysonotomyia niveicrus Hansson, 2004
+\par Chrysonotomyia niveipes (Girault), 1915
+\par Chrysonotomyia novimaculatipennis (Girault), 1915
+\par Chrysonotomyia obesula Boucek, 1986
+\par Chrysonotomyia occidentalis (Girault), 1915
+\par Chrysonotomyia olympus (Girault), 1913
+\par Chrysonotomyia osae Hansson, 2004
+\par Chrysonotomyia pallidiventris Hansson, 2004
+\par Chrysonotomyia pansata Hansson, 2004
+\par Chrysonotomyia parva Hansson, 2004
+\par Chrysonotomyia perlonga Hansson, 2004
+\par 
+\par 
+\par 
+\par \page 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par Chrysonotomyia phenacapsia (Yoshimoto), 1972
+\par Chrysonotomyia pherocera Hansson, 2004
+\par Chrysonotomyia picta (Boucek), 1988
+\par Chrysonotomyia pilata Hansson, 2004
+\par Chrysonotomyia piperigena Hansson, 2004
+\par Chrysonotomyia planipes Hansson, 2004
+\par Chrysonotomyia planiseta Hansson, 2004
+\par Chrysonotomyia postmarginaloides (Saraswat), 1975
+\par Chrysonotomyia propodealis Hansson, 2004
+\par Chrysonotomyia pubipennis (Khan & Shafee), 1980
+\par Chrysonotomyia pulchra (Girault), 1913
+\par Chrysonotomyia pulchrella (Girault), 1915
+\par Chrysonotomyia quinquedentata (Girault), 1915
+\par Chrysonotomyia reticulata Sheng & Zhan, 2000
+\par Chrysonotomyia rexia Narendran, 2001
+\par Chrysonotomyia rubii Hansson, 2004
+\par Chrysonotomyia santarosae Hansson, 2004
+\par Chrysonotomyia sarmatica (Erd\'94s), 1966
+\par Chrysonotomyia serjaniae Hansson, 2004
+\par Chrysonotomyia setiscuta Hansson, 2004
+\par Chrysonotomyia speciosa (Girault), 1913
+\par Chrysonotomyia strigifer Hansson, 2004
+\par Chrysonotomyia striolata Hansson, 2004
+\par Chrysonotomyia sudoensis Paik, 1992
+\par Chrysonotomyia tekensis (Myartseva & Kurashev), 1991
+\par Chrysonotomyia temporata Hansson, 2004
+\par Chrysonotomyia thapsina Hansson, 2004
+\par Chrysonotomyia thysanota Hansson, 2004
+\par Chrysonotomyia tobiasi Myartseva & Kurashev, 1991
+\par Chrysonotomyia trifasciata (Girault), 1913
+\par Chrysonotomyia tristicha Hansson, 2004
+\par Chrysonotomyia trjapitzini Myartseva & Kurashev, 1991
+\par Chrysonotomyia turkmenica Myartseva & Kurashev, 1991
+\par Chrysonotomyia unifasciata Hansson, 2004
+\par Chrysonotomyia unimaculata Paniagua & Hansson, 2009
+\par Chrysonotomyia upalacola Hansson, 2004
+\par Chrysonotomyia variclava (Girault), 1915
+\par Chrysonotomyia varicolor (Girault), 1913
+\par Chrysonotomyia variegata Hansson, 2004
+\par Chrysonotomyia varitincta Hansson, 2004
+\par Chrysonotomyia voltairei (Girault), 1915
+\par Chrysonotomyia xuthotela Hansson, 2004
+\par Chrysonotomyia younusi Hayat & Perveen, 2005
+\par Chrysonotomyia zaommomomorpha (Girault), 1915}{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923 
+\par 
+\par 
+\par }{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923\charrsid15609970 Closterocerus abelardi Girault, 1922
+\par Closterocerus africanus Waterston, 1925
+\par Closterocerus agromyzae Narayanan, Subba Rao & Ra, 1960
+\par Closterocerus albitibiae (Girault), 1917
+\par Closterocerus ashmeadi (Girault), 1915
+\par 
+\par 
+\par 
+\par \page 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par Closterocerus bambeyi (Risbec), 1951
+\par Closterocerus brachyphagus Hansson, 1994
+\par Closterocerus brownii Ashmead, 1904
+\par Closterocerus cardigaster (Masi), 1917
+\par Closterocerus carolinae Hansson, 1994
+\par Closterocerus chamaeleon (Girault), 1922
+\par Closterocerus cincinnatus Girault, 1916
+\par Closterocer\ltrpar us cinctipennis Ashmead, 1888
+\par Closterocerus cinctiventris (Ashmead), 1904
+\par Closterocerus coffeellae Ihering, 1914
+\par Closterocerus cruy (Girault), 1918
+\par Closterocerus curtisi Girault, 1915
+\par Closterocerus cyaneus Hansson, 1994
+\par Closterocerus damastes Walker, 1847
+\par Closterocerus eupulcher \'99zdikmen, 2011
+\par Closterocerus eutrifasciatus Liao, 1987
+\par Closterocerus flavicinctus De Santis, 1983
+\par Closterocerus hungaricus (Erd\'94s), 1966
+\par Closterocerus insignis Waterston, 1915
+\par Closterocerus javanus Perkins, 1912
+\par Closterocerus kinquelibae (Risbec), 1951
+\par Closterocerus lanassa (Walker), 1839
+\par Closterocerus leptocerus (Waterston), 1925
+\par Closterocerus liriomyzae (Risbec), 1951
+\par Closterocerus litchii (Yang & Luo), 1994
+\par Closterocerus longiscapus (Boucek), 1986
+\par Closterocerus longus Hansson, 1994
+\par Closterocerus lyonetiae (Ferri\'8are), 1952
+\par Closterocerus mirabilis Edwards & La Salle, 2004
+\par Closterocerus mirus Girault, 1913
+\par Closterocerus nigrescens (Ikeda & Kamijo), 1993
+\par Closterocerus nitidus Hansson, 1994
+\par Closterocerus nius Hansson, 1994
+\par Closterocerus orientalis (Ferri\'8are), 1933
+\par Closterocerus orientalis Yefremova & Kriskovich, 1996
+\par Closterocerus oryzamyntor Gumovsky & Zhu, 2006
+\par Closterocerus pannonicus (Erd\'94s), 1956
+\par Closterocerus partifuscipennis (Girault), 1916
+\par Closterocerus perineti (Risbec), 1952
+\par Closterocerus phytomyzae Mani, 1971
+\par Closterocerus promecothecae (Ferri\'8are), 1931
+\par Closterocerus pulcher (Howard), 1897
+\par Closterocerus pulcherrimus (Kerrich), 1970
+\par Closterocerus purpureus (Howard), 1897
+\par Closterocerus purpurissatus (Kerrich), 1970
+\par Closterocerus ritchiei (Ferri\'8are), 1936
+\par Closterocerus rostandi Girault, 1915
+\par Closterocerus rotundiventris (Szel\'82nyi), 1980
+\par Closterocerus ruforum (Krausse), 1917
+\par Closterocerus saintpierrei Girault, 1913
+\par 
+\par 
+\par 
+\par \page 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par Closterocerus scapiatus Singh & Khan, 1996
+\par Closterocerus smaragdulus (Graham), 1963
+\par Closterocerus solidaginis (Yoshimoto), 1980
+\par Closterocerus spiniformis (Moser), 1965
+\par Closterocerus splendens Kowalski, 1917
+\par Closterocerus sumae Girault, 1934
+\par Closterocerus tau Girault, 1917
+\par Closterocerus texanus Hansson, 1994
+\par Closterocerus theaephilus (Risbec), 1952
+\par Closterocerus tineivorus (Risbec), 1951
+\par Closterocerus transsylvanicus (Erd\'94s), 1951
+\par Closterocerus trifasciatus Westwood, 1833
+\par Closterocerus utahensis Crawford, 1912
+\par Closterocerus vesiculis (Moser), 1965
+\par Closterocerus violaceus Hansson, 1994
+\par Closterocerus westwoodi Girault, 1915
+\par Closterocerus yamagishii (Kamijo), 1979
+\par Closterocerus zangwilli Girault, 1913}{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923 
+\par 
+\par 
+\par }{\rtlch\fcs1 \af2 \ltrch\fcs0 \insrsid8987923\charrsid15609970 Neochrysocharis achrysocharoides (Girault), 1916
+\par Neochrysocharis acuminatus Hansson, 1990
+\par Neochrysocharis agromyzae (Crawford), 1913
+\par Neochrysocharis albicoxa Hansson, 1995
+\par Neochrysocharis albiscapus Erd\'94s, 1954
+\par Neochrysocharis ambitiosus Hansson, 1990
+\par Neochrysocharis aratus (Walker), 1838
+\par Neochrysocharis arizonensis (Crawford), 1913
+\par Neochrysocharis arvensis Graham, 1963
+\par Neochrysocharis aversiflexus Hansson, 1997
+\par Neochrysocharis beasleyi Fisher & La Salle, 2005
+\par Neochrysocharis chalybeus Hansson, 1995
+\par Neochrysocharis chlorogaster (Erd\'94s), 1966
+\par Neochrysocharis clarus Szel\'82nyi, 1977
+\par Neochrysocharis clavatus (Hansson), 1995
+\par Neochrysocharis clinias (Walker), 1838
+\par Neochrysocharis convexus Hansson, 1997
+\par Neochrysocharis cuprifrons Erd\'94s, 1954
+\par Neochrysocharis cyaneoviridis Hansson, 1995
+\par Neochrysocharis diastatae (Howard), 1881
+\par Neochrysocharis dimas (Walker), 1839
+\par Neochrysocharis donna (Girault), 1917
+\par Neochrysocharis elongatus Hansson, 1995
+\par Neochrysocharis epimeralis Hansson, 1995
+\par Neochrysocharis formosus (Westwood), 1833
+\par Neochrysocharis hartigi (Szel\'82nyi), 1977
+\par Neochrysocharis hirsutus Hansson, 1995
+\par Neochrysocharis horticola Khan, Agnihotri & Sushil, 2005
+\par Neochrysocharis hyphantriae (Yoshimoto), 1978
+\par Neochrysocharis indicus Khan, Agnihotri & Sushil, 2005
+\par Neochrysocharis iris Erd\'94s, 1954
+\par 
+\par 
+\par 
+\par \page 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par Neochrysocharis jazyga Erd\'94s, 1969
+\par Neochrysocharis liriomyzae Khan, Agnihotri & Sushil, 2005
+\par Neochrysocharis longiventris (Askew), 1979
+\par Neochrysocharis marginalis Hansson, 1995
+\par Neochrysocharis moczari Szel\'82nyi, 1973
+\par Neochrysocharis nunbergi (Szczepanski), 1960
+\par Neochrysocharis okazakii Kamijo, 1978
+\par Neochrysocharis pictipes (Crawford), 1912
+\par Neochrysocharis pilosus Hansson, 1995
+\par Neochrysocharis sericeus (Erd\'94s), 1954
+\par Neochrysocharis texensis Hansson, 1995
+\par Neochrysocharis trifolii Erd\'94s, 1961
+\par Neochrysocharis tumidiscapus Hansson, 1997
+\par Neochrysocharis villosicornis Szel\'82nyi, 1977
+\par Neochrysocharis violaceus Askew, 1999
+\par Neochrysocharis washingtoni (Girault), 1913
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par 
+\par \page 
+\par }}
