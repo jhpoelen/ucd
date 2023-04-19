@@ -3,7 +3,7 @@ This repository contains an archival copy of the Universal Chalcidoidea Database
 
 All files were provided by J.S. Noyes on 2023-03-18 and consent was given to publish the data under CC0.
 
-For getting started, please see [`Instructions`](./Instructions(Please read first).pdf) first. Then, suggest to take a look at a [Flowchart](./Flowchart.pdf) and the [Table Structure](./TableStructure.pdf).
+For getting started, please see the [`Instructions`](./Instructions%28Please%20read%20first%29.pdf) first. Then, suggest to take a look at a [`Flowchart`](./Flowchart.pdf) and the [`Table Structure`](./TableStructure.pdf).
 
 ## Citation
 On use of this data, please follow academic tradition and cite the data using:  
