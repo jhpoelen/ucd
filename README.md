@@ -5,7 +5,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7844167.svg)](https://doi.org/10.5281/zenodo.7844167)
 
-This repository contains an archival copy of the Universal Chalcidoidea Database by J.S. Noyes in their original [Paradox Database](https://en.wikipedia.org/wiki/Paradox_%28database%29) file format. 
+This repository contains an archival copy of the Universal Chalcidoidea Database (UCD) by J.S. Noyes in their original [Paradox Database](https://en.wikipedia.org/wiki/Paradox_%28database%29) file format. 
 
 All files were provided by J.S. Noyes on 2023-03-18 and consent was given to publish the data under CC0.
 
