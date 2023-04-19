@@ -14,7 +14,14 @@ Noyes, J.S. March 2019. Universal Chalcidoidea Database. World Wide Web electron
 
 Using Preston [1,2], the UCD content was packaged and their provenance was signed.
 
-```preston history --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data,https://linker.bio```
+```bash
+preston history\
+ --anchor hash://sha256/ec1760dc83dfb17df003ef5e626b965dd4403850bc58286ac59c7ef3a447e063\
+ --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data\
+ --remote https://zenodo.org/record/7844167/files\
+ --remote https://softwareheritage.org\
+ --remote https://linker.bio
+```
 
 yielded:
 
@@ -23,7 +30,27 @@ yielded:
 <urn:uuid:0659a54f-b713-4f86-a917-5be166a14110> <http://purl.org/pav/hasVersion> <hash://sha256/eb416c97bf52a36b31ece2b47431a6a4a9bda7f52b9bc8ccb92f91f5c1bdf268> .
 ```
 
-with associated content cataloged via ```preston alias --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data,https://linker.bio```
+and can be cloned using
+
+```bash
+preston clone
+ --anchor hash://sha256/ec1760dc83dfb17df003ef5e626b965dd4403850bc58286ac59c7ef3a447e063\
+ --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data\
+ --remote https://zenodo.org/record/7844167/files\
+ --remote https://softwareheritage.org\
+ --remote https://linker.bio
+```
+
+with associated content cataloged via 
+
+```bash
+preston alias
+ --anchor hash://sha256/ec1760dc83dfb17df003ef5e626b965dd4403850bc58286ac59c7ef3a447e063\
+ --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data\
+ --remote https://zenodo.org/record/7844167/files\
+ --remote https://softwareheritage.org\
+ --remote https://linker.bio
+```
 
 | content location | relation | content id
 | --- | --- | --- |
