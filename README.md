@@ -1,5 +1,5 @@
 # ucd
-This repository contains an archival copy of the Universal Chalcidoidea Database by J.S. Noyes in their original [Paradox Database file format. 
+This repository contains an archival copy of the Universal Chalcidoidea Database by J.S. Noyes in their original [Paradox Database](https://en.wikipedia.org/wiki/Paradox_%28database%29) file format. 
 
 All files were provided by J.S. Noyes on 2023-03-18 and consent was given to publish the data under CC0.
 
