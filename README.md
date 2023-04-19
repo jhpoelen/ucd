@@ -265,9 +265,9 @@ preston alias
 
 ## References
 
-[1] MJ Elliott, JH Poelen, JAB Fortes (2020). Toward Reliable Biodiversity Dataset References. Ecological Informatics. https://doi.org/10.1016/j.ecoinf.2020.101132
+[1] MJ Elliott, JH Poelen, JAB Fortes (2020). Toward Reliable Biodiversity Dataset References. Ecological Informatics. [https://doi.org/10.1016/j.ecoinf.2020.101132](https://doi.org/10.1016/j.ecoinf.2020.101132)
 
-[2] Elliott, M. J., Poelen, J. H., & Fortes, J. (2023, accepted with minor revisions). Signed Citations: Making Persistent and Verifiable Citations of Digital Scientific Content. https://doi.org/10.31222/osf.io/wycjn
+[2] Elliott, M. J., Poelen, J. H., & Fortes, J. (2023, accepted with minor revisions). Signed Citations: Making Persistent and Verifiable Citations of Digital Scientific Content. [https://doi.org/10.31222/osf.io/wycjn](https://doi.org/10.31222/osf.io/wycjn)
 
 
 
