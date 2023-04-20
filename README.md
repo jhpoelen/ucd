@@ -3,7 +3,7 @@
 
 [![SWH](https://archive.softwareheritage.org/badge/swh:1:dir:e5ac2648e97ad1cb959553a79252a5c5b95091de/)](https://archive.softwareheritage.org/swh:1:dir:e5ac2648e97ad1cb959553a79252a5c5b95091de;origin=https://github.com/jhpoelen/ucd;visit=swh:1:snp:bf418258dcaf56ebb8eb7bef9fbb0727386fb868;anchor=swh:1:rev:d60a7ae2c7549f156dff8ae2caadb4ddaf6f31b5) 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7844167.svg)](https://doi.org/10.5281/zenodo.7844167)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7847600.svg)](https://doi.org/10.5281/zenodo.7847600)
 
 This repository contains an archival copy of the Universal Chalcidoidea Database (UCD) by J.S. Noyes in their original [Paradox Database](https://en.wikipedia.org/wiki/Paradox_%28database%29) file format. 
 
