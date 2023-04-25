@@ -1,6 +1,0 @@
-"Chalci abrotP","Eurytoma","abrotani","","(Panzer)","Chalcis","","abrotani","","Panzer","JE","1801","1801"
-"Cynips abrotP","Eurytoma","abrotani","","(Panzer)","Cynips","","abrotani","","(Panzer)","JE","1801","1801"
-"Cynips abrotPa","Eurytoma","abrotani","","(Panzer)","Cynips","","abrotoni","","(Panzer)","JE","1801",""
-"Euchar abrotP","Eurytoma","abrotani","","(Panzer)","Eucharis","","abrotani","","(Panzer)","JE","1801","1801"
-"Euryto abrotP","Eurytoma","abrotani","","(Panzer)","Eurytoma","","abrotani","","(Panzer)","JE","1801","1801"
-

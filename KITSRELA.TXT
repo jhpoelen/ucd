@@ -1,7 +1,0 @@
-"APL","Plant associate","6"
-"AST","Associate","5"
-"HYP","Parasitoid","4"
-"PAH","Parasitoid host","3"
-"PLH","Plant host","2"
-"PRH","Primary host","1"
-

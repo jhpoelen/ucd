@@ -1,6 +1,0 @@
-MOVETO [JourBook]
-x = STRVAL ([JourBook])
-UPIMAGE
-MOVETO [JourBook]
-CTRLBACKSPACE
-TYPEIN x
