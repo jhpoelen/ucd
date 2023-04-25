@@ -1,7 +1,7 @@
 # ucd
 [`download` 📦](https://github.com/jhpoelen/ucd/archive/42a5815a2c50e396f1e34e9f73e0b13fcc67c44f.zip) 
 
-[![SWH](https://archive.softwareheritage.org/badge/swh:1:dir:95a3ac018d59730f6648caf9c553b8acff1af7db/)](https://archive.softwareheritage.org/swh:1:dir:95a3ac018d59730f6648caf9c553b8acff1af7db;origin=https://github.com/jhpoelen/ucd;visit=swh:1:snp:e5726ecf2e2f19174172c7d36ef41e238a23f8de;anchor=swh:1:rev:5160d49751901b3cfd9b37ff950fc43214c2c023)
+[![SWH](https://archive.softwareheritage.org/badge/swh:1:dir:52ac4d104b6f031359da84ee57ebc8fe389bf8fb/)](https://archive.softwareheritage.org/swh:1:dir:52ac4d104b6f031359da84ee57ebc8fe389bf8fb;origin=https://github.com/jhpoelen/ucd;visit=swh:1:snp:aa05010ed2e1248647bdf47e38c983deddb62ca2;anchor=swh:1:rev:89c9da3f5e293642c394416ca7e5e9e26979e3a9)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7863906.svg)](https://doi.org/10.5281/zenodo.7863906)
 
