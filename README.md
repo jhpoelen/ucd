@@ -3,7 +3,7 @@
 
 [![SWH](https://archive.softwareheritage.org/badge/swh:1:dir:52ac4d104b6f031359da84ee57ebc8fe389bf8fb/)](https://archive.softwareheritage.org/swh:1:dir:52ac4d104b6f031359da84ee57ebc8fe389bf8fb;origin=https://github.com/jhpoelen/ucd;visit=swh:1:snp:aa05010ed2e1248647bdf47e38c983deddb62ca2;anchor=swh:1:rev:89c9da3f5e293642c394416ca7e5e9e26979e3a9)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7863906.svg)](https://doi.org/10.5281/zenodo.7863906)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7864604.svg)](https://doi.org/10.5281/zenodo.7864604)
 
 This repository contains an archival copy of the Universal Chalcidoidea Database (UCD) by J.S. Noyes in their original [Paradox Database](https://en.wikipedia.org/wiki/Paradox_%28database%29) file format. 
 
@@ -24,7 +24,7 @@ Using Preston [1,2], the UCD content was packaged and their provenance was signe
 preston history\
  --anchor hash://sha256/562fc5f7ac62b0dba9952e267dc839ab16be3efcf149b98a8d77f6e88bce4f53\
  --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data\
- --remote https://zenodo.org/record/7844167/files\
+ --remote https://zenodo.org/record/7864604/files\
  --remote https://softwareheritage.org\
  --remote https://linker.bio
 ```
@@ -45,7 +45,7 @@ and can be cloned using
 preston clone
  --anchor hash://sha256/562fc5f7ac62b0dba9952e267dc839ab16be3efcf149b98a8d77f6e88bce4f53\
  --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data\
- --remote https://zenodo.org/record/7844167/files\
+ --remote https://zenodo.org/record/7864604/files\
  --remote https://softwareheritage.org\
  --remote https://linker.bio
 ```
@@ -56,7 +56,7 @@ with associated content cataloged via
 preston alias
  --anchor hash://sha256/562fc5f7ac62b0dba9952e267dc839ab16be3efcf149b98a8d77f6e88bce4f53\
  --remote https://raw.githubusercontent.com/jhpoelen/ucd/main/data\
- --remote https://zenodo.org/record/7844167/files\
+ --remote https://zenodo.org/record/7864604/files\
  --remote https://softwareheritage.org\
  --remote https://linker.bio
 ```
