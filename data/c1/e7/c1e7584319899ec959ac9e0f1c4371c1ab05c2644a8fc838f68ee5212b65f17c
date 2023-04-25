@@ -1,0 +1,291 @@
+            INSTALLING PARADOX ON AN AT&T STARGROUP NETWORK
+            -----------------------------------------------
+
+This file contains instructions for installing Paradox on an AT&T StarGROUP
+network. These instructions were verified using AT&T StarGROUP 3.5.1
+on a Compaq DeskPro 386/25 computer using MS-DOS 5.0.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Assumptions
+2. Installation Steps
+3. Linking Users and Setting User Paths
+
+
+1. ASSUMPTIONS
+--------------
+
+These instructions assume the following about your StarGROUP installation:
+
+- You use StarGROUP version 3.1 or higher. (NOTE: If you have a previous
+  version, you need to use AD, FS, or PS in place of SRV in the following
+  installation commands. Consult your StarGROUP version's documentation.)
+
+- Your network has a shared applications directory named C:\\SERVERNAME\APPS,
+  which is linked to each user's logical drive D and where SERVERNAME is
+  the name of your server.
+
+- You perform all installation and configuration operations from the
+  server.
+
+- The following parameters are set in the [LMXSERVER] section of LANMAN.INI
+  at the server:
+
+  IGNOREUNIX=YES
+  UNIXLOCKS=NO
+  USTRUCTS=2000
+
+2. INSTALLATION STEPS
+---------------------
+
+1)  Create a sharename, PDOX45, that gives all users read-only rights to a
+    subdirectory of \\SERVERNAME\APPS called PDOX45. The
+    \\SERVERNAME\APPS\PDOX45 directory will contain the Paradox system
+    files. By creating the sharename, you automatically create the
+    subdirectory.
+
+    a. From the server, log in as the network administrator. If you log in
+       to the network from your local drive C, you can do this from your C>
+       system prompt. Type
+
+       SRV LOGIN \\SERVERNAME\ADMIN
+
+    b. If a password is assigned to \\SERVERNAME\ADMIN, enter the
+       password when prompted.
+
+    c. Create the sharename that will give users read-only access to the
+       PDOX45 directory (a subdirectory of \\SERVERNAME\APPS). Type
+
+       SRV SHARE PDOX45=C:\APPS\PDOX45 /R
+
+       where C: is the server physical drive containing the PDOX45 directory,
+       and /R sets the rights to read-only.
+
+2)  Create a sharename, PDOXADMN, for the PDOX45 system files directory for
+    the network administrator that gives read/write/create rights. Type
+
+    SRV SHARE PDOXADMN=C:\APPS\PDOX45/PASS=Password /RWC
+
+    where "Password" is the password you assign, and /RWC stands for
+    read/write/create rights. Write down the password and store it in
+    a safe location for future reference.
+
+3)  Create a sharename that gives all users read/write/create rights to a
+    first-level directory, PDOXDATA. The \\SERVERNAME\PDOXDATA directory
+    will contain shared Paradox data files and the network control file
+    PDOXUSRS.NET. By creating the sharename, you automatically create the
+    directory.
+
+    If you have more than one server, or if your server has more than one
+    hard disk, your choice of which server disk drive to use for the
+    PDOXDATA directory should depend on how heavily Paradox will be used.
+    Estimate the probable growth of your shared data and pick a drive with
+    enough available storage space.
+
+    As your network users become familiar with Paradox, they will probably
+    create new Paradox tables and applications. When in doubt, overestimate
+    the amount of space you'll need.
+
+    NOTE: If your network already has a shared data directory and an
+    associated sharename, you can use them for shared Paradox tables;
+    however, this isn't recommended, because mixing Paradox data
+    with other application data in the same directory makes network
+    housekeeping more difficult. If you do decide to put Paradox data in an
+    existing shared data directory with other applications' shared data, skip
+    this step.
+
+    To set up the PDOXDATA sharename and directory, type
+
+    SRV SHARE PDOXDATA=X:\PDOXDATA /RWC
+
+    where X is any server logical drive letter, and PDOXDATA is a valid DOS
+    path on that drive to a new directory, PDOXDATA.
+
+    NOTE: Don't assign a password to this directory, because users would
+    have to enter the password every time they wanted to access shared data
+    in PDOXDATA. You can password-protect individual tables and applications
+    in this directory; see "Protect" in Chapter 17 of the Paradox
+    "User's Guide."
+
+4)  Log in to the network as a client and establish the following links:
+
+    a. Link logical drive E to your network home directory. Type
+
+       SRV LINK E:
+
+    b. Link logical drive F to the PDOXDATA directory. Type
+
+       SRV LINK \\SERVERNAME\PDOXDATA F:
+
+    c. Link logical drive G to the PDOX45 directory. Type
+
+       SRV LINK \\SERVERNAME\PDOXADMN G:
+
+       Because you're using the PDOXADMN sharename, you have
+       read/write/create rights.
+
+5)  Install the Paradox system files and optional software. Follow the
+    instructions in NETWORK.TXT (found on your Paradox installation disks).
+    The Paradox INSTALL program copies your Paradox system files and optional
+    software from the program disks into the system files directory, PDOX45.
+
+6)  Create and modify the CONFIG.SYS file of each workstation to set the
+    number of buffers and files needed by Paradox:
+
+    FILES=40
+    BUFFERS=40
+
+    A workstation's CONFIG.SYS file must be stored in the root directory of
+    the workstation's hard disk (or on the boot disk if the workstation is
+    started from a floppy disk). See NETWORK.TXT for details on CONFIG.SYS.
+
+    NOTE: After editing the CONFIG.SYS file, you must reboot the workstation
+    before you can run Paradox. To reboot, press [Ctrl][Alt][Del].
+
+7)  Edit the [ATTISO_XIF] session of the PROTOCOL.INI at the workstation:
+
+    NSESS=10
+
+    NOTE: After editing the PROTOCOL.INI you must restart the network
+    session.
+ 
+8)  Link each user to a private directory. The private directory must be
+    either a network home directory or a private directory on a local hard
+    disk. For information, see "Linking Users and Setting User Paths"
+    later in this file. For information about private directories, see
+    NETWORK.TXT.
+
+9)  Link each user to the Paradox system files directory, PDOX45.
+    For information, see "Linking Users and Setting User Paths"
+    later in this file.
+
+10) Link each user to the directory containing PDOXUSRS.NET, PDOXDATA.
+    For information, see "Linking Users and Setting User Paths"
+    later in this file.
+
+11) Change each Paradox user's path to search for the user's private
+    directory and the Paradox system files directory, IN THAT ORDER. The
+    user's private directory must precede all other Paradox-related
+    directories in the path, since Paradox searches for PARADOX.CFG in the
+    private directory to determine the user's private directory and other
+    default settings. For information, see "Linking Users and Setting
+    User Paths" later in this file. For information about the PARADOX.CFG
+    file, see NETWORK.TXT.
+
+12) Create PARADOX.CFG files. See NETWORK.TXT for complete details.
+
+
+3. LINKING USERS AND SETTING USER PATHS
+---------------------------------------
+
+You can establish the links and paths for each workstation (steps 7, 8, 9,
+and 10) in different ways. In theory, network users can enter them manually
+from their keyboards when they want to use Paradox, but this isn't
+recommended, because a mistake could cause serious problems for network
+Paradox users. You should automatically create the correct links and path
+for each user instead. You can use two methods:
+
+- A login batch file that automatically sets up every user to run Paradox
+  when he or she logs in to the network. This method is good for networks
+  where Paradox is used frequently.
+
+- A Paradox batch file that sets up the correct links and path when a user
+  starts Paradox. Use this method for networks where Paradox is used
+  infrequently.
+
+To use a login batch file
+-------------------------
+On most AT&T StarGROUP networks, each user has an individual batch file (or
+series of batch files) that logs the user in to the network. The login batch
+file method uses these batch files to establish the links and paths for
+Paradox use.
+
+The way you structure your login batch commands depends on your network. For
+example, on a network using the three-drive pattern of drive assignments,
+include the following lines in a login batch file after the line in the batch
+sequence that logs the user into StarGROUP:
+
+SRV LINK D: \\SERVERNAME\APPS
+SRV LINK F: \\SERVERNAME\PDOXDATA
+SRV LINK E:
+PATH = C:\PDOX45; D:\PDOX45; D:\
+
+To use a Paradox batch file
+---------------------------
+Instead of linking to the Paradox directories in a user's login batch file
+and including the Paradox directories in each user's path, you can create a
+special Paradox batch file that establishes the correct links and sets the
+correct path each time Paradox is started.
+
+Store this batch file in a directory already on everyone's search path, such
+as the shared applications directory. Since everyone who uses Paradox will
+run the same Paradox batch file, write the path so that Paradox finds the
+correct PARADOX.CFG file for each user.
+
+The following sample Paradox batch file makes these assumptions:
+
+- The network uses the four-drive pattern of drive assignments.
+
+- Everyone who uses it is already logged in to the network, and everyone's
+  network home directory is already linked to logical drive E.
+
+- All workstations have local hard disks, and each workstation has a
+  C:\PDOX45 directory to be used as a private directory.
+
+- The shared applications directory \\SERVERNAME\APPS is already linked to
+  each user's logical drive D.
+
+Give the batch file an appropriate name, such as PDOX.BAT, and store it in
+the shared applications directory \\SERVERNAME\APPS.
+
+Here is the batch file. (If your network doesn't conform to the previous
+assumptions, you might need to modify it.)
+
+PATH>E:\SAVEPATH.BAT
+SRV LINK F: \\SERVERNAME\PDOXDATA
+SRV LINK G: \\SERVERNAME\PDOX45
+PATH = C:\PDOX45; G:\; D:\
+PARADOX
+SRV UNLINK F:
+SRV UNLINK G:
+COMMAND /C E:\SAVEPATH
+DEL E:\SAVEPATH.BAT
+
+Here are descriptions of the individual lines:
+
+- The first line saves the user's current path for later restoration.
+
+- The second line links the user's logical drive F to the Paradox shared data
+  directory (containing PDOXUSRS.NET) using the sharename PDOXDATA. What you
+  enter here must match the PDOXUSRS.NET location you entered when you
+  installed Paradox.
+
+- The third line links the user's logical drive G to the Paradox system files
+  directory using the sharename PDOX45.
+
+- The fourth line sets the correct path so that the private directory on the
+  local hard disk is searched first to find the correct PARADOX.CFG file.
+  This example PATH statment includes D:\ so the user has access to the
+  AT&T StarGROUP network software and network batch files.
+
+  NOTE: If some workstations on the network don't have hard disks, their
+  users must use their network home directory as their private directory
+  (containing a PARADOX.CFG file). In this case, the fourth line would be
+
+  PATH = E:\; G:\; D:\
+
+  With this path, Paradox looks for the PARADOX.CFG file in the user's
+  network home directory, E:.
+
+- The fifth line starts Paradox.
+
+- The sixth and seventh lines are invoked when the user exits from Paradox;
+  they unlink the PDOXDATA and the PDOX45 directories, respectively.
+
+- The eighth line restores the user's original path by running the
+  SAVEPATH.BAT batch file.
+
+- The ninth line deletes the SAVEPATH.BAT batch file.
+

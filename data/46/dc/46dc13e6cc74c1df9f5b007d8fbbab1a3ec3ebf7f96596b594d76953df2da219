@@ -1,0 +1,390 @@
+                         WELCOME TO PARADOX 4.5
+                         ----------------------
+
+This file contains important, late-breaking information about Paradox 4.5,
+including revisions to the documentation. For answers to commonly asked
+questions about Paradox 4.5, see the HELPME.TXT file in the Paradox system
+directory. Information in these files supersedes the Paradox documentation.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1.  Contents of HELPME.TXT
+2.  Contacting Borland
+3.  The Paradox Manuals
+4.  Installing Paradox on a Network
+5.  Notes on TUTILITY
+6.  Using TECHINFO
+7.  Outer Join Queries in a Multi-user Environment
+8.  Compression Utilities and Paradox Installation
+9.  Using ROUND()
+10. Selection Precedence in File Prompts
+11. Conditional Elements in SpeedBars
+12. PAL Functions in the Watch Pane
+13. Displaying Expression Values from the Miniscript Window
+14. Documentation Revisions
+
+1. Contents of HELPME.TXT
+-------------------------
+
+See HELPME.TXT, included in your Paradox system directory, for help on the
+following topics:
+
+   Highlighting the Current Field or Record
+   Running Paradox under Windows
+   Running Paradox under OS/2
+   Running Paradox under DESQview
+   Specific Compatibility Problems
+   Tips on the Application Workshop
+
+
+2. Contacting Borland
+---------------------
+
+If you have any problems, please read this file, the HELPME.TXT file, and
+the Paradox manuals first. If you still need assistance, see the Paradox
+"Getting Started" manual for a complete description of the different services
+Borland offers. For your convenience, the contact information is summarized
+below.
+
+NOTE: For support outside the United States and Canada, contact
+your local Borland dealer.
+
+TechFax
+-------
+U.S. and Canada        800-822-4269 (voice)
+
+800 Automated Support
+---------------------
+U.S. and Canada        800-524-8420 (voice)
+
+Online Automated Support
+------------------------
+U.S. and Canada        408-431-5250 (modem)
+9600, 2400, or 1200 baud, 8 data bits, no parity, 1 stop bit
+
+File Download BBS
+-----------------
+U.S. and Canada        408-439-9096 (modem)
+
+Online information services
+---------------------------
+CompuServe             GO BORLAND
+BIX                    JOIN BORLAND
+GEnie                  BORLAND
+
+Paradox 900-Advisor Line Paid Support
+-------------------------------------
+U.S. only              900-555-1000 (voice - $2 per minute)
+
+Customer Service
+----------------
+U.S.                   408-461-9000 (7 a.m. to 4 p.m. Pacific time)
+Canada                 416-229-6000
+
+
+3. The Paradox Manuals
+-----------------------
+
+For information on features that are new or changed in Paradox
+version 4.5, consult the Paradox 4.5 Upgrade Guide. The other
+manuals contain information on features that were also available
+in version 4.0.
+
+
+4. Installing Paradox on a Network
+----------------------------------
+
+If you're going to install Paradox on a network, please read NETWORK.TXT and
+the network installation file for the specific network you're using. The
+network text files are in the Paradox system directory.
+
+File Name           Network
+---------           -------
+NOVELL              Novell
+3CSHARE             3Com 3+Share and 3Com 3+
+ATTSTAR             AT&T StarLAN using StarGROUP
+BANYAN              Banyan Vines
+DECPATH             DEC Pathworks
+MSLANMAN            Microsoft LAN Manager
+IBMPCLAN            IBM PC LAN
+LANSRVR             IBM Lanserver 3.0 with DOS workstations
+
+
+5. NOTES ON TUTILITY
+--------------------
+
+TUTILITY (for Table Utility) is a program designed to repair damaged
+tables. The TUTILITY program that comes with Paradox 3.5 does not work
+on Paradox 4.5 tables. If you have damaged Paradox 4.5 tables, use the
+TUTILITY program included in your Paradox 4.5 system directory.
+
+Paradox tables can be damaged by power failures, hardware failures, bad
+network cards or connections, removing a floppy disk that Paradox is
+accessing, or rebooting the system while Paradox is active in memory.
+You should always make regular backups of your important data.
+
+To start TUTILITY, exit Paradox, then type TUTILITY at the DOS
+prompt and press Enter. Additional instructions and a description
+of program options are provided in the TUTILITY.DOC file. Online
+help is also available when you run the program. Command-line
+help is available by typing TUTILITY -help.
+
+
+6. Using TECHINFO
+-----------------
+
+Included in the Paradox system directory is an application,
+TechInfo, that displays detailed information about your system.
+To run it, choose Scripts|Play and enter TECHINFO (assuming the
+current working directory is the system directory--usually
+PDOX45). You can add TechInfo to the Utilities menu by adding the
+following line to PARADOX.ADD:
+
+UTILITY | TechInfo | Display System Information. | TECHINFO
+
+
+7. Outer Join Queries in a Multi-user Environment
+-------------------------------------------------
+
+Outer join queries will always act as restart queries, regardless of the
+Tools|Net|Changes setting.
+
+
+8. Compression Utilities and Paradox Installation
+-------------------------------------------------
+
+Your system must have 6.5MB of disk space available to install
+Paradox with all options included (6MB with no options included).
+If you're using a compression utility to increase the amount of
+available disk space on your system, you might need more
+available space; drives enhanced with compression utilities can
+provide only an estimate of available space.
+
+
+9. Using ROUND()
+----------------
+
+In version 4.0, Paradox's ROUND() function was changed to use a
+technique called Banker's rounding to round numbers. In standard
+rounding, when a number lies exactly on the halfway point, it's
+rounded up (for example, rounding 223.65 to one decimal place
+results in 223.7). In Banker's rounding the number is rounded to
+the nearest even number (for example, 223.65 is rounded to
+223.6). Banker's rounding increases accuracy and helps prevent
+rounding errors. For more information on Banker's rounding, see
+TechFax number 1148.
+
+
+10. Selection Precedence in File Prompts
+----------------------------------------
+
+If a file list displays a directory name that's identical to a
+file name shown in the same list, the directory name has
+precedence. For example, if you chose View to view a table, and
+both a SAMPLE subdirectory (SAMPLE\) and SAMPLE table name appear
+in the file list, choosing either item displays the contents of
+the SAMPLE subdirectory in the file list.
+
+
+11. Conditional Elements in SpeedBars
+-------------------------------------
+
+If the <String> argument of an element created by the SPEEDBAR
+command is an empty string (""), the element won't appear on the
+SpeedBar. You can use this to create conditional SpeedBar
+elements. For example, the following code creates a SpeedBar that
+only includes the F9 (Edit) element if the HasEditAccess variable
+is set to True.
+
+   SPEEDBAR "~F1~ Help"          : "F1",
+            IIF(HasEditAccess,           ; Conditional element
+                "~F9~ Edit","")  : "F9",
+            "~F10~ Menu"         : "F10"
+
+
+12. PAL Functions in the Watch Pane
+-----------------------------------
+
+Some PAL functions have normal but unexpected effects when
+evaluated in the Debugger's Watch pane. Expressions in the Watch
+pane recalculate whenever you Step or Trace through code, enter a
+new expression or variable, or Suspend and restore the Debugger.
+The following table lists some functions that perform an
+operation whenever the Watch pane recalculates:
+
+Function           Operation
+---------------    ---------
+GETCHAR()          Waits for a keystroke.
+
+MATCH()            Creates and manipulates variables.
+
+PRINTERSTATUS()    Looks for an active printer; if not found,
+                   takes a few seconds before returning control
+                   to the Debugger.
+
+DRIVESTATUS()      Accesses the drive referred to in the
+and DRIVESPACE()   function's argument.
+
+ISTABLE(),         If a drive specifier is included, these have
+ISFILE() and       the same effect as DRIVESTATUS()
+DIREXISTS()        and DRIVESPACE().
+
+SDIR()             Always returns the current directory.
+
+
+13. Displaying Expression Values from the Miniscript Window
+-----------------------------------------------------------
+
+In earlier versions of Paradox, you could use RETURN <Expression>
+to display the value of an expression using the Miniscript
+command. In version 4.5, use MESSAGE <Expression> instead.
+
+
+14. Documentation Revisions
+---------------------------
+
+This section of the README file contains new information and revisions
+to the Paradox manuals.
+
+Upgrade Guide
+-------------
+In Table 2.10 on page 60, the index name "AUTO-FILL" should be
+"AUTO-FILLED".
+
+On page 67, the following strings listed for WINDOWTYPE() will not be 
+returned:
+
+"RESTRUCTURE"
+"INDEX"
+"PASSWORD"
+"SORT"
+
+Getting Started
+---------------
+If you choose the Norwegian/Danish country group when you install
+Paradox, the INSTALL program automatically copies NORDAN4.SOR to
+PARADOX.SOR. NORDAN4.SOR is a modified version of the Paradox 3.5
+NORDAN.SOR sort order file. If you have applications or databases that
+depend on the old NORDAN.SOR sort order and don't want to use the new
+NORDAN4.SOR sort order, you can copy NORDAN.SOR to PARADOX.SOR after
+you install Paradox. See also the note on the SORTORDER() function in the
+PAL Reference section of this file.
+
+The Custom Configuration Program needs the following files to run:
+CUSTOM.SC, CUSTOM.LIB, and CUSTOM.OV1. If any of these files are
+missing, re-install Paradox to copy the files to your hard disk.
+
+Blob Editor (in the PAL dialog box of CCP) lets you specify an external
+BLOB editor to use for editing binary fields. Paradox doesn't include a
+built-in BLOB editor.
+
+User's Guide
+------------
+You cannot use Edit or DataEntry mode to modify a memo field in a linked
+detail form; use CoEdit mode instead.
+
+The IIF example preceding Example 8-3 should be:
+IIF(ISBLANK([Miles]),"****",[Miles]).
+
+Programmer's Guide
+------------------
+Under "Using Field Specifiers in Expressions," the fourth example should
+be: [Orders->Quantity]=10.
+
+The picture shown in Example 5-2 should be [(###) ]###-####. Omit any
+additional spaces.
+
+If a pushbutton has focus in a dialog box, it will be selected by
+the Enter key regardless of where the DEFAULT keyword is used.
+The example on page 244 implies that the CANCEL button will be
+selected by the Enter key, as it is the default button. This is
+only true if the button has focus. As the only elements in the
+code example are pushbuttons, the CANCEL button must be declared
+first to give it focus when the dialog box opens. For example
+
+   PUSHBUTTON @5,23 WIDTH 10
+      "~C~ancel"
+      CANCEL
+      DEFAULT
+      VALUE "Cancel"
+      TAG "No"
+      TO ButtonValue
+   PUSHBUTTON @5,8 WIDTH 10
+      "~O~K"
+      OK
+      VALUE "Accept"
+      TAG "Yes"
+      TO ButtonValue
+
+When nesting WAIT commands, you must nest each command within a
+WAIT procedure. For example, to nest a WAIT FIELD within a WAIT
+RECORD, you must place the WAIT FIELD command in the WAIT
+procedure specified by the WAIT RECORD command.
+
+
+PAL Reference
+-------------
+The behavior of the following PAL commands and functions differs from the
+printed documentation.
+
+- CONVERTLIB
+  Convert all Paradox 3.5 library files to Paradox 4.5 format before using
+  them. Some Paradox 3.5 library files might cause your system to hang if
+  they are not converted before use in Paradox 4.5. See Chapter 1 of the
+  "PAL Programmer's Guide" for information about converting PAL libraries.
+
+  CONVERTLIB does not correctly convert a procedure that defines an
+  embedded procedure.
+
+- SETCOLORS
+  The SETCOLORS command accepts the optional keyword DEFAULT to restore
+  system colors to the settings used at the beginning of your Paradox
+  session. The syntax is SETCOLORS DEFAULT.
+
+- SETDIR
+  The SETDIR command releases all locks placed by a user.
+
+- SORTORDER()
+  If you chose the Norwegian/Danish country group and its dictionary sort
+  order at installation, the SORTORDER() function returns "nordan40". If
+  you copy NORDAN.SOR to PARADOX.SOR, SORTORDER() returns "nordan". See the
+  "Getting Started" section earlier in this file for further details.
+
+- TABLEORDER()
+  The new TABLEORDER() function returns the name of the secondary index
+  that is ordering the current image of the active table (in table or
+  form view). TABLEORDER() returns a null string ("") if the active table
+  is unkeyed or is in primary index order (the default). TABLEORDER()
+  results in an error if used in an inappropriate context, that is, in
+  any context other than table or form view.
+
+- UNDO
+  The UNDO command does not restore changes from APPENDARRAY or
+  REPLACEFIELDS.
+
+Application Workshop
+--------------------
+The section "Screen" under the section "Order of execution for Report Print
+items" in Chapter 12 of "Application Workshop" does not list the
+execution order of Report Print objects when output is to the screen. The
+screen output order is:
+
+1) The Setup and Reset Strings, Printer Port, and End of Page options are
+   overridden (if requested).
+
+2) The Working message appears.
+
+3) The setup procedure executes.
+
+4) The report prints to the screen. The next keypress or mouse click
+   removes the working message.
+
+5) The cleanup procedure executes after "Cancel" is selected from the
+   Report Previewer menu.
+
+6) The Setup and Reset strings, Printer Port, and End of Page settings are
+   restored.
+
+

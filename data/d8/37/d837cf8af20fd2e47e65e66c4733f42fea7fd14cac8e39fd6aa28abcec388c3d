@@ -1,0 +1,92 @@
+##############################################################################
+# 
+# ----------------------------------------------------------------------------
+# WARNING!
+# Do not attempt to modify this file unless you absolutely know what
+# you are doing.  Improper changes to this file could cause permanent
+# damage your display adapter and/or monitor!
+# ----------------------------------------------------------------------------
+#
+# Adapter Node Format:
+#
+#  Menu Choice, first item of sub-menu, last item of sub-menu, 0
+#
+# Leaf Node Format:
+#
+#  Menu Choice, Mode, AX, BX
+#
+#   Mode:     0 = Auto detect (use existing mode or set to 2, 3, or 7)
+#             2 = EGA/VGA adapter 80x25 black & white
+#	      3 = EGA/VGA adapter 80x25 color
+#             7 = Monochrome
+#         0x0FF = Use AX,BX values with INT 10
+#         0x102 = EGA/VGA adapter 43/50 line black & white
+#         0x103 = EGA/VGA adapter 43/50 line color
+#
+# Note: This resource file is NOT format-compatible with
+#       Quattro/PRO VIDEO.RSC.
+#
+##############################################################################
+
+48					# total number of menu items
+15					# number of root menu items
+5					# number of root menu leaves
+
+A: Auto-detect,0,0,0				# 0  root leaf
+B: Monochrome,7,0,0				# 1  root leaf
+C: EGA/VGA: 80x25,3,0,0				# 2  root leaf
+D: EGA/VGA: 80x43/50,0x103,0,0			# 3  root leaf
+,,,						# 4  separator line
+E: Ahead Systems VGA Wizard,15,18,0		# 5  root item
+F: ATI VGA Wonder,19,20,0			# 6  root item
+G: Compaq Integrated (132 column) VGS,21,25,0	# 7  root item
+H: Everex Viewpoint VGA/EV-673 VGA,26,31,0	# 8  root item
+I: Genoa Systems Super VGA,32,34,0		# 9  root item
+J: Orchid ProDesigner VGA,35,38,0		# 10 root item
+K: Paradise EGA 480/VGA 1024,39,40,0		# 11 root item
+L: Sigma VGA Legend/HP16,41,42,0		# 12 root item
+M: STB PowerGraph VGA,43,44,0			# 13 root item
+N: Video-7 VRAM VGA,45,47,0			# 14 root item
+
+A: VGA Wizard: 80x34,0xff,50,0		# 15 VGA Wizard submenu
+B: VGA Wizard: 80x45,0xff,51,0		# 16 "                "
+C: VGA Wizard: 132x25,0xff,35,0		# 17 "                "
+D: VGA Wizard: 132x44,0xff,34,0		# 18 "                "
+
+A: ATI VGA: 132x25,0xff,35,0		# 19 ATI submenu
+B: ATI VGA: 132x44,0xff,51,0		# 20 "         "
+
+A: Compaq VGS: 132x25,0xff,35,0		# 21 Compaq submenu
+B: Compaq VGS: 132x28,0xff,36,0		# 22 "            "
+C: Compaq VGS: 132x43,0xff,34,0		# 23 "            "
+D: Compaq VGS: 132x50,0xff,39,0		# 24 "            "
+E: Compaq VGS: 132x60,0xff,40,0		# 25 "            "
+
+A: Everex VGA: 80x34,0xff,112,3		# 26 Everex VGA submenu
+B: Everex VGA: 80x60,0xff,112,4		# 27 "                "
+C: Everex VGA: 100x43,0xff,112,7	# 28 "                "
+D: Everex VGA: 100x75,0xff,112,8	# 29 "                "
+E: Everex VGA: 132x25,0xff,112,10	# 30 "                "
+F: Everex VGA: 132x44,0xff,112,11	# 31 "                "
+
+A: Genoa VGA: 132x25,0xff,35,0		# 32 Genoa VGA submenu
+B: Genoa VGA: 132x28,0xff,36,0		# 33 "               "
+C: Genoa VGA: 132x43,0xff,34,0		# 34 "               "
+
+A: Orchid VGA: 80x60,0xff,38,0		# 35 Orchid VGA submenu
+B: Orchid VGA: 132x25,0xff,35,0		# 36 "                "
+C: Orchid VGA: 132x28,0xff,36,0		# 37 "                "
+D: Orchid VGA: 132x44,0xff,34,0		# 38 "                "
+
+A: Paradise EGA/VGA: 132x25,0xff,85,0	# 39 Paradise VGA submenu
+B: Paradise EGA/VGA: 132x43,0xff,84,0	# 40 "                  "
+
+A: Sigma VGA: 132x25,0xff,28,0		# 41 Sigma VGA submenu
+B: Sigma VGA: 132x44,0xff,29,0		# 42 "               "
+
+A: STB VGA: 132x25,0xff,35,0		# 43 STB VGA submenu
+B: STB VGA: 132x44,0xff,34,0		# 44 "             "
+
+A: Video-7 VGA: 80x60,0xff,28421,67	# 45 Video-7 VGA submenu
+B: Video-7 VGA: 100x60,0xff,28421,68	# 46 "                 "
+C: Video-7 VGA: 132x43,0xff,28421,66	# 47 "                 "

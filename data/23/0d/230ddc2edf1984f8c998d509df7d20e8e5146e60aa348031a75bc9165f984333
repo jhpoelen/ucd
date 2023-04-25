@@ -1,0 +1,396 @@
+              INSTALLING PARADOX ON A BANYAN VINES NETWORK
+              --------------------------------------------
+
+This file contains instructions for installing Paradox on a Banyan Vines
+or Vines/286 network. These instructions were verified using Banyan Vines
+386, version 5.0, on a Dell 486/P computer using MS-DOS 5.0.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Assumptions
+2. Requirements
+3. Installation Steps
+
+
+1. ASSUMPTIONS
+--------------
+
+These instructions assume the following about your Banyan installation:
+
+- You use Banyan's Vines network allocation and resource software version
+  2.10 or higher on a Banyan/DTS server.
+
+- You're authorized to perform administrative tasks on your Banyan network.
+
+- You're familiar with Banyan's network system administration utilities and
+  StreetTalk naming conventions.
+
+- You perform all installation and configuration operations from a
+  workstation.
+
+
+2. REQUIREMENTS
+---------------
+
+The two disk-related requirements to run Paradox on a Banyan Vines or
+Vines/286 network are:
+
+- You must have a minimum of 4MB free disk space in a server volume for the
+  Paradox system files.
+
+- Each user must have a private directory located on either a local hard
+  disk or a network server file volume.
+
+The additional memory (RAM) requirements for workstations to run Paradox
+from a Banyan Vines network are:
+
+- A dedicated IBM Personal Computer AT (or 100% compatible) running a
+  Vines/286 network system must have a minimum of 1MB random access memory
+  (RAM). Additional RAM above 1MB improves system performance.
+
+- The minimum 5MB RAM provided with the Banyan/DTS server is sufficient to
+  run Paradox from the server.
+
+- Workstations require a minimum of 1MB RAM for joint Vines and Paradox
+  operation. Banyan's Vines workstation software occupies approximately
+  100K of workstation RAM when installed.
+
+
+3. INSTALLATION STEPS
+---------------------
+
+NOTE: This file proposes creating only one Vines file service for all
+aspects of Paradox. This prevents a single application from commanding
+a disproportionate share of the finite file services on a Banyan network.
+However, if your network can devote more than one Vines file service to
+different parts of Paradox--for example, one file service for the
+Paradox system files and another for Paradox shared data--you can create
+those multiple file services. You can then set them to different logical
+drives and modify the user profiles for access to Paradox based on those
+file services and logical drive assignments.
+
+1)  Add a new Vines file service for Paradox:
+
+    a. Log in to the Banyan server from a network workstation.
+
+    b. When prompted, enter your login name. (Enter either your Banyan
+       nickname or your full StreetTalk user name, including your group and
+       organization names.)
+
+    c. When prompted, enter your password. If you don't have a password, or
+       if this is the first time you've logged in to the first server on a
+       network, press [Enter].
+
+    d. After the server displays a report on network resources activated
+       during your login, a logical drive designator appears, just like a
+       DOS prompt:
+
+       E:\>
+
+       This is the default login drive for the Banyan network system just
+       after Banyan system installation. If you've set a different default
+       drive in your user profile, it appears instead.
+
+    e. To create the file service for Paradox, invoke the Vines System
+       Management menu in either of these ways:
+
+       - Type MANAGE at the DOS prompt and choose SERVICES from the menu.
+
+       or
+
+       - Type MSERVICE at the system prompt.
+
+    f. To add Paradox as a new and separate Vines file service, choose Add
+       a Server-Based Service.
+
+    g. The system prompts for the name of the new file service.
+
+       StreetTalk name:
+
+       Enter the StreetTalk name for the Paradox system files file service:
+
+       PDOX45@group name@org name
+
+       where "group name" is the name of the group and "org name" is the
+       name of the organization. The PDOX45 item name must be unique in its
+       group. If the PDOX45 item name is already in use, you can't add it
+       again.
+
+    h. The system prompts for a description of the new service. Enter a
+       description of up to 63 characters. This is for administrative
+       purposes and doesn't affect user access to Paradox.
+
+    i. When prompted, choose a server. If your network has only one server,
+       skip this step.
+
+    j. When prompted, choose the type of service you're adding. To indicate
+       a file service, choose Vines File Service.
+
+    k. When prompted, choose the physical disk on which this service will
+       reside. If the server has only one disk, press [Enter].
+
+    l. When prompted, start the file service you just added by choosing
+       YES when the system asks if you want to start the service
+       immediately.
+
+    m. Exit from the System Management menus by pressing [Esc] until you
+       reach the DOS prompt.
+
+2)  At the DOS prompt, link the new file service to a logical drive
+    designation with the command
+
+    SETDRIVE G PDOX45@group name@org name
+
+    where "group name" and "org name" are the group and organization names
+    for the service names. You can specify any logical drives from A through
+    Z to point to the Paradox-based file services. Avoid using A through C
+    so that workstation users don't lose access to their workstations' disk
+    drives. Also, avoid using drive Z so you don't make Banyan's
+    administrative utilities linked to drive Z unavailable.
+
+    NOTE: The logical drive letter in the SETDRIVE command doesn't include
+    the colon (:) that DOS requires. If you don't create a new file service
+    for Paradox, but instead include Paradox in an applications file service,
+    don't perform this SETDRIVE command. Instead, make sure the applications
+    file service is set to a logical drive.
+
+3)  Create a directory for the Paradox system files:
+
+    Make the Paradox file service logical drive the current drive, change to
+    its root directory, and create the PDOX45 directory with the following
+    commands:
+
+    G:
+    CD \
+    MD PDOX45
+
+4)  Set read access rights to PDOX45:
+
+    CD PDOX45
+    SETARL
+
+    The SETARL program sets the access rights list for a resource. When the
+    program prompts you for the directory name, press [Enter] to indicate the
+    current directory (that is, PDOX45). Be sure to specify R for read access
+    rights when you edit the access rights list. Consult the chapter on
+    "Services" in the "Banyan Administrator's Guide" for more about access
+    rights.
+
+5)  Create a directory for shared Paradox data:
+
+    Make the Paradox file service logical drive the current drive, change to
+    its root directory, if necessary, and create the PDOXDATA directory with
+    the following commands:
+
+    G:
+    CD \
+    MD PDOXDATA
+
+6)  Set modify access rights to the PDOXDATA directory:
+
+    CD PDOXDATA
+    SETARL
+
+    When the SETARL program prompts you for the directory name, press [Enter]
+    to indicate the current directory (that is, PDOXDATA). Be sure to specify
+    M for modify access rights when you edit the access rights list. Consult
+    the chapter on "Services" in the "Banyan Administrator's Guide" for more
+    about access rights.
+
+7)  If you want to create a directory for Paradox private directories, make
+    the Paradox file service logical drive the current drive, change to its
+    root directory, if necessary, and create the PDOXDIRS directory with the
+    following commands:
+
+    G:
+    CD \
+    MD PDOXDIRS
+
+8)  Set modify access rights to the PDOXDIRS directory:
+
+    CD PDOXDIRS
+    SETARL
+
+    When the SETARL program prompts you for the directory name, press [Enter]
+    to indicate the current directory (that is, PDOXDIRS). Be sure to specify
+    M for modify access rights when you edit the access rights list. Consult
+    the chapter on "Services" in the "Banyan Administrator's Guide" for more
+    about access rights.
+
+    After creating the PDOXDIRS directory, you can change to it and create
+    private Paradox directories for network Paradox users who require them.
+
+9)  If you want to include Paradox in another applications file service, exit
+    the System Management menus, if you haven't already done so. When the DOS
+    prompt appears,
+
+    a. Change to the root directory of the applications file volume. For
+       example, if your applications file service and its top-level
+       directory are called \APPS, and the service is set to logical drive
+       D, type
+
+       D:
+       CD \APPS
+
+    b. Create the subdirectory for the Paradox system files. Type
+
+       MD PDOX45
+
+
+10) Install the Paradox system files and optional software. Follow the
+    instructions in NETWORK.TXT (found on your Paradox installation disks).
+    The Paradox INSTALL program copies your Paradox system files and optional
+    software from the program disks into the system files directory, PDOX45.
+
+11) Establish private directories--either on workstations' local hard disks
+    or, for diskless workstations, on the server hard disk.
+
+    If your users have general private directories on the server disk, use
+    these private directories for Paradox. You can also create specific
+    subdirectories for Paradox in these general private-user directories. For
+    example, if users have private directories on a file service named USERS
+    set to logical drive U, you can do the following:
+
+    a. Make the USERS drive the current drive. Type
+
+       U:
+
+    b. Change to the user's private directory. Type
+
+       CD\USER-DIRNAME
+
+    c. Create a Paradox private directory. Type
+
+       MD PDOXDIRS
+
+       Be sure to specify this private directory in each user's PARADOX.CFG
+       file and to include it in the user's search path.
+
+       If you don't routinely provide private directories on the file server
+       for your workstation users, you should create a directory for
+       Paradox private directories on the PDOX45 file service and name
+       this directory PDOXDIRS. After creating the PDOXDIRS directory, you
+       can create a private subdirectory for each workstation user in the
+       network. Include these Paradox private directories in each user's
+       search path.
+
+12) Create or modify the CONFIG.SYS file of each workstation to set the
+    number of buffers and files needed by Paradox:
+
+    FILES=40
+    BUFFERS=40
+
+    A workstation's CONFIG.SYS file must be stored in the root directory of
+    the workstation's hard disk (or on the boot disk if the workstation is
+    started from a floppy disk). See NETWORK.TXT for details on CONFIG.SYS.
+
+    NOTE: After editing the CONFIG.SYS file, you must reboot the workstation
+    before you can run Paradox. To reboot, press [Ctrl][Alt][Del].
+
+13) Set logical drives and paths in Banyan user profiles.
+
+    You can set the logical drives and search paths for each workstation
+    using different methods. While network users can individually set logical
+    drives for network file volumes and define search paths manually from
+    their keyboards, this isn't recommended. A mistake could cause serious
+    problems for network Paradox users. You should set the correct logical
+    drives and establish the correct search paths for each user instead.
+
+    The most efficient and secure method for doing this is with Banyan "user
+    profiles." A user profile contains commands that are executed when the
+    user logs in to the Banyan network. A user profile is similar to, but
+    distinct from, an AUTOEXEC.BAT file on a workstation. It contains
+    commands that are executed when the workstation is booted.
+
+    The steps for creating and editing user profiles are explained in the
+    "Administrator's Guide" for the Banyan Vines virtual networking system.
+    Your primary tasks are to
+
+    - set the appropriate file service(s) to logical drives under the :FILES:
+      heading
+
+    - establish the appropriate search paths under the :DOS: heading
+
+    To modify user profiles for Paradox, perform the following steps:
+
+    a. Type MANAGE and choose Users or type MUSER at the DOS prompt.
+
+    b. Choose Select, then choose the user whose profile you want to modify.
+
+    c. Choose Edit to edit the user profile. To edit a profile, move the
+       cursor to the point where you want to add, delete, or modify
+       information.
+
+       - If you've created a separate file service for the Paradox system
+         files, add the following command under the :FILES: heading of each
+         user profile:
+
+         SETDRIVE G "PDOX45@group name@org name"
+
+         where "group name" and "org name" are the group and organization
+         names of the file services you established for Paradox. You can
+         specify any logical drive letter as described previously. These
+         commands should be the same commands you executed prior to
+         installing Paradox on the server.
+
+       - To establish the appropriate search paths, add one of the
+         following commands under the :DOS: heading of each user profile:
+
+         PATH = C:\PDOX45;G:\
+         PATH = U:\user-dirname\PDOXDIRS;G:\
+         PATH = G:\PDOXDIRS\user-dirname;G:\
+
+         Use the first line for network users whose workstations have local
+         hard disks and for whom C:\PDOX45 is the private directory.
+
+         Use the second line for network users whose workstations are either
+         diskless or have only floppy drives and who also have a private
+         directory on the server. U: can be any logical drive created as a
+         private directory for a network user, "\user-dirname" is the user's
+         private directory name, and "\PDOXDIRS" is the name for the
+         explicit Paradox private directory.
+
+         Use the third line for users with diskless or floppy-only
+         workstations who don't have general private-server directories.
+
+       - If instead you've added Paradox to a general applications file
+         service called APPS set to logical drive D, add the following
+         command under the :FILES: heading of each user profile:
+
+         SETDRIVE D "apps@group name@org name"
+
+       - To establish the appropriate search paths, add one of the
+         following commands under the :DOS: heading of each user profile:
+
+         PATH = C:\PDOX45;D:\APPS\PDOX45;+
+         PATH = U:\user-dirname\PDOXDIRS;D:\APPS\PDOX45;+
+         PATH = D:\APPS\PDOXDIRS\user-dirname;D:\APPS\PDOX45;
+
+         Use the first line for network users whose workstations have local
+         hard disks and for whom C:\PDOX45 is the private directory.
+
+         Use the second line for network users whose workstations are either
+         diskless or have only floppy drives and who also have a private
+         directory on the server. U: can be any logical drive created as a
+         private directory for a network user, "\user-dirname" is the user's
+         private directory name, and "\PDOXDIRS" is the name for the
+         explicit Paradox private directory.
+
+         Use the third line for users with diskless or floppy-only
+         workstations who don't have general private-server directories.
+
+    d. After you finish editing the user profiles, exit the System
+       Management utilities.
+
+       After the appropriate SETDRIVE and PATH commands are included in
+       each user profile, network users can log in to the Banyan Vines or
+       Vines/286 network and start using Paradox by typing
+
+       PARADOX
+
+       at the DOS prompt.
+
+14) Create PARADOX.CFG files. See NETWORK.TXT for details.
+

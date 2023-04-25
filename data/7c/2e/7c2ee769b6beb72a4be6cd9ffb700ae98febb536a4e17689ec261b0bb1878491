@@ -1,0 +1,1454 @@
+
+                 PARADOX NETWORK INSTALLATION GUIDE
+                 ----------------------------------
+
+The information in this file supplements the network-specific installation
+instructions contained in other online files. The network-specific files
+are on the first program disk and are copied to the directory where the
+program files are stored (usually PDOX45) during the installation process.
+See Section 2 for a list of these files.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Upgrading to Paradox 4.5
+2. Paradox Network Concepts
+3. Installing Paradox on a Network
+4. Configuring Paradox for Network Workstations
+5. Updating Your Installation with NUPDATE
+6. Improving Network Performance
+7. Troubleshooting
+
+
+1. UPGRADING TO PARADOX 4.5
+---------------------------
+
+We strongly recommend that you upgrade all copies of earlier versions of
+Paradox to Paradox 4.5. If you choose not to upgrade all copies of earlier
+versions, a network user running Paradox 4.5 or 4.0 and a network user
+running Paradox 3.5 (or an earlier version) can't access the same file or
+even the same directory concurrently.
+
+The benefits of upgrading to Paradox 4.5 on a network include
+
+- Improved performance
+
+- Improved concurrency for multi-table relationships
+
+- The ability of different installed copies of Paradox 4.5 to use different
+  network drive letters to specify the location of the same PDOXUSRS.NET
+  file and data directories
+
+- The ability to create read-only directories in Paradox with
+  Tools|Net|Lock|DirLock, which improves performance by making use of
+  disk-caching
+
+- The ability to host 300 concurrent users (Paradox 3.5 can host up to 150)
+
+Upgrading from Paradox 3.5 to Paradox 4.5
+-----------------------------------------
+Suppose you have a six-count Paradox 3.5 network installation, and you've
+purchased Paradox 4.5 and five single-count Paradox License Packs as an
+upgrade. With your upgrade, you keep your total user count of six users.
+
+The Paradox license agreement allows you to install Paradox in one of two
+configurations: the server-only or the combined server-local installation;
+see "Possible network configurations" in Section 3 for details. In either
+case, follow the instructions for your particular network to install
+Paradox 4.5 to share data on a network.
+
+The advantage to the combined installation is that one user has exclusive
+rights to one user count and is therefore guaranteed access when he or she
+starts Paradox from the workstation on which Paradox is installed.
+Additionally, that user can run Paradox without being connected to the
+network (for example, if the workstation is a portable computer or if the
+user wishes to use Paradox without the network memory overhead).
+
+Integrating earlier versions of Paradox with Paradox 4.5
+--------------------------------------------------------
+A user running Paradox 4.5 or 4.0 can't access the same file or even the
+same directory as a user running an earlier version of Paradox on the
+network; therefore, we do not recommend that you integrate versions 3.5 or
+earlier of Paradox with Paradox 4.5. However, if you do integrate earlier
+versions with Paradox 4.5 on a network, you must be aware of the following
+things:
+
+- Paradox 4.5 and 4.0 keep track of multiple users on a network with
+  PDOXUSRS.NET, while earlier versions of Paradox keep track of multiple
+  users on a network with PARADOX.NET.
+
+- Paradox 4.5 no longer requires serial numbers for installation, and
+  it doesn't restrict the number of users currently running the program.
+  To restrict the number of users running Paradox, purchase a program
+  that restricts access for all software on your network.
+
+- Tables created in earlier versions of Paradox can be opened in Paradox
+  4.5. When you open tables created in version 3.5 or earlier, they can be
+  opened again in those earlier versions if they are not restructured in
+  Paradox 4.5 and saved as standard 4.5 files. You can save them as
+  compatible files, and continue to open them in earlier versions. From the
+  Restructure menu, choose FileFormat|Compatible if you want to continue
+  using the table in both Paradox 4.5 and earlier versions. Choose
+  FileFormat|Standard if you want to upgrade the table to Paradox 4.5
+  format. If you upgrade to Paradox 4.5 format, you can add memo fields to
+  the table. See Chapters 10 and 11 in the "User's Guide" for details about
+  FileFormat on the Create and Restructure menus, respectively. Also see
+  Chapter 23 in the "User's Guide" for a complete discussion of compatibility
+  issues.
+
+
+2. PARADOX NETWORK CONCEPTS
+---------------------------
+
+This section provides an overview of the network concepts you should
+understand before you install Paradox on a network file server. It also
+helps you follow the Paradox configuration procedures described in Section
+3. If you're an experienced network administrator, you probably only need
+to browse this section. It covers
+
+- Installation preparation
+
+- The PDOXUSRS.NET file
+
+- Init scripts
+
+- Directories
+
+- Paths and network drive assignments
+
+- The workstation CONFIG.SYS file
+
+- Precautions
+
+Installation preparation
+------------------------
+You need to structure your user environment so that Paradox operates
+correctly and efficiently. Plan your network installation before you
+install, by following these steps:
+
+- Prepare a list of network resources, including
+
+    - servers (RAM, hard disk, location)
+
+    - workstations (RAM, hard disk, location)
+
+    - printers (network/local, location)
+
+    - other output devices (network/local, location)
+
+- Prepare a list of potential Paradox users, including
+
+    - name, department
+
+    - user name, private directory
+
+    - access levels, passwords
+
+- Prepare a list of Paradox directories, including
+
+    - Paradox system files directory: name (for example, PDOX45), drive
+      letter, subdirectories, location
+
+    - Paradox shared data files directory: name (for example, PDOXDATA),
+      drive letter, subdirectories, location
+
+    - Users' private directories: name (we suggest creating a directory
+      called PDOX45 on the user's local hard disk, if available, or in the
+      user's network home directory on the network drive), drive letter,
+      location
+
+- Prepare a list of Paradox products you currently own, including
+
+    - version (Paradox 3.0, Paradox 3.5, Paradox 4.5, Paradox OS/2,
+      Paradox 386, Paradox Multi-Pack, Paradox License Pack)
+
+    - current or planned installation location (hard disk, subdirectory
+      name)
+
+This worksheet will help you administer your network installation of
+Paradox.
+
+The PDOXUSRS.NET file
+---------------------
+You designate the location of PDOXUSRS.NET, the network control file, when
+you install Paradox for shared network use. (Users running Paradox version
+3.5 or earlier on the network will be using a PARADOX.NET file.) Specify a
+single location, in a shared data directory on the network server to which
+all Paradox users have read/write/create rights, so Paradox can find it in
+the same place each time a user starts it. The location you specify must be
+entered from the point of view of the eventual user at a workstation.
+
+The PDOXUSRS.NET file is session-specific. When the first user starts
+Paradox on the network, Paradox searches for the file in the location you
+specified. If Paradox can't find PDOXUSRS.NET, it creates it in the
+specified location. Subsequent users will find that the file has already
+been created. If the file is accidently erased, Paradox re-creates it.
+
+You can specify different drive letters for the location of PDOXUSRS.NET if
+your network system allows it; however, the path name--everything after the
+drive letter--must always be the same.
+
+NOTE: You can override the designated location of PDOXUSRS.NET with the
+command-line option -net <Path>, where <Path> is the override location you
+want. See Chapter 23 of the "User's Guide" for details on using command-line
+options when you start Paradox.
+
+Init scripts
+------------
+When you start Paradox, it looks for and plays, if it exists, an Init
+script. An Init script that is used by everyone on the network can be
+stored in every private directory or in the directory containing
+PARADOX.EXE. If a user has an individual Init script, it must be stored in
+the private directory searched when that user starts Paradox. For more on
+Init scripts, see Chapter 18 of the "User's Guide."
+
+Directories
+-----------
+Paradox uses three types of directories:
+
+- Paradox system files directory (suggested name: PDOX45)
+
+- Paradox shared data directories (suggested name for the main directory
+  under which these fall: PDOXDATA)
+
+- Paradox private directories
+
+The Paradox system files directory
+----------------------------------
+If you're installing Paradox on a network file server, the directory
+containing the Paradox system files must be a shared directory. We
+recommend you name this directory PDOX45, make it a subdirectory of a
+network shared applications directory, and make it read-only, or make the
+Paradox systems files themselves read-only. Some networks don't allow
+multiple users to execute programs concurrently if the program's files
+aren't read-only.
+
+If you install the optional software, the INSTALL program copies the files
+to the following subdirectories of the Paradox system files directory:
+
+- SAMPLE, for Paradox sample tables and other sample objects
+
+- SAMPAPP, for the PAL sample application
+
+- WORKSHOP, for the Paradox Application Workshop
+
+- VIDEO, for the Paradox Application Workshop sample application
+
+      \
+      ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+      ³                    ³
+   \PDOX45             \PDOXDATA
+      ³
+      ÃÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄ¿
+      ³           ³           ³           ³
+   \SAMPLE    \SAMPAPP    \WORKSHOP    \VIDEO
+                                          ³
+                                        \CFG
+
+Shared data directory
+---------------------
+During installation, you create at least one Paradox shared data directory
+used to store Paradox tables and objects that more than one user at a time
+can access. The description of the installation process for each network
+(in other online files) discusses ways you can organize data directories.
+We recommend that the initial shared data directory be named PDOXDATA and
+that it be used to store the PDOXUSRS.NET control file.
+
+In most cases, each Paradox user must have read/write/create rights to all
+directories that contain shared Paradox data. The exception is a shared
+data directory that has been locked through Paradox with Tools|Net|Lock
+|DirLock. For consistency, whoever places a DirLock on a shared data
+directory should also make this directory read-only in DOS. To place a
+DirLock on a directory, you must have read/write/create rights to it.
+
+CAUTION: DirLock doesn't prevent users with read/write/create rights to the
+directory from copying tables from it to one that isn't locked with
+DirLock, modifying the tables, and then copying them back to the original
+directory.
+
+Individual Paradox users must have read/write/create rights to shared data
+directories containing the Paradox data they need to modify. They must have
+full access rights for Paradox to create the special lock files (extension
+.LCK) that control access to shared objects.
+
+Additionally, each user must have read/write/create rights to the directory
+containing the PDOXUSRS.NET file.
+
+NOTE: You set access rights to network directories with your network
+software, not with Paradox.
+
+Private directories
+-------------------
+Every person who uses Paradox on the network must have a unique private
+directory. Paradox stores each user's temporary Paradox objects, such as
+Answer tables and Instant scripts, in the user's own private directory.
+
+If no private directory is specified, Paradox attempts to establish a
+private directory for a user but might not be able to if the user's
+environment has not been set up correctly:
+
+- If a user's workstation has a local hard disk, the private directory
+  should be located there (for example, C:\PDOX45).
+
+- If a user's workstation has no local hard disk, the private directory
+  should be the network home directory on the file server. If the private
+  directory is located on the file server, the user must have
+  read/write/create rights to the directory.
+
+- You can't use a floppy disk drive as a private directory.
+
+- If a user performs queries on large tables, his or her private directory
+  should be located on a drive with adequate disk space.
+
+Every private directory should contain a PARADOX.CFG file that tells
+Paradox that this directory is the private directory. If Paradox can't
+locate PARADOX.CFG when a user starts the program (or if the file doesn't
+contain a valid private directory designation), Paradox automatically tries
+to designate a private directory for the user:
+
+- If the user's workstation has a drive C, Paradox makes the current
+  directory on that drive the private directory.
+
+- If the workstation doesn't have a drive C, Paradox tries to make the
+  network directory on the current drive the private directory. If this
+  happens to be a shared directory that is currently in use by others or is
+  a directory to which the user has insufficient rights, the user can't
+  start Paradox. If the directory is a shared directory that no one else is
+  using at the time, all other users are then prevented from accessing that
+  directory. Because of these problems, the network administrator should
+  designate explicitly each user's private directory in the user's
+  PARADOX.CFG file.
+
+See the description of private directories in Chapter 15 of "Getting Started"
+for more details.
+
+Paradox working directories
+---------------------------
+A Paradox working directory is the directory containing the Paradox tables
+and objects with which a user is currently working. While any user can
+access Paradox data stored in any drive or directory, the working directory
+permits access to objects stored in it without the user having to specify a
+drive or directory location.
+
+If a Paradox working directory is a network shared directory, multiple
+users can access its data concurrently. If a user designates a network
+directory as a Paradox private directory, this prevents all other users
+from working with objects stored there. Paradox informs other users of the
+name of the user who made the directory private.
+
+Paths and network drive assignments
+-----------------------------------
+Multiple users on a network run Paradox and access shared Paradox data
+concurrently. To make sure everything works smoothly, the network
+administrator should make sure that each user sets up his or her path
+correctly and starts Paradox properly.
+
+Drive assignments
+-----------------
+Although each user on a network can have an individual system of assigning
+network drive letters to directories, administering your network will be
+easier if each user has a consistent pattern of network drive assignments.
+You can use any pattern you want, but the most useful are
+
+- The three-drive pattern:
+
+    - One drive is linked to the directory (and subdirectories) containing
+      all shared application programs.
+
+    - A second drive is linked to the user's home directory.
+
+    - A third drive is linked to a directory containing shared data.
+
+- The four-drive pattern:
+
+    - One drive is linked to the directory (and subdirectories) containing
+      DOS and network systems software.
+
+    - A second drive is linked to the user's home directory.
+
+    - A third drive is linked to a directory containing shared data.
+
+    - A fourth drive is linked to a directory containing the application
+      program in use at the moment.
+
+The specific drive letters assigned to these directories aren't important
+and vary from network to network. Each user does not have to have the same
+drive letter assigned to each directory.
+
+These drive patterns are similar but have significant differences. The
+three-drive pattern uses fewer network drive letters but requires more
+complex paths because each application is stored in a subdirectory of the
+shared applications directory. Because the path can be used to locate the
+directory containing the application software, the three-drive pattern
+doesn't require a special batch file for each application.
+
+The four-drive pattern can have simpler paths, but the path and the link to
+the directory containing the application currently in use must be changed
+each time the user calls up a different application. As a result, if you
+use the four-drive pattern, you have to create a batch file for each
+application that links the correct directory to the fourth drive and sets
+the correct path.
+
+IMPORTANT: When making drive assignments, you should always consider disk
+space. If a shared table in a shared drive is 3MB, then the private
+directory disk of a user accessing that table needs at least 10MB of free
+space to process queries on that table.
+
+The workstation CONFIG.SYS file
+-------------------------------
+Each computer or network workstation that runs Paradox must have a
+CONFIG.SYS file that sets the FILES and BUFFERS parameters. The CONFIG.SYS
+file must be stored in the root directory of the workstation's hard disk
+(or on the boot disk if the workstation is started from a floppy disk). The
+required parameters are
+
+FILES=40
+BUFFERS=40
+
+If another application requires a higher number of files, you can set your
+CONFIG.SYS file to that higher number without causing any problems for
+Paradox. Depending on what kind of operation you're doing, setting the
+number of buffers higher than 40 might or might not improve performance.
+See Chapter 23 of the "User's Guide" for complete details about how Paradox
+manages memory and when, if at all, you should adjust these DOS parameters.
+
+Precautions
+-----------
+This section contains information about potential hazards to Paradox data.
+
+The DOS COPY command
+--------------------
+Caution users against using the DOS COPY command to duplicate Paradox
+objects on a network. Doing so circumvents the protection that Paradox
+provides against data loss or corruption. Urge users to use the Tools|Copy
+command to duplicate Paradox objects.
+
+The DOS APPEND command
+----------------------
+When setting up a path for Paradox, you should not mention any directories
+containing Paradox objects in the DOS APPEND path. Doing so might cause
+confusion when Paradox searches for and stores objects.
+
+Dual links
+----------
+On a network, Paradox identifies tables by their drive letter, path, and
+table name. For example, suppose the PDOXDATA\SALES directory contains a
+table called Orders. Now suppose PDOXDATA is linked to drive F. To Paradox,
+the full name for the table is F:\SALES\ORDERS. Now suppose you also link
+drive G to the SALES directory without unlinking drive F. Paradox will also
+identify the Orders table as G:\ORDERS. This dual link means that Paradox
+has two different names from the same user for the same table. This could
+result in serious problems.
+
+To avoid problems, never refer to the same table from one workstation in
+one session using two different network drives. This problem occurs only
+when the same user is referring to the same table in two different ways.
+Different users at different workstations can access a table with whatever
+path names they choose without problems.
+
+Changing the sort order
+-----------------------
+The sort order used by Paradox is first determined by the country group you
+choose when you install Paradox; see Chapter 22 of the "User's Guide" for
+details. You have the option during installation of overriding that country
+group's default dictionary sort order with the ASCII sort order. The
+INSTALL program then creates the PARADOX.SOR file based on your country
+group and override sort order choices. The PARADOX.SOR file controls the
+sort order.
+
+On a standalone system, you can change the sort order by merely
+substituting one .SOR file for another. However, this method should not be
+used in a network environment, nor should the sort order be changed by an
+individual user. The network administrator should be the only person to
+change the Paradox sort order used on the network. To do so, run the
+INSTALL program. See Section 3 for more information.
+
+NOTE: If you decide to change the sort order after you've installed Paradox
+and also have already installed optional Paradox software, such as the
+sample tables, then you must reinstall this optional software when you run
+INSTALL again to change the sort order.
+
+
+3. INSTALLING PARADOX ON A NETWORK
+----------------------------------
+
+This section contains information about
+
+- Where to find network-specific installation instructions
+
+- Multiuser system requirements
+
+- Possible network configurations
+
+- Installation instructions
+
+Network-specific installation instructions
+------------------------------------------
+This section contains general instructions for installing Paradox on any
+network. Because you might need additional instructions specific to your
+network, Paradox comes with network-specific installation instructions in
+their own text files on the first program disk. You should read the
+instructions for your network before you install.
+
+The following table lists the networks Paradox supports and the
+corresponding file names.
+
+NETWORK                     FILE CONTAINING INSTALLATION INSTRUCTIONS
+---------------------------------------------------------------------
+3COM 3+ Share               3CSHARE
+AT&T StarGROUP              ATTSTAR
+Banyan Vines                BANYAN
+DEC Pathworks               DECPATH
+IBM PC LAN                  IBMPCLAN
+IBM Lanserver 3.0           LANSRVR
+Microsoft LANMAN            MSLANMAN
+Novell Advanced NetWare     NOVELL
+
+To display a network installation file a screen at a time, insert the first
+program disk in a floppy disk drive and go to that drive by typing A: at
+the DOS prompt (or B: for drive B). Type DIR *. to get a list of all the
+text files. Then type README <FileName>, where <FileName> is the name of the
+file for your network, such as NOVELL.
+
+To print a network installation file, bring it up in your favorite text
+editor and print, or type PRINT <FileName> at the DOS prompt, where
+<FileName> is the name of the file you want to print.
+
+Multiuser system requirements
+-----------------------------
+To use Paradox 4.5 or Paradox License Pack on a local area network, you
+need one of the following configurations:
+
+- A 3Com 3+ Share network, version 1.5.1 or higher
+
+- An AT&T StarGROUP for DOS, version 3.1 or higher
+
+- A Banyan Vines network, version 2.10 or higher
+
+- A DEC Pathworks network, version 1.0 or higher
+
+- An IBM Token Ring or PC Network with IBM PC Local Area Network Program,
+  version 1.12 or higher
+
+- An IBM Lanserver network, version 3.0, with DOS workstations
+
+- A Microsoft Local Area Network Manager, version 2.0 or higher
+
+- A Novell Advanced NetWare network, version 2.0A or higher
+
+- Other networks that are 100% compatible with DOS 3.1 and one of the
+  networks above
+
+You also need one or more personal computers to serve as workstations. Each
+workstation must have
+
+- Any combination of hard and floppy disk drives (including no drives at
+  all, provided it has access to a network drive)
+
+- Protected-mode capable machine (80286 or higher microprocessor) usually a
+  machine with 640K RAM and 384K extended memory, although some machines
+  with this base memory still aren't protected-mode capable
+
+- DOS 3.1 or higher
+
+- A monochrome or color monitor with an adapter; to display graphics you
+  need a CGA, MCGA, EGA, VGA, or Hercules monitor with an adapter
+
+SQL NOTE: The network requirements for Paradox with SQL Link differ from
+those listed here. See the SQL Link "User's Guide" for more information.
+
+Possible network configurations
+-------------------------------
+The basic network configurations are server-only, combined, and local-only
+installation. The exact configuration you choose depends on the needs of
+your users. In any configuration, to share data on a network, each copy of
+Paradox must be installed for network (shared) use, and the location of the
+PDOXUSRS.NET file must be specified.
+
+- You can use Paradox to access shared data, whether Paradox is installed
+  on the network file server or on a workstation hard disk.
+
+- Any computer attached to the network (including portable computers) can
+  access shared Paradox data, provided that Paradox has also been installed
+  properly on that computer for shared use.
+
+- Even if you don't have a network currently installed, you can integrate
+your current standalone copies of Paradox into a network configuration in
+case you decide to connect your workstations to a network in the future.
+Thus, your investment in Paradox is protected when you upgrade your
+hardware.
+
+If you install a copy of Paradox on a workstation's local hard disk, you
+can use that copy of Paradox on the network regardless of how many other
+people are using Paradox on the network.
+
+Server-only installation
+------------------------
+In the server-only configuration, Paradox and a one-count or ten-count
+Paradox License Pack are installed on a network file server. In this
+configuration, users can run Paradox from any workstation connected to the
+network. Users can access data stored on network servers, plus data stored
+on the local hard disk of the machine they're using.
+
+To improve performance, you can copy some of the Paradox system files from
+the network server to workstations that have local hard disks; see Section
+6 for more information. If you do this, however, you can run Paradox from
+that workstation only when connected to the network. You can't run Paradox
+if the workstation (including portable computers) is operating as a
+standalone machine.
+
+Combined installation
+---------------------
+In a combined installation, Paradox is installed both on the network file
+server and on one or more workstations' hard disks. In this type of
+installation, users can access Paradox either from the server or from the
+local workstation. Section 6 explains the performance advantages of
+installing Paradox locally.
+
+Local-only installation
+-----------------------
+You can install Paradox on one or more workstations or computers connected
+to the network and share data over the network without installing any
+copies of Paradox on the network server. In this configuration, users can
+run Paradox only from the computers on which Paradox is installed.
+
+Installing Paradox for use on a network
+---------------------------------------
+Although the specific steps for installing Paradox can vary from network to
+network, each installation follows the same basic sequence. Read the
+separate network file for installation instructions specific to your
+network. If you need more information about network concepts, see
+Section 2.
+
+Pre-installation steps
+----------------------
+To prepare your network for server-only or combined Paradox installation,
+complete the following steps:
+
+1.  Create a shared, read-only directory to contain the Paradox system
+    files. We recommend you name this directory PDOX45. To protect the
+    network software settings, only the network administrator should have
+    read/write/create rights to this directory. Other users should have
+    read-only rights to this directory.
+
+2.  Create a shared network directory for Paradox data. We recommend you
+    name this directory PDOXDATA. This directory will contain Paradox
+    tables and applications to be used by more than one person, and it will
+    also be used to store the Paradox network control file, PDOXUSRS.NET,
+    while Paradox is active on the network. Users need read/write/create
+    rights to this directory to modify data and to create or update the
+    PDOXUSRS.NET file during the Paradox session.
+
+Installing the system files
+---------------------------
+Use this section in conjunction with the network-specific installation
+instructions in text files located on the first program disk.
+
+1.  Go to the Paradox system files directory, usually PDOX45. 
+
+2.  Insert the first program disk in drive A and type A:INSTALL to run
+    the INSTALL program. Follow the onscreen instructions and refer to the
+    following notes for further assistance:
+
+    - Choose Network Installation from the INSTALL menu. This permits users
+      to access shared data files on the network, even if you're installing
+      Paradox on a local hard disk.
+
+    - If INSTALL can't copy files to the network drive, make sure you're
+      logged on as the network administrator and have read/write/create
+      rights to the network directory (PDOX45) where you're trying to
+      install Paradox.
+
+    - You must fill out all of the screens in INSTALL. If you press Esc
+      part way through, installation is incomplete.
+
+Once the installation process is complete, you should see the onscreen
+message "Paradox has been successfully installed."
+
+If installation wasn't successful
+---------------------------------
+Check these items:
+
+- Lack of sufficient storage space on your hard disk. This is the most
+  likely cause of installation trouble. You need at least 6MB of free space
+  on your server to install Paradox without the optional software. Once
+  installed, Paradox occupies less than 5MB. To install all the optional
+  software, you need an additional 1MB. If you need more disk space, remove
+  the files you don't need to free up enough room to repeat the
+  installation process.
+
+- If you have sufficient disk space, review the instructions to make sure
+  you followed them correctly.
+
+Technical support
+------------------
+- If you can't determine the cause of the problem, you can contact Borland
+  Technical Support. Refer to the "Borland Support and Services Guide"
+  included with Paradox for instructions on how to contact Borland
+  Technical Support.
+
+Additional installation steps
+-----------------------------
+After you install Paradox on your network server as part of a server-only
+or combined installation, you must set up each workstation or computer that
+will be running Paradox:
+
+1.  Modify workstation CONFIG.SYS files where necessary. The CONFIG.SYS
+    file in the root directory of each workstation or computer must contain
+    the following statements:
+
+    FILES=40
+    BUFFERS=40
+
+2.  Create a private directory for each Paradox user. Paradox requires a
+    specific location, unique to each user, to store that user's temporary
+    objects (for example, Answer tables). The user must have
+    read/write/create rights to this directory. For performance reasons, we
+    recommend creating this private directory on the workstation's local
+    hard disk, if it has one. Otherwise, the private directory should be
+    the user's home directory on the network drive.
+
+3.  Modify the user's search path. The user's path must specify that DOS
+    will first search the user's private directory (to locate the personal
+    configuration file, PARADOX.CFG), then the Paradox system files
+    directory.
+
+4.  Set up the Paradox network environment for the user:
+
+    - Modify each user's login script, or create a Paradox startup batch
+      file that establishes paths for the user prior to starting Paradox.
+     
+    - Verify that each user has been assigned proper access rights to
+      each Paradox directory.
+
+5.  Configure Paradox for the network and for each user, as described in
+    Section 3.
+
+6.  Test and document your work. Log on to the network from each
+    workstation and for each user and verify that Paradox works properly.
+    Distribute written instructions for starting Paradox and keep written
+    records of your installation for future reference.
+
+7.  If you need to increase the number of concurrent users on the network,
+    purchase more single or License Pack copies of Paradox.
+
+
+4. CONFIGURING PARADOX FOR NETWORK WORKSTATIONS
+-----------------------------------------------
+
+This section describes how to configure individual workstations to use
+Paradox on a network. This is the final step in Paradox network
+installation. This section covers
+
+- Network configuration requirements
+
+- Configuration and the private directory
+
+- Creating a default network configuration file
+
+- Creating individual user configuration files
+
+Overview
+--------
+The Custom Configuration Program (CCP) lets you customize Paradox for each
+user's particular needs. By playing a Paradox script called Custom, you
+choose options from a series of menus, then save your custom configuration
+in a file called PARADOX.CFG. When each user starts Paradox, it searches
+for and uses a PARADOX.CFG file to set configuration options. The
+installation program automatically copies Custom to the server directory
+containing the Paradox system files (PDOX45).
+
+In terms of network operation, the most important function of a PARADOX.CFG
+file is to designate the location of each user's private directory. Every
+Paradox user must have a separate private directory. Paradox uses the
+PARADOX.CFG file to discover the location of the private directory a person
+will be using while working with Paradox.
+
+The PARADOX.CFG file is also used to
+
+- Specify report formats and printer defaults for shared printers on the
+  network
+
+- Specify default graph settings, printers, and screens
+
+- Tell Paradox the name of each user (on networks where the user name
+  can't be determined from the network operating system)
+
+- Set other user- or workstation-related parameters such as monitor type
+  and autorefresh interval
+
+See Chapter 15 of "Getting Started" for complete information on the Custom
+Configuration Program.
+
+The default PARADOX.CFG file
+----------------------------
+In creating a default Paradox configuration file, you must decide on the
+generic configuration settings that best apply to all Paradox users on the
+network. This file serves two purposes:
+
+- You can use it as a template to help you set up individual PARADOX.CFG
+  files for each workstation.
+
+- It serves as a fallback configuration file if a user happens to use a
+  workstation that doesn't have its own PARADOX.CFG file.
+
+The settings you can manipulate through the Custom script can be classified
+into three types:
+
+- Network settings apply to the entire network. For example, everyone
+  should use the same settings for the default network shared printer.
+
+- Workstation settings apply to a particular workstation. For example, on
+  the same network you might have some workstations with color monitors and
+  others with monochrome monitors.
+
+- Individual settings are those that pertain to a particular user. For
+  example, users might have individual preferences for default report
+  formats. Also, on networks where Paradox can't determine a user's name
+  from the operating system, Paradox gets the user name from that user's
+  PARADOX.CFG file.
+
+The default configuration file should contain the most general settings
+--those that apply to the greatest number of users or workstations. By
+choosing the generic settings, you have fewer changes to make when
+customizing individual PARADOX.CFG files for each user or workstation.
+
+Configuration steps
+-------------------
+Before configuring individual workstations, you should complete all the
+installation steps for your specific network as described in Sections 2
+and 3 of this file and in specific network installation files located on
+the first program disk. This includes setting up the correct path, login
+script, or batch file for each workstation.
+
+To create the default PARADOX.CFG file and configure Paradox for each
+workstation, follow the steps in the next sections.
+
+
+CREATING THE DEFAULT PARADOX.CFG FILE
+-------------------------------------
+
+1.  Log on to the network as the administrator and access the Custom
+    Configuration Program to create a default PARADOX.CFG file for the
+    network. You must have a network drive linked to the Paradox system
+    files directory (for example, PDOX45) with read/write/create rights.
+
+    You can access the CCP from the DOS prompt or from within Paradox:
+
+    - From the DOS prompt, type PARADOX CUSTOM. For example, if the
+      PDOX45 directory is linked to drive G, and G is the current drive,
+      type PARADOX CUSTOM.
+
+    - From Paradox's Main menu, choose ð|Utilities|Custom or choose
+      Scripts|Play and choose Custom as the script to play.
+
+2.  Choose Network from the Custom Main menu to set the default private
+    directory.
+
+    You should enter the private directory name from the point of view of
+    the eventual user at a workstation. You should enter the most common
+    private directory location for your network as the default. For
+    example, on a network in which the majority of workstations have local
+    hard disks, you should type C:\PDOX45.
+
+3.  Enter other default settings as appropriate.
+
+    NOTE: For the default PARADOX.CFG file, you should leave the User Name
+    text box blank.
+
+4.  After you enter your network settings, return to the Custom Main menu
+    and press F2 or choose DO-IT! from the menu.
+
+5.  Paradox displays a menu with the choices HardDisk and Network. Choose
+    Network.
+
+6.  Paradox displays a dialog box with the prompt "Directory:" and with
+    the name of the directory you entered as the private directory. Since
+    you're creating the network default PARADOX.CFG file, you should delete
+    the suggested entry by pressing Ctrl-Backspace and enter the drive
+    letter of the PDOX45 directory. You then exit to Paradox.
+
+7.  Change the access rights of the PDOX45 directory back to read-only.
+
+Creating workstation and individual configuration files
+-------------------------------------------------------
+Every private directory should contain a PARADOX.CFG file that tells
+Paradox that this directory is the private directory. For workstations with
+local hard disks, follow these steps:
+
+1.  Go to each workstation and log on to the network as the network
+    administrator.
+
+2.  Create a C:\PDOX45 directory on the local hard disk.
+
+3.  Copy the default PARADOX.CFG file from the network Paradox system files
+    directory, PDOX45, to C:\PDOX45.
+
+4.  If you want to specify individual or workstation-specific parameters
+    for a particular workstation PARADOX.CFG file, access the CCP (see
+    step 1 of the previous section).
+
+5.  Choose Network from the CCP Main menu.
+
+6.  Change the private directory setting to C:\PDOX45.
+
+7.  On networks where the user name isn't automatically recognized, enter
+    the user's name in the User Name text box.
+
+8.  Create or modify any other settings as appropriate and choose OK to
+    return to the CCP Main menu.
+
+9.  Press F2 or choose DO_IT! from the CCP Main menu when you're finished.
+
+10. Choose Network from the HardDisk/Network menu.
+
+11. You see a dialog box with the prompt "Directory:", followed by what you
+    entered as the private directory. Press Enter or choose OK to accept
+    this and store the PARADOX.CFG file in the user's C:\PDOX45 hard-disk
+    drive and directory.
+
+For workstations without local hard disks,
+
+1.  Copy the default PARADOX.CFG file from the network Paradox system files
+    directory, PDOX45, to the network home directory of each person who
+    will run Paradox from a diskless workstation.
+
+2.  Make each of those network home directories your current directory and
+    access the CCP (see step 1 of the previous section).
+
+3.  Choose Network from the CCP Main menu.
+
+4.  Change the private directory setting to the network drive linked to the
+    user's network home directory.
+
+5.  On networks where the user name isn't automatically recognized, enter
+    the user's name in the User Name text box.
+
+6.  Create or modify any other settings as appropriate and choose OK to
+    return to the CCP Main menu.
+
+7.  Press F2 or choose DO-IT! from the CCP Main menu when you're finished.
+
+8.  Choose Network from the HardDisk/Network menu.
+
+9.  You see a dialog box with the prompt "Directory:", followed by what you
+    entered as the private directory. Press Enter or choose OK to accept
+    this and store the PARADOX.CFG file in the user's private directory.
+
+You can modify any or all of the PARADOX.CFG files by rerunning Custom from
+the appropriate directory and making the necessary changes.
+
+IMPORTANT: You must always save these individual PARADOX.CFG files by
+exiting Custom with DO_IT! and then by choosing Network from the
+HardDisk/Network menu and specifying the directory containing the
+PARADOX.CFG file. (If you save PARADOX.CFG with HardDisk, Custom tries to
+save it to the system files directory and fails if you don't have
+read/write/create rights to this directory.)
+
+
+5. UPDATING YOUR INSTALLATION WITH NUPDATE
+------------------------------------------
+
+This section describes how to update or modify your Paradox network
+installation.
+
+You can update the information you entered when running INSTALL by running
+the NUPDATE program, which is stored in the Paradox system files directory
+(for example, PDOX45). NUPDATE lets you change the following information:
+
+- The name of the network administrator
+
+- The location of the PDOXUSRS.NET file
+
+- The network type
+
+NOTE: Paradox no longer keeps track of user count.
+
+CAUTION: Use NUPDATE to modify Paradox network installation parameters only
+when no Paradox users are on the network. Use Tools|Info|Who on the Main
+menu to see if anyone on the network is using Paradox.
+
+To modify network installation parameters with NUPDATE,
+
+1.  Make the PDOX45 directory your current directory. You must have
+    read/write/create rights to this directory.
+
+2.  Type NUPDATE.
+
+3.  NUPDATE displays the Personal Signature screen with your current
+    company, network administrator, and user names.
+
+    - If you want to change the network administrator name (or user name,
+      if you're installing on a local hard disk for network access), move
+      to that field, erase the existing name by pressing Ctrl-Backspace,
+      and then type the new name. When the new name is correctly entered,
+      press F2 to proceed.
+
+    - If you don't want to change the network administrator name, press F2
+      to proceed.
+
+    NOTE: If you want to change the company name displayed on the Personal
+    Signature screen, you must reinstall Paradox.
+
+4.  Paradox displays the Network Type screen, showing the currently
+    installed network type and the location of PDOXUSRS.NET.
+
+    - To modify the information on this screen, move to the field you want
+      to change, then press Ctrl-Backspace to erase the existing
+      information. Next, type the new information and press F2 to continue.
+
+      NOTE: If you change the location of PDOXUSRS.NET, you need to do the
+      following things: for each network and workstation installation, run
+      NUPDATE in that installation's system files directory (usually
+      PDOX45) and change the location of PDOXUSRS.NET. You also have to
+      make sure that when users start Paradox, they're linked to the new
+      directory containing PDOXUSRS.NET.
+
+    - To skip this screen without changing anything on it, simply press F2
+      or choose DO-IT! from the menu.
+
+
+6. IMPROVING NETWORK PERFORMANCE
+--------------------------------
+
+This section tells you how to improve Paradox performance on a network,
+using the following techniques:
+
+- Adding extra extended memory
+
+- Running Paradox from a local hard disk on a network
+
+- Using a local hard disk for the user's private directory
+
+- Storing data on a local hard disk
+
+- Reducing unnecessary read and write requests
+
+Overview
+--------
+The best way to improve performance--on either a standalone computer or on
+a network--is by adjusting the way Paradox allocates memory. To learn how
+Paradox manages memory and how to adjust it, see Chapter 23 of the "User's
+Guide."
+
+You can also improve Paradox network performance by using, wherever
+possible, a workstation's local hard disk instead of the server hard disk
+for your storage requirements. The network server must process requests to
+read from and write to its hard disk one at a time. As the number of
+network users increases, the possibility of a backlog of read/write
+requests also increases. Since only one user can access the network server
+at any given instant, other users must wait their turn to access the
+server's hard disk. This delay results in a small loss of performance for
+Paradox on the network. By using your workstation to process read/write
+requests on a local hard disk rather than through the server, however, you
+reduce the number of requests the network server needs to process, and
+therefore increase the speed with which Paradox functions on the network.
+
+Improving performance through efficient use of memory
+-----------------------------------------------------
+The efficient use of memory becomes more important when using Paradox on
+a network rather than on a standalone because of the memory used by
+network services. One way to improve performance is simply to add more
+memory in the form of extra extended memory. You can also improve
+performance by using extended memory to best advantage. See "How Paradox
+manages memory" and "Memory allocation options" in Chapter 23 of the
+"User's Guide" for complete details about how to configure Paradox for
+optimal use of memory.
+
+IBM Token Ring users
+--------------------
+Token Ring cards use some of the same memory address space as the AST
+Rampage card. If the network cards installed on your workstations are IBM
+Token Ring cards, you can prevent this conflict by modifying the
+workstation's CONFIG.SYS file.
+
+Token Ring cards use one of two address spaces: CC00-CFFF or D800-DBFF
+(consult your Token Ring documentation to find out which your card uses).
+The CONFIG.SYS file contains a line that begins DEVICE=REMM.SYS, which
+was added during the EEMS card installation. If the Token Ring card uses
+CC00-CFFF, add the parameter /X=CC00-CFFF to this line. If the Token
+Ring card uses D800-DBFF, add the parameter /X=D800-DBFF.
+
+Efficient use of memory for PAL applications
+--------------------------------------------
+Network software reduces the amount of memory available for Paradox to use.
+Thus, while the efficient use of memory in Paradox applications is
+important on a standalone system, it becomes imperative on the network. PAL
+applications optimize memory management when you
+
+- Use the PRIVATE keyword in procedures instead of global variables
+
+- Hand-code literal strings rather than assign them to variables
+
+- Use arrays sparingly and judiciously
+
+- Use RELEASE PROC for procedures that are used only once
+
+- Use procedures, especially closed procedures
+
+- Keep the size of procedures under 4K
+
+- Use AUTOLIB instead of READLIB to load procedures from libraries
+
+Using workstation hard disks to improve performance
+---------------------------------------------------
+You can improve Paradox's performance on a network by using the hard disks
+of local workstations to run Paradox and to store Paradox data.
+
+Installing paradox on a local workstation
+-----------------------------------------
+The best way to reduce network delays is to purchase a separate copy of
+Paradox and install it on a local hard disk. The user loads Paradox from a
+local hard disk rather than the server's hard disk. This substantially
+eliminates network delays caused by Paradox accessing the server for
+software yet still allows access to shared data on the network.
+
+Assuming you've properly followed the installation instructions in this
+file, you've set up the user's search path so that Paradox looks first to
+the user's private directory before looking to the system files directory.
+If Paradox can read system files from the local hard disk rather than from
+the server hard disk, server delays are reduced, and the speed of Paradox
+is increased.
+
+NOTE: Under the Paradox license agreement, you are not permitted to violate
+the "one count, one user" rule. If you download the Paradox system files to
+your local hard disk, you can operate Paradox only when you are logged on
+to the network.
+
+Copying system files to workstation private directories
+-------------------------------------------------------
+Short of purchasing and installing a separate single-user copy of Paradox
+on a workstation hard disk, you can copy the following system files from
+the Paradox system files directory on the network (for example, PDOX45) to
+the workstation private directory on the local hard disk (for example,
+C:\PDOX45):
+
+PARADOX.IDX
+
+PARADOX.AUX
+
+PARADOX.OV1
+
+PARADOX.OV2
+
+PARADOX.HLP
+
+PARADOX.MSG
+
+You should verify that the user's search path is properly set up to search
+the private directory on the local drive before searching the system files
+directory on the server hard disk.
+
+NOTE FOR NOVELL USERS: Because you can't list a local drive before a network
+drive on the Novell search path, you will have to set up a DOS path using
+the PATH command to take advantage of this strategy.
+
+Storing data on a local workstation
+-----------------------------------
+If a user is working with personal Paradox tables not shared with any other
+network users, you can reduce network delays by storing these tables and
+their related objects on a local hard disk.
+
+Another good method for improving performance on a network is to designate
+a directory on a local hard disk as the private directory for temporary
+objects. This eliminates network delays caused when Paradox creates or
+accesses temporary objects and provides significant performance
+improvements if you're working with large objects or many objects at the
+same time. For more about private directories on a network, see Section 2.
+
+Other performance tips
+----------------------
+If you're experiencing noticeable slowness in performance after doing the
+things suggested in the previous sections of this chapter, try reducing
+unnecessary read and write requests. If you have tables that you want users
+to have only read rights to, you can store them in a separate shared
+directory and place a DirLock (directory lock) on that directory by
+choosing Tools|Net|Lock|DirLock. Placing a DirLock on a shared data
+directory lets Paradox disk-cache that directory's files, thereby providing
+faster viewing access of those objects.
+
+In general, the more you restrict access, the faster Paradox works. For
+example, a table with a write lock gets better performance than a table
+with no locks; a table with a full lock gets better performance than a
+table with just a write lock. Check other explicit table-locking features
+available to you to limit users' access to Paradox data in "Lock" and
+"PreventLock" under "Net" in Chapter 17 of the "User's Guide." Also see
+Chapter 21 of the "User's Guide" for further details on network issues.
+
+For shared data directories containing objects users must be able to write
+to, you can do the following:
+
+- Have users increase their autorefresh intervals or turn autorefresh off
+  completely. (Choose Network from the CCP Main menu, or in Paradox, choose
+  AutoRefresh from the CoEdit menu or Tools|Net|AutoRefresh from the Main
+  menu.)
+
+- If you need to run big queries on a periodic basis (to sum up a day's
+  sales activities, for instance), run them at times of low activity.
+
+
+7. TROUBLESHOOTING
+-----------------
+This section examines potential network problems:
+
+- Insufficient disk space on the network server
+
+- A workstation malfunction that causes a file to be incorrectly locked
+
+- PDOXUSRS.NET problems
+
+- Private directory problems
+
+- Directory access-denied problems
+
+Insufficient disk space on the server
+-------------------------------------
+Before Paradox begins an operation, it checks to make sure enough disk
+space is available to complete the task. If enough space isn't available,
+Paradox cancels the operation and displays a "Not enough disk space" message.
+However, Paradox can't predict what other users at other workstations on
+the network might do while the operation is underway. If a second user
+fills up server disk space while the first user is performing a
+disk-intensive Paradox operation, the first user might not have enough disk
+space to complete the task.
+
+For example, suppose that one user decides to sort a table to a new file.
+Paradox checks the server disk space, verifies that enough room is
+available for the new table, and begins the sort. Now, at another
+workstation, a different user starts copying large files from his or her
+local hard disk to the server hard disk, and Paradox discovers that it no
+longer has enough room for the newly sorted table.
+
+When this problem occurs, Paradox temporarily returns to DOS so that the
+first user can clear space on the server by erasing unneeded files. Paradox
+displays a message indicating how much disk space it needs to proceed.
+
+- If users choose not to delete files to free up disk space, they can type
+  EXIT to return to Paradox. Paradox cancels the operation, clears the
+  desktop, and returns to Main mode.
+
+- Users can free up disk space by deleting as many unneeded files as they
+  can and then typing EXIT to resume the operation.
+
+The amount-of-space-needed message only indicates the minimum Paradox needs
+to proceed with the very next step. If you clear only the minimum
+requested, Paradox proceeds with its next step but then might find itself
+unable to proceed with the following step. It then returns you to DOS,
+where you have to repeat this process. Because of this, when you're placed
+in DOS to free up disk space, free up as much as you possibly can,
+regardless of the amount requested.
+
+The network administrator should caution users against deleting any Paradox
+files or objects that they or others might need. In this situation, no one
+should ever delete the PDOXUSRS.NET file or any of the following Paradox
+file types:
+
+- PARADOX*.*
+
+- SORT*.DB
+
+- *.LCK
+
+- *.T*
+
+- Z*.*
+
+Network administrators should regularly monitor server disk space to
+prevent this potential problem.
+
+Workstation crashes and file locking
+------------------------------------
+If a workstation crashes while working with shared Paradox tables, the
+network operating system might lock the table or record to all users. This
+is a network problem, not a Paradox problem. It can be solved only by
+logging the workstation back on to the network. Once the workstation is
+logged back on, the network operating system automatically removes the
+locks. It is not necessary for the workstation to reload Paradox.
+
+In this situation, some or all of the work done at the workstation
+immediately before it crashed could be lost. The existing Paradox tables
+and objects aren't harmed, but they remain as they were when they were last
+saved to disk--a good reason to save to disk often.
+
+If the workstation is damaged and can't be logged back on to the network,
+you have to tell the network that the damaged workstation has been logged
+off. All networks provide some method of doing this when a workstation
+malfunctions. Consult your network documentation.
+
+Paradox directory and table locks are controlled by files of the file type
+.LCK. In the normal course of Paradox operation, .LCK files are created,
+modified, and deleted automatically by Paradox in every directory
+containing Paradox data. Since Paradox automatically deletes or modifies
+unneeded or incorrect .LCK files, you should not have to use DOS to delete
+any .LCK files.
+
+NOTE: In rare situations, you might need to delete .LCK files. Only the
+network administrator should do so. You might want to call Borland
+Technical Support to assist you, if you think you're in a situation that
+requires you to delete .LCK files. See the "Borland Support and Services
+Guide" for instructions on calling Borland Technical Support.
+
+PDOXUSRS.NET problems
+---------------------
+Several error messages indicate a problem with the PDOXUSRS.NET file:
+
+-- "<Table> locked by PDOXUSRS.NET in <Directory>" (your PDOXUSRS.NET is
+   in <Directory>)
+
+   This message indicates more than one PDOXUSRS.NET file is on the
+   network. Users who are using one PDOXUSRS.NET file are unable to access
+   data being locked by a second PDOXUSRS.NET file. The only way to solve
+   this problem is to have only one PDOXUSRS.NET file on the network that
+   everyone uses.
+
+   To find the cause of duplicate PDOXUSRS.NET files,
+
+   1.  Have everyone on the network exit Paradox. No one should be using
+       Paradox while you perform step 2.
+
+   2.  Make sure all copies of Paradox specify the same directory for the
+       PDOXUSRS.NET file.
+
+   3.  Verify that the user's batch file for loading Paradox sets up the
+       proper path to PDOXUSRS.NET. See the instructions for creating batch
+       files on your particular network in the online text file for your
+       network (in the system files directory, which is usually PDOX45).
+
+       When Paradox is installed, a directory is specified as the location
+       of the PDOXUSRS.NET file. If two copies of Paradox are running on the
+       network with different directories specified for the PDOXUSRS.NET
+       file, each will have a different PDOXUSRS.NET file. This kind of
+       problem most frequently occurs when a local copy of Paradox is
+       installed with an incorrect directory specified for PDOXUSRS.NET.
+       It also occurs when a standalone computer (such as a portable
+       computer) is temporarily plugged into the network, and its copy of
+       the PDOXUSRS.NET file doesn't have the correct network directory
+       specified.
+
+       To determine the directory specified as the location of the
+       PDOXUSRS.NET file, run NUPDATE for all server-installed copies of
+       Paradox and INSTALL for all copies of Paradox installed on local
+       hard disks. If a copy of Paradox has an incorrect specification for
+       PDOXUSRS.NET, correct it while in NUPDATE or INSTALL. See Section 3
+       for more information on running INSTALL or Section 5 for running
+       NUPDATE.
+
+-- "Can't start Paradox: unable to access PDOXUSRS.NET"
+
+   This message indicates a problem with locating the PDOXUSRS.NET file.
+   For example, G: is specified as the location of PDOXUSRS.NET, but this
+   user has no directory linked to logical drive G. Other reasons why the
+   file can't be accessed include
+
+   - Inability to perform record locking. The PDOXUSRS.NET file has been
+     found, but it is unable to perform record locking. Check to make sure
+     that
+
+     - The directory is a shared directory (that is, the network allows
+       concurrent access to multiple users)
+
+     - The directory grants all users read/write/create rights
+
+     - The correct network type was specified during installation
+
+   - Inability to read the PDOXUSRS.NET file. The PDOXUSRS.NET file has
+     been found, but Paradox is unable to read it.
+
+   - Check the network-level access rights. The directory containing the
+     PDOXUSRS.NET file must grant read/write/create rights.
+
+   - If directory access rights aren't the problem, the PDOXUSRS.NET file
+     might have somehow become corrupted. Have everyone on the network exit
+     Paradox, then use DOS to delete the existing PDOXUSRS.NET file. When
+     you restart Paradox, a new PDOXUSRS.NET file is created.
+
+   - Inability to write to the PDOXUSRS.NET file. The PDOXUSRS.NET file has
+     been found, but Paradox is unable to write to it. Check the
+     network-level access rights. The directory-level access rights must be
+     read/write/create. If the directory-level access  rights are correct,
+     use DOS to delete the existing PDOXUSRS.NET file. When you restart
+     Paradox, a new PDOXUSRS.NET file is created.
+
+If none of these suggestions solves the problem, call Borland Technical
+Support. Refer to the "Borland Support and Services Guide" for information
+on how to do this.
+
+
+-- "Can't access shared <DirectoryName> from single-user workstation"
+
+   This message indicates that the user is trying to access network data
+   with a copy of Paradox that hasn't been properly installed for network
+   use. The user's copy of Paradox fails to specify a network type,
+   specifies the wrong network type, or fails to specify the location of
+   the PDOXUSRS.NET file.
+
+   In most cases, this type of problem occurs with copies of Paradox
+   installed on workstation local hard disks or on standalone computers
+   that are temporarily connected to the network.
+
+   To correct the problem, run NUPDATE for this copy of Paradox and specify
+   the correct network type and location of the PDOXUSRS.NET file. See
+   Section 5 for more information on running NUPDATE.
+
+Private directory problems
+--------------------------
+Error messages similar to the following ones indicate that one user has
+tried to access data in a directory being used by someone else as a private
+directory:
+
+-- "Directory <DirectoryName> is in use by <UserName>"
+
+-- "<DirectoryName> is the private directory of <UserName>"
+
+   When a Paradox user designates a particular directory as a private
+   directory, Paradox prevents all other users from accessing any tables or
+   objects stored in that directory. For example, if a Paradox user
+   incorrectly designates a shared data directory as a private directory,
+   other legitimate users are prevented from accessing data in that
+   directory. This problem can occur when a user
+
+   - Starts Paradox without a PARADOX.CFG file
+
+   - Starts Paradox with a PARADOX.CFG file that specifies the wrong
+     private directory
+
+   - Starts Paradox with an incorrect path so that the wrong PARADOX.CFG
+     file is loaded (or no file at all is found)
+
+   The user name and directory named in the error message tell you the
+   source of the problem. Depending on your network, the user name shown in
+   the message can be
+
+   - A network user name that identifies a particular person
+
+   - A workstation machine name that identifies a particular workstation
+
+   - A name that has been entered as a user name in a PARADOX.CFG file that
+     might identify either a person or a workstation
+
+   If the error message indicates that someone is using an incorrect
+   directory as a private directory, you must tell that person to change
+   his or her private directory. This can be done on a temporary basis by
+   having that person use Tools|Net|SetPrivate to set a different private
+   directory. However, you should check the user's path and PARADOX.CFG
+   file to find out why an incorrect private directory was designated and
+   correct the problem.
+
+   The error message "Working directory <DirectoryName> from .CFG file
+   doesn't exist, trying current directory" usually means that Paradox
+   can't find the directory specified in the PARADOX.CFG file. For example,
+   a network directory has been specified but isn't linked to the
+   designated drive.
+
+Directory access problems
+-------------------------
+The error message "Access to directory denied" indicates that the user
+isn't properly linked to the directory he or she is trying to access.
+This is a network problem, not a Paradox problem. Check to see that the
+user is correctly linked to the necessary directories.
+
+NOTE TO NOVELL USERS: On the Novell network, this message might mean the
+user doesn't have read/write/create rights to the directory in question.
+
+
