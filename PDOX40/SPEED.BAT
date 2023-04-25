@@ -1,0 +1,1 @@
+copy h:\pdox40\paradox.idx c:\pdox40\paradox.idx

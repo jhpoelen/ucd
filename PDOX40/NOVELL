@@ -1,0 +1,428 @@
+                 INSTALLING PARADOX ON A NOVELL NETWORK
+                 --------------------------------------
+
+This file contains instructions for installing Paradox on a Novell network.
+These instructions were verified using Netware 386, version 3.11 and 
+version 4.0, on a Dell 486P/33 using MSDOS 5.0.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Assumptions
+2. Installation Steps
+3. Linking Users and Setting User Paths
+4. Novell Flag Commands
+5. Locally Installed Copies of Paradox
+
+
+1. ASSUMPTIONS
+--------------
+
+These instructions assume the following about your Novell installation:
+
+- You use Novell Advanced NetWare version 2.0A or higher.
+
+- Every network user has a home directory.
+
+- You're familiar with the Novell Filer and Syscon utilities and the
+  Novell commands MAP and SEARCH.
+
+- Your network has a shared applications directory named \APPS.
+
+- You perform all installation and configuration operations from a
+  workstation.
+
+
+2. INSTALLATION STEPS
+---------------------
+
+1)  Log in as network supervisor. Type
+
+    LOGIN SUPERVISOR
+
+2)  If prompted to do so, type in the supervisor's password.
+
+3)  To start the Filer utility, type
+
+    FILER
+
+    The Filer Main menu appears.
+
+4)  Set the current directory to the server's shared applications
+    directory:
+
+    a. Choose Select Current Directory from the menu. You see the Current
+       Directory dialog box, which shows the current Novell server and
+       volume name, followed by a colon and the name of the current
+       directory.
+
+    b. If nothing appears to the right of the colon, the root directory is
+       the current directory. Type the name of the shared applications
+       directory, APPS.
+
+    c. If a directory name (or names) is to the right of the colon, use
+       [Backspace] to erase them so just the colon remains. Enter the name
+       of the shared applications directory.
+
+       At the top of your screen you should now see the new current
+       directory, ServerName\VolumeName:APPS, and be back at the Filer Main
+       menu.
+
+5)  Create the Paradox system files directory.
+
+    a. Choose Directory Contents from the Filer Main menu. A Directory
+       Contents box displaying the existing subdirectories appears.
+
+    b. Press [Ins]. The New Subdirectory Name dialog box appears.
+
+    c. Fill in the name of the subdirectory that will contain the Paradox
+       system software, PDOX45. The subdirectory name appears in the box.
+
+    d. Press [Esc] to return to the Filer Main menu.
+
+6)  Set the current directory to the new PDOX45 subdirectory.
+
+    a. Choose Select Current Directory. The Current Directory dialog box
+       appears.
+
+    b. Add the name of the subdirectory you just created. The directory
+       should now read ServerName\VolumeName:APPS\PDOX45.
+
+7)  Edit the Inherit Rights Mask of the new PDOX45 directory. Choose Current
+    Directory Information and choose Maximum Rights Mask. Delete all rights
+    except:
+
+    - File Scan (F)
+    - Read from File (R)
+    - Open Files (O)
+
+    Open Files (O) is needed for Netware 286 servers.
+
+    NOTE: The network supervisor always has all rights to all directories,
+    regardless of how the maximum rights mask is set. For information on
+    how to edit the maximum rights mask, consult your Novell documentation.
+
+8)  Designate the trustees (users) who will be allowed to use Paradox on
+    the network. To use Paradox on the network, a user must be listed as a
+    trustee of the PDOX45 directory.
+
+    a. Choose Current Directory Information and then choose Trustees.
+
+    b. If you want Paradox to be available to everyone on your network,
+       assign the trustee group Everyone to the PDOX45 directory.
+
+    c. If you want to limit access to Paradox, you must individually
+       designate which trustees have access. You can do this on a user-by-
+       user basis or by using the Syscon menu to create a trustee group (or
+       groups) and then designating the group as a trustee for the PDOX45
+       directory.
+
+       For descriptions of how to use the Filer utility to assign trustees
+       or the Syscon utility to create groups, consult your Novell
+       documentation.
+
+9)  Create the Paradox shared data directory.
+
+    a. Choose Select Current Directory from the Filer Main menu. The
+       Current Directory dialog box appears, showing the current Novell
+       server and volume name followed by a colon and the name of the
+       current directory, ServerName\VolumeName:APPS\PDOX45.
+
+    b. If nothing appears to the right of the colon, the root directory is
+       already the current directory. Press [Enter] to return to the Filer
+       Main menu.
+
+    c. If a directory name (or names) appears to the right of the colon, use
+       [Backspace] to erase them and press [Enter] to return to the Filer
+       Main menu.
+
+       At the top of your screen you should now see ServerName\VolumeName:.
+
+    d. Choose Directory Contents from the Filer Main menu. A box appears at
+       the left of your screen, displaying the existing subdirectories.
+
+    e. Press [Ins]. The New Subdirectory Name dialog box appears.
+
+    f. Fill in the name of the directory that will contain shared Paradox
+       data, PDOXDATA. The subdirectory name appears in the box.
+
+    g. Press [Esc] to return to the Filer Main menu.
+
+10) Set the current directory to the new PDOXDATA directory.
+
+    a. Choose Select Current Directory from the menu.
+
+    b. You see the Current Directory dialog box, which shows the current
+       Novell server and volume name followed by a colon. Type
+
+       PDOXDATA
+
+11) Optionally, if you want to delete parental rights, edit the maximum
+    rights mask of the new PDOXDATA directory. For information on how to edit
+    the maximum rights mask, consult your Novell documentation.
+
+12) Designate the trustees who will be allowed to access the tables stored in
+    the PDOXDATA directory.
+
+    a. If you want everyone on your network to be able to access these
+       tables, assign the trustee group Everyone to the PDOXDATA directory.
+
+    b. If you want to limit access, you must individually designate which
+       trustees have access. You can do this on a user-by-user basis or by
+       using the Syscon menu to create a trustee group (or groups) and
+       then designating the group as a trustee for the PDOXDATA directory.
+
+       For descriptions of how to use the Filer utility to assign trustees
+       or the Syscon utility to create groups, consult your Novell
+       documentation.
+
+13) Install the Paradox system files and optional software. Follow the
+    instructions in NETWORK.TXT (found on your Paradox installation disks).
+    The Paradox INSTALL program copies your Paradox system files and optional
+    software from the program disks into the system files directory, PDOX45.
+
+14) Create or modify the CONFIG.SYS file of each workstation to set the
+    number of buffers and files needed by Paradox:
+
+    FILES=40
+    BUFFERS=40
+
+    A workstation's CONFIG.SYS file must be stored in the root directory of
+    the workstation's hard disk (or on the boot disk if the workstation is
+    started from a floppy disk). See NETWORK.TXT for details on CONFIG.SYS.
+
+    NOTE: After editing the CONFIG.SYS file, you must reboot the workstation
+    before you can run Paradox. To reboot, press [Ctrl][Alt][Del].
+
+15) Link each user to a private directory. The private directory must be
+    either a network home directory or a private directory on a local hard
+    disk. For information, see "Linking Users and Setting User Paths" later
+    in this file.
+
+    See NETWORK.TXT for more information about private directories.
+
+    Normally, each user on a Novell network has a home directory (and
+    associated subdirectories), which can be used for Paradox tables. In most
+    cases, a single user has trustee rights to a particular home directory.
+    Only that user can use Paradox tables stored in his or her home directory.
+
+    Other directories on the network grant trustee rights to more than one
+    person. Paradox tables stored in these multiuser directories can be
+    accessed by everyone who has trustee rights to them. These are called
+    shared directories.
+
+16) Link each user to the Paradox system files directory, PDOX45. For
+    information, see "Linking Users and Setting User Paths" later in this
+    file.
+
+17) Link each user to the directory containing PDOXUSRS.NET, PDOXDATA. For
+    information, see "Linking Users and Setting User Paths" later in this
+    file.
+
+18) Change each Paradox user's path to search for the user's private
+    directory and the Paradox system files directory, IN THAT ORDER. The
+    user's private directory must precede all other Paradox-related
+    directories in the path, since Paradox searches for PARADOX.CFG in the
+    private directory to determine the user's private directory and other
+    default settings.
+
+    For information, see "Linking Users and Setting User Paths" later in this
+    file.
+
+    See NETWORK.TXT for details about the PARADOX.CFG file.
+
+    The Novell operating system forbids using the SEARCH path to search a
+    local hard disk directory before a network directory. Since using local
+    hard disk directories as private directories isn't recommended, you
+    should either
+
+    - Make sure no PARADOX.CFG files are in any of the network directories
+      listed in a user's search path and then search the local private
+      directory immediately after the last network directory. If you used a
+      default PARADOX.CFG file in the PDOX45 directory as NETWORK.TXT
+      explains, you will have to delete that file before users begin
+      running Paradox.
+
+    - Use the DOS PATH command rather than the Novell MAP and SEARCH commands
+      to set up each user's search path. You must use this method if Paradox
+      system files will be downloaded to a local hard disk as NETWORK.TXT
+      describes.
+
+19) Create PARADOX.CFG files. See NETWORK.TXT for details.
+
+
+3. LINKING USERS AND SETTING USER PATHS
+---------------------------------------
+
+You can establish the necessary links and paths for each workstation (steps
+15, 16, 17, and 18) in different ways. In theory, network users can enter
+them manually from their keyboards when they want to use Paradox, but this
+isn't recommended, because a mistake can cause problems for network Paradox
+users. You should set up a system that automatically establishes the proper
+Novell SEARCH path or DOS path for each user instead. You can use two methods:
+
+- A login batch file that automatically sets up every user to run Paradox
+  when logging in to the network. Use this method for networks where Paradox
+  is used frequently.
+
+- A Paradox batch file that sets up the correct links and path when a user
+  starts Paradox. Use this method for networks where Paradox is used
+  infrequently.
+
+To use a login batch file
+-------------------------
+Include the necessary MAP and SEARCH commands in each user's login script,
+which is read when that person logs in to the Novell network. You can use
+this method in the following circumstances:
+
+- The user's private directory is either on the local hard disk (for example,
+  C:\PDOX45) or on the user's network home directory (if there is no local
+  hard disk), and the user's PARADOX.CFG file is stored in the private
+  directory.
+
+- No default PARADOX.CFG file is present in the PDOX45 directory on the file
+  server.
+
+- The workstation has a local hard disk and therefore has a DOS path that
+  includes the Paradox private directory, C:\PDOX45.
+
+- Each user always has the directory containing the network control file
+  PDOXUSRS.NET, PDOXDATA, mapped to the same logical drive.
+
+NOTE: If everyone on your network will be making frequent use of Paradox, you
+might want to include the login commands in the system login script rather
+than in individual login scripts.
+
+To add MAP and SEARCH commands to an individual login script:
+
+1)  Start the Syscon utility. Type
+
+    SYSCON
+
+    You see the Syscon menu.
+
+2)  Choose User Information. The list of users appears.
+
+3)  Highlight the user for whom you're creating (or modifying) the individual
+    login script. Press [Enter]. The User Information menu appears.
+
+4)  Choose Login Script. The existing login script for the user appears.
+
+5)  Add the required MAP commands. The system login script must contain a MAP
+    command for the directory containing the Paradox system software files
+    (APPS\PDOX45) and the directory containing the PDOXUSRS.NET file
+    (PDOXDATA). This assumes your network already maps each user's home
+    directory to drive F.
+
+    MAP G:=ServerName\VolumeName:APPS\PDOX45
+    MAP S:=ServerName\VolumeName:PDOXDATA
+    MAP F:=ServerName\VolumeName:UserHomeDir
+
+    In this example, F, G, and S are drives that haven't been used in any
+    other MAP statements. "UserHomeDir" is the user's network home directory.
+    The drive letter you specify for the directory containing the
+    PDOXUSRS.NET file (PDOXDATA) must match what you entered for its location
+    during installation.
+
+6)  Add SEARCH commands to the login script for the workstation's private
+    directory. If the workstation has no local hard disk, enter the SEARCH
+    command for the user's network home directory, which is the directory
+    containing the user's PARADOX.CFG file:
+
+    MAP SEARCH1:=F:
+
+7)  Now enter the SEARCH command for the APPS\PDOX45 directory:
+
+    MAP SEARCH2:=ServerName\VolumeName:APPS\PDOX45
+
+    The search number for this directory must be greater than the search
+    number for the private directory.
+
+    When you're finished, the Paradox-related portions of your individual
+    login script might look something like this:
+
+    MAP G:=ServerName VolumeName:APPS\PDOX45
+    MAP S:=ServerName VolumeName:PDOXDATA
+    MAP F:=ServerName VolumeName:UserHomeDir
+    MAP SEARCH1:=F:
+    MAP SEARCH2:=G:
+
+    Novell will automatically append the directories mentioned in the
+    workstation's DOS path to the network search path.
+
+To use a Paradox batch file
+---------------------------
+Give the batch file an appropriate name, such as PDOX.BAT, and store it in
+the shared applications directory. This batch file assumes that the user's
+network home directory is already mapped to logical drive F.
+
+MAP S:=ServerName\VolumeName:PDOXDATA
+MAP K:=ServerName\VolumeName:APPS\PDOX45
+MAP INSERT SEARCH1:=F:
+MAP INSERT SEARCH2:=K:
+PARADOX
+MAP DEL S:
+MAP DEL K:
+MAP DEL S2:
+MAP DEL S1:
+
+Here are descriptions of the individual lines:
+
+- The first line maps the PDOXDATA directory to logical drive S. This assumes
+  this directory contains the PDOXUSRS.NET file and that S:\ is what you
+  specified as the location of this file when you installed Paradox.
+
+- The second line maps the PDOX45 directory to a logical drive K. If some
+  other directory is already mapped to a drive you pick, the new MAP command
+  will replace the old one, and you won't be able to restore the old mapping
+  automatically when the user leaves Paradox.
+
+- The third line inserts a SEARCH1 command for the user's network home
+  directory. If the user already has a SEARCH1 command, the old SEARCH1
+  automatically becomes SEARCH2 because of the word "insert" in the command
+  line. Without the word "insert," the old SEARCH1 would be overwritten.
+
+  In most cases, the user's PARADOX.CFG file will designate the local hard
+  disk directory (C:\PDOX45) as the user's private directory. However, if
+  someone works at a workstation without a local hard disk, this file should
+  designate the user's network home directory as the user's private
+  directory.
+
+- The fourth line inserts a SEARCH command for the PDOX45 directory, which is
+  mapped to logical drive K (or whatever drive letter you selected on line 2).
+
+- The fifth line starts and runs Paradox.
+
+- The sixth and seventh lines are invoked when the user exits Paradox; they
+  delete the mapping for the PDOXDATA and the PDOX45 directories,
+  respectively, and make drives S and K available for other uses.
+
+- The eighth and ninth lines remove the two SEARCH commands. In this way,
+  the user's MAP and SEARCH commands are left just as they were prior to
+  running the batch file. We delete s2 before s1 because, when a search is
+  deleted, the next lower SEARCH command automatically moves up to replace
+  it.
+
+
+4. NOVELL FLAG COMMANDS
+-----------------------
+
+Do NOT use the Novell FLAG command to change the status of any Paradox
+software or data file. You don't need to use the Novell FLAG command to
+enable a Paradox table to be shared by multiple users. This is done from
+within Paradox.
+
+
+5. LOCALLY INSTALLED COPIES OF PARADOX
+--------------------------------------
+
+If a workstation has a locally installed copy of Paradox that has been
+properly installed to access data from the network, you can run that copy of
+Paradox in either standalone or network mode. However, if you load the
+network software, you must log in to the network before starting Paradox.
+This is because Paradox senses the presence of network software and looks for
+PDOXUSRS.NET. If you haven't logged in, Paradox will be unable to find
+PDOXUSRS.NET because you don't have any logical drive assignments.
+
+

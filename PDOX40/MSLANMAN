@@ -1,0 +1,269 @@
+          INSTALLING PARADOX ON A MICROSOFT LAN MANAGER NETWORK
+          -----------------------------------------------------
+
+This file contains instructions for installing Paradox on Microsoft's Local
+Area Network Manager (LAN Manager), version 2.2. These instructions
+were verified using MS LAN Manager 2.2 on a Dell 486P/33 computer using
+MSDOS 5.0. As of July 1993, NETWKSTA.500 DOS workstation redirector patch
+(available from Microsoft) was required. 
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Assumptions
+2. Installation Steps
+3. Linking Users and Setting User Paths
+
+
+1. ASSUMPTIONS
+--------------
+
+These instructions assume the following about your MS LAN Manager
+installation:
+
+- You use Microsoft LAN Manager version 2.0 or higher.
+
+- You're familiar with Microsoft LAN Manager commands.
+
+- Your network has a shared applications directory named \\SERVER\APPS, where
+  "SERVER" is the server name.
+
+- The APPS directory is linked to each user's logical drive E.
+
+- You can log in to your network as a user with administrative privileges.
+
+- Your system is in user security mode (not share security). If your system
+  is in share security mode, your installation will differ slightly from
+  these instructions. Follow your network documentation instructions.
+
+- You perform all configuration operations from the server but then install
+  Paradox from a workstation.
+
+
+2. INSTALLATION STEPS
+---------------------
+
+1)  Run NET ADMIN from the server to open the LAN Manager administrator
+    window.
+
+2)  From the LAN Manager administrator window, determine what security mode
+    you're running in by selecting Config from the menu (press [Alt][C]).
+    Choose Server options (press [R]). If user security is checked, that's
+    the mode you're in. If it isn't checked, you're running in share
+    security mode.
+
+    Installation differs depending on the security mode. For user security
+    mode, follow these instructions:
+
+    a. Choose View|Shared resources to open the Shared Resources at
+       \\SERVER dialog box, where "SERVER" is the name of your server.
+
+    b. Choose the Add share button.
+
+    c. When you see a list, choose the Disk directory radio button and
+       choose OK to confirm. You see the Share a Directory with the Network
+       dialog box.
+
+    d. Type PDOX45 in the Sharename text box.
+
+    e. Assuming that your applications are installed on drive C, type
+
+       C:\APPS\PDOX45
+
+       in the Path text box. (If you're not installing to drive C,
+       substitute the correct drive letter for C.)
+
+    f. Choose OK to confirm your settings.
+
+    g. Choose OK again when LAN Manager asks if you want to create the
+       directory.
+
+    h. LAN Manager opens the Select a File for Access Permissions dialog
+       box. With <current directory> selected, press [Enter].
+
+    i. You see the Access Permissions for \\SERVER\PDOX45 dialog box, where
+       "SERVER" is your server name. Choose the R:Read and X:Execute
+       permissions.
+
+    j. Move to the Not permitted list and highlight the *USERS group. Choose
+       Permit (or press [Alt][P]) to transfer the *USERS group to the
+       Permitted list. You should see *USERS (RX) in the Permitted list.
+       Repeat this step for additional groups or users needing access to
+       Paradox.
+
+       NOTE: A user with Admin privileges has all permissions. You
+       therefore don't need to move the Admins group (*ADMINS) explicitly
+       to the Permitted list.
+
+    k. Choose OK to confirm your settings.
+
+    l. LAN Manager returns to the Select a File for Access Permissions
+       dialog box. Choose Done.
+
+    m. LAN Manager returns to the Shared Resources at \\SERVER dialog box,
+       where "SERVER" is your server name. Choose Add share to add another
+       sharename.
+
+    n. Choose Disk directory.
+
+    o. Choose OK to confirm.
+
+    p. You see the Share a Directory With the Network dialog box. In the
+       Sharename text box, type
+
+       PDOXDATA
+
+    q. In the Path text box, type
+
+       C:\PDOXDATA
+
+       If you're not installing to drive C, substitute the correct drive
+       letter for C.
+
+       NOTE: If you have more than one server, or if your server has more
+       than one hard disk, your choice of which server disk drive to use
+       for the PDOXDATA directory should depend on how heavily Paradox
+       will be used. Estimate the probable growth of your shared data and
+       pick a drive with enough available storage space.
+
+       As your network users become familiar with Paradox, they will
+       probably create new Paradox tables and applications. When in doubt,
+       overestimate the amount of space you'll need.
+
+    r. You can assign a password in the Password text box, but this isn't
+       recommended. If you assign a password, each user will have to enter
+       that password every time they try to access any shared data in this
+       directory.
+
+    s. Choose OK to confirm your settings.
+
+    t. Choose OK to confirm that LAN Manager should create the directory.
+
+    u. LAN Manager opens the Select a File for Access Permissions dialog
+       box. (A single dot in the text box indicates you'll be setting access
+       rights for all files in the current directory.) With <current
+       directory> selected in the pick list, press [Enter].
+
+    v. LAN Manager opens the Access Permissions dialog box. Choose
+       read/write/create/delete rights by choosing RWCDA (or by pressing
+       [Alt][S]).
+
+    w. Move to the Not permitted list box and highlight the *USERS group.
+       Choose Permit (or press [Alt][P]). *USERS (RWCDA) appears in the
+       Permitted list. Repeat this step for additional groups or users
+       needing access to the PDOXDATA directory.
+
+       NOTE: A user with Admin privileges has all permissions. You
+       therefore don't need to move the Admins group (*ADMINS) explicitly
+       to the Permitted list.
+
+    x. Choose OK to confirm your settings.
+
+    y. LAN Manager returns to the Select a File for Access Permissions
+       dialog box. Choose Done.
+
+    z. LAN Manager returns to the Shared Resources at \\SERVER dialog box,
+       where "SERVER" is your server name. Choose Done.
+
+    aa. Exit from the LAN Manager by choosing View|Exit.
+
+3)  Establish drive assignments for the PDOX45 and PDOXDATA sharenames on
+    a workstation.
+
+4)  Install the Paradox system files and optional software from the
+    workstation where you established drive assignments for the PDOX45 and
+    PDOXDATA sharenames. Follow the instructions in NETWORK.TXT (found on
+    your Paradox installation disks). The Paradox INSTALL program copies your
+    Paradox system files and optional software from the program disks into
+    the Paradox system files directory, PDOX45.
+
+    When you finish installing the Paradox software, return to this file to
+    learn how to make Paradox available to your users.
+
+5)  Create or modify the CONFIG.SYS file of each workstation to set the
+    number of buffers and files needed by Paradox:
+
+    FILES=40
+    BUFFERS=40
+
+    A workstation's CONFIG.SYS file must be stored in the root directory of
+    the workstation's hard disk (or on the boot disk if the workstation is
+    started from a floppy disk). See NETWORK.TXT for details on CONFIG.SYS.
+
+    NOTE: After editing the CONFIG.SYS file, you must reboot the workstation
+    before you can run Paradox. To reboot, press [Ctrl][Alt][Del].
+
+6)  Modify the [WORKSTATION] setting in the LANMAN.INI for each workstation
+    to set the number of resources required by Paradox:
+
+    NUMRESOURCES = 200
+
+7)  Modify the [NETBEUI_XIF] section in the PROTOCOL.INI for each 
+    workstation:
+
+    NCBS = 85
+    SESSIONS = 40
+
+8)  Establish a private directory for each user. The private directory must
+    be either a network home directory or a private directory on a local hard
+    disk. Use NET USE to link a user's private directory to his or her
+    network home directory.
+
+    For information on establishing a private directory, see "Linking Users
+    and Setting User Paths" later in this file.
+
+    For information about private directories, see NETWORK.TXT.
+
+9)  Use NET USE to link each user to the Paradox system files directory,
+    PDOX45. For information, see "Linking Users and Setting User Paths"
+    later in this file.
+
+10) Use NET USE to link each user to the directory containing PDOXUSRS.NET,
+    PDOXDATA. For information, see "Linking Users and Setting User Paths"
+    later in this file.
+
+11) Change each Paradox user's path to search for the user's private
+    directory and the Paradox system files directory, IN THAT ORDER. For
+    information, see "Linking Users and Setting User Paths" later in this
+    file.
+
+    The user's private directory must precede all other Paradox-related
+    directories in the path, since Paradox searches for PARADOX.CFG in the
+    private directory to determine the user's private directory and other
+    default settings. See NETWORK.TXT for details about the PARADOX.CFG file.
+
+12) Create PARADOX.CFG files. See NETWORK.TXT for details.
+
+
+3. LINKING USERS AND SETTING USER PATHS
+---------------------------------------
+
+You can establish the necessary links and paths for each workstation (steps
+6, 7, 8, and 9) in different ways. In theory, network users can enter them
+manually from their keyboards when they want to use Paradox, but this isn't
+recommended, because a mistake can cause problems for network Paradox users.
+You should automatically create the correct links and path for each user
+instead.
+
+Use a login batch file that automatically sets up every user to run Paradox
+when he or she logs in to the network. Use this method for networks where
+Paradox is used frequently.
+
+On LAN Manager, each user has an individual batch file (or series of batch
+files) that logs the user in to the network. The login batch file method uses
+these batch files to establish the links and paths for Paradox use.
+
+The structure of your login batch commands depends on the network
+configuration. For example, on a network using the three-drive pattern of
+drive assignments, include the following lines in a login batch file after
+the line in the batch sequence that logs the user in to LAN Manager:
+
+NET USE E: \\SERVER\APPS\PDOX45
+NET USE H: \\SERVER\USERDIRS
+NET USE F: \\SERVER\PDOXDATA
+PATH=C:\PDOX45;H:\USERDIRS;E:\APPS\PDOX45
+
+where "USERDIRS" is the sharename for the location of the user's network home
+directory.
+

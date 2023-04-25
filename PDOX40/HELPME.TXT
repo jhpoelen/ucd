@@ -1,0 +1,372 @@
+                  PARADOX 4.5: ANSWERS TO COMMON QUESTIONS
+                  ----------------------------------------
+
+This file provides answers to questions commonly asked about Paradox 4.5.
+All information in this file supersedes information in the Paradox
+documentation.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Contacting Borland
+2. Highlighting the Current Field or Record
+3. Running Paradox under Windows
+4. Running Paradox under OS/2
+5. Running Paradox under DESQview
+6. Specific Compatibility Problems
+7. Tips on the Application Workshop
+
+
+1. CONTACTING BORLAND
+---------------------
+
+Q. What are all the ways that I can communicate with Borland and receive
+   information from Borland?
+
+A. See the second section of the README.
+
+
+2. HIGHLIGHTING THE CURRENT FIELD OR RECORD
+-------------------------------------------
+
+Q. Is there a way to highlight the current record or field in a table?
+
+A. Use the PAL command SETHIGHLIGHT:
+
+   1)  Choose Alt-F10|Miniscript
+
+   2)  To activate record highlighting for the current image, type the
+       following miniscript and press Enter:
+
+       SETHIGHLIGHT CURRENT RECORD <ColorAttribute>
+
+       <ColorAttribute> is one of the color attributes listed in Appendix F
+       of the PAL Reference, such as (15 + 64).
+
+   3)  To activate field highlighting for the current image, type the
+       following miniscript and press Enter:
+
+       SETHIGHLIGHT CURRENT FIELD <ColorAttribute>
+
+   4)  To activate record highlighting for an image other than the current
+       image, replace the CURRENT keyword in the previous miniscripts with
+       the name of the table to affect.
+
+   5)  Press Esc to close the Miniscript window.
+
+   6)  To save the record highlighting for a table, use {IMAGE} {KEEPSET}.
+
+   To deactivate highlighting, replace the <ColorAttribute> argument in
+   the previous miniscripts with the keyword OFF. For more information on
+   SETHIGHLIGHT, see Chapter 2 of the Paradox 4.5 Upgrade Guide.
+
+
+3. RUNNING PARADOX UNDER WINDOWS
+--------------------------------
+
+Q. How do I run Paradox under Microsoft Windows?
+
+A. Install Paradox as described in Chapter 23 of the Paradox "User's
+   Guide." Start Paradox from the Program Manager in Windows by using the
+   provided icon, rather than shelling out to DOS and starting Paradox from
+   the DOS command line. Starting Paradox from Windows with the icon
+   executes the PIF file and customizes the environment for Windows.
+
+   The PIF file limits the extended memory that Paradox uses to 3096K. If
+   you do not run other applications under Windows at the same time as
+   Paradox, you can use the -extk command-line option to let Paradox use
+   all available extended memory.
+
+
+4. RUNNING PARADOX UNDER OS/2
+-----------------------------
+
+Q. How do I run Paradox 4.5 under OS/2?
+
+A. Paradox requires OS/2 version 2.0 or greater. Use the following
+   procedure to install and run Paradox under OS/2, version 2.0.
+
+   1)  Install Paradox.
+
+       a. Insert Disk 1 in drive A or B.
+
+       b. Double-click on the OS/2 System Icon that appears.
+
+       c. Double-click on Drives.
+
+       d. Double-click on the disk drive object for the installed drive.
+
+       e. Double-click on the INSTALL.EXE object.
+
+       f. Follow the instructions that appear onscreen.
+
+   2)  Create DOS objects for Paradox.
+
+       a. From the OS/2 system prompt, change to the Paradox directory.
+          For example, type
+
+          CD \PDOX45
+
+       b. From the OS/2 system prompt, enter the command
+
+          PDOXOS2
+
+       c. When prompted, enter the path of the Paradox system files. For
+          example, type
+
+          \PDOX45
+
+          The CMD file will create a desktop folder containing PdoxDOS, 
+          Tutility and Nupdate.
+
+   3)  Start Paradox.
+
+       a. Double-click the new program object.
+
+Q. How do I access shared tables under OS/2 on a network drive?
+
+A. Run Nupdate (in your Paradox system directory) and set Network Type
+   to Other.
+
+
+5. RUNNING PARADOX UNDER DESQVIEW
+---------------------------------
+
+Q. How do I run Paradox under DESQview?
+
+A. Use the following procedure to run Paradox under DESQview:
+
+   1)  Limit the amount of memory that Paradox uses by inserting the
+       following command in the batch file that loads DESQview:
+
+       set DPMIMEM=MAXMEM 3000
+
+       Clear this setting when you leave DESQview by inserting the
+       following line after the line that calls DESQview:
+
+       set DPMIMEM=
+
+   2)  Start Paradox with the -emk 0 parameter in DESQview. In the
+       Parameters text box of the Change a Program dialog box, type
+
+       -emk 0
+
+   3)  Set the memory size for Paradox under DESQview to 400K. In the
+       Memory Size text box of the Change a Program dialog box, type
+
+       400K
+
+
+6. SPECIFIC COMPATIBILITY PROBLEMS
+----------------------------------
+
+Q. Why do I see the DOS error message "Unexpected Condition: Memory corrupt
+   (TSR loaded?)" when I'm running Paradox without a TSR loaded?
+
+A. If you're running Paradox under extremely tight memory conditions (low
+   real memory) and you run a PAL script that shells out to DOS and runs
+   COMMAND.COM (for example, your script contains a line with a DOS
+   command, such as "COPY file1.txt file2.txt"), you might get this DOS
+   error message when DOS tries to return to Paradox. This usually happens
+   when you have a SQL Link driver loaded. However, low real memory can
+   cause this in non-SQL cases because DOS 5.0 does not remove COMMAND.COM
+   from low memory when returning to Paradox.
+
+   To prevent this situation and error message, start Paradox with the
+   command-line option -notsr. The -notsr option detects and corrects the
+   type of memory corruption caused by DOS 5.0 under low real memory and
+   SQL Link driver circumstances.
+
+   CAUTION: Never load a TSR when you shell out to DOS from
+   Paradox, whether or not you've started Paradox with -notsr. If you
+   accidentally load a TSR when you shell out to DOS from Paradox after
+   starting Paradox with -notsr, this command-line option prevents Paradox
+   from checking memory when you shell back in to Paradox. You won't
+   necessarily return to Paradox cleanly, and you will not receive
+   a warning message from DOS.
+
+
+Q. Can I use the AST REX.SYS driver with Paradox?
+
+A. The AST REX.SYS driver, which converts EEMS expanded memory back to
+   extended memory, is not compatible with Paradox. To obtain extended
+   memory with an EEMS board, disallow the REMM.SYS expanded memory driver
+   from using some or all of the memory on the board. (In some cases, you
+   will have to set switches on the board to accomplish this.)
+
+
+Q. How should I configure PCKwik for use with Paradox?
+
+A. If you use PCKwik, do not supply the /A+ expanded memory option with
+   the /L lend option. If memory lending is desired, use /EM+ to force
+   use of extended memory.
+
+
+Q. Can I use an AST machine with shadow RAM to run Paradox?
+
+A. Some AST machines with shadow RAM have shown compatibility problems with
+   Paradox. If you experience load problems on one of these machines,
+   either disable the shadow RAM, or provide less than the total amount of
+   extended memory to Paradox's DPMI server. To do so, set an environment
+   variable that specifies the maximum amount of memory that the DPMI
+   server will use. This variable can be entered directly at the DOS
+   prompt, or inserted as a line in your AUTOEXEC.BAT file, using the
+   syntax:
+
+   set DPMIMEM=MAXMEM nnnn
+
+   where nnnn is the amount of extended memory (in kilobytes) that will be
+   allocated to the Paradox DPMI server.
+
+   The amount of memory you actually provide is determined by the total
+   extended memory minus the amount of memory used for Shadow RAM. For
+   example, on a machine with 4MB of RAM, 640K is typically reserved for
+   real memory, leaving 3456K (4096K-640K) extended memory; 128K more
+   reserved for Shadow RAM leaves 3328K (3456K-128K) usable extended
+   memory. In this case, set DPMIMEM as follows:
+
+   set DPMIMEM=MAXMEM 3328
+
+
+Q. Can I run Paradox on a machine with more than 16MB of memory?
+
+A. If your machine has more than 16MB of extended memory, use the following
+   command to set DPMI before you start Paradox:
+
+   set DPMIMEM=MAXMEM 16000
+
+   Then start Paradox with the -extk 16000 command-line option.
+
+
+Q. Why do I receive erroneous DOS error messages?
+
+A. If you load SHARE for any reason and you access tables regularly with
+   many associated objects, you might get false error messages from DOS
+   when SHARE runs out of environment space. Such messages include "File
+   not found" when you know the file is present and "Access denied" for a
+   script when you go into debug mode. If you get these or other DOS
+   messages which you suspect are erroneous and the result of SHARE running
+   out of environment space, increase the size of the environment used by
+   SHARE. See your DOS documentation for details.
+
+   If increasing the size of the environment for SHARE doesn't take care of
+   erroneous DOS messages, you can start Paradox with the -handles
+   command-line option as follows:
+
+   paradox -handles n
+
+   where n is greater than or equal to 20, and less than or equal to 64.
+   If you specify a number for n that is out of range, Paradox leaves the
+   number of handles it manages at the default. Use -handles as a
+   last resort, after increasing the environment space used by SHARE.
+   Starting Paradox with less than 64 handles has a significant negative
+   impact on performance.
+
+
+Q. How should I start Paradox with Qualitas' 386MAX?
+
+A. To make Paradox work properly with version 6 of Qualitas' 386MAX, start
+   Paradox with the -notsr command-line option.
+
+
+Q. Why do I have problems when I choose Monochrome from the System|Video
+   menu?
+
+A. When you choose monochrome from the video menu, your system will hang
+   if QEMM, 386MAX, or another memory manager is using the memory reserved
+   for a monochrome adapter. In addition, the Monochrome selection is
+   incompatible with some EGA adapter cards.
+
+
+Q. Why is the video mode of my Paradise VGA 1024 adapter not restored
+   after I exit Paradox?
+
+A. If you exit Paradox while in high resolution mode, your prior video mode
+   is not restored. Start Paradox with the -bios command-line option to
+   prevent this situation.
+
+
+Q. Why can't I start Paradox with VSHIELD in some situations?
+
+A. If you load VSHIELD with the /SWAP parameter, Paradox won't run. This
+   problem is corrected in VSHIELD versions 94 and above.
+
+
+Q. Why can't I print line drawing and other special characters on my
+   PostScript printer?
+
+A. Line drawing characters are part of the IBM character set, and they are
+   not supported by PostScript printers. Characters that are commonly used
+   to represent text in foreign languages are the only special characters
+   that Paradox can print on a PostScript printer.
+
+
+Q. Why are mailing labels that I created in Paradox 3.5 sometimes truncated
+   when I print them in Paradox 4.5?
+
+A. In Paradox 3.5, if a wordwrap field causes the height of the report's
+   form band to be exceeded, Paradox prints all the text by allowing the
+   wordwrap to change the height of your label. Paradox 4.5 will not let
+   wordwrap change the height of your label; instead, the wordwrap text
+   will be truncated. If wordwrap text is truncated when you print mailing
+   labels, change the height of the form band in your mailing label report.
+
+
+7. TIPS ON THE APPLICATION WORKSHOP
+-----------------------------------
+
+This section contains tips on using the Application Workshop.
+
+Custom Procedures in Edit Session Objects
+-----------------------------------------
+- Upon returning from a procedure, leave the Paradox editing mode
+  (CoEdit, DataEntry, or Edit) as it was when the procedure began.
+  For example, if you simulate pressing F2 Do_It! to go to Main
+  mode, your procedure should also switch back to the editing mode
+  the session was in originally.
+
+- If you move to a different table, or if you change IMAGERIGHTS for a
+  table, call PPP_Edit_MovedTable() to restore the table settings. This
+  will ensure that IMAGERIGHTS is properly set and that the Edit Session
+  flags are restored.
+
+  NOTE: If View and Edit or View and Update modes were set for the
+  table, the table will be in View mode when the Edit Session resumes.
+
+- If you use the CLEARPULLDOWN or SHOWPULLDOWN command, call
+  PPP_ESR_ArriveWindow_N() before returning from your procedure.
+  PPP_ESR_ArriveWindow_N() returns 1 if the cursor is on a system window;
+  otherwise, it returns 0 and restores the Edit Session menu. If you do
+  not call this procedure, the Edit Session menu is not restored until you
+  arrive on a new window.
+
+- From a master form with embedded forms, or from any form when more than
+  one table is on the workspace, do not switch to a different form for the
+  same table. Even if you then return to the original form, the window
+  handle will be lost and movement between tables disabled for the
+  remainder of the Edit Session. You can, however, switch to table view
+  and back.
+
+- When returning from a custom procedure in an Edit Session, set global
+  echo to NORMAL; otherwise, unexpected screen displays will occur in
+  subsequent actions.
+
+Attaching Your Own Code to an Action
+------------------------------------
+- Always leave your procedure with echo set to OFF when returning to the
+  Application Workshop, EXCEPT with an Edit Session, in which case set
+  echo to NORMAL.
+
+- If your code is attached to an object, always leave the workspace as you
+  found it.
+
+- If your code is an object (ExecProc, Execute, or Script), you can do what
+  you want with the workspace, but it must be left in Main mode at
+  completion. We suggest a RESET before returning to the Application
+  Workshop. Application Workshop objects generally avoid the RESET command
+  so your locks aren't cleared between actions.
+
+
+
+

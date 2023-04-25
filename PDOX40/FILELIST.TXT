@@ -1,0 +1,247 @@
+FILES ON DISKS
+--------------
+
+DISK 1
+------
+INSTALL   EXE - Installation Utility
+README        - Readme file
+FILELIST  TXT - Paradox DOS
+3CSHARE       - Network Information File for 3Com 3+Share Network
+ASCII     SOR - ASCII sort order
+ATTSTAR       - Network Information File for AT&T StarGROUP Network
+BANYAN        - Network Information file for Banyan Vines Network
+DECPATH       - Network Information file for DEC Pathworks Network
+HELPME    TXT - Questions and answers about Paradox
+IBMPCLAN      - Network Information file for IBM PC LAN Network
+INTL      PAK - 
+   PARADOX   CFG - CFG file with defaults for Western Europe
+   PARADOX   SOM - SOM file with defaults for Western Europe
+   PARADOX   SOR - International sort order
+   PDOXLAND   PS - Postscript setup file for Landscape printing(codepage437)
+   PDOXPORT   PS - Postscript setup file for Portrait printing(codepage437)
+
+INTL      SOR - International sort order
+LANSRVR       - Network Information file for IBM Lanserver
+MSLANMAN      - Network Information file for Microsoft LAN Manager
+NETWORK   TXT - Network installation instructions
+NORDAN    PAK - 
+   PDOXLAND   PS - Postscript setup file for Landscape printing(codepage865)
+   PARADOX   CFG - CFG file with defaults for Norway & Denmark
+   PARADOX   SOM - SOM file with defaults for Norway & Denmark
+   PARADOX   SOR - Dictionary sort order for Norway and Denmark
+   PDOXPORT   PS - Postscript setup file for Portrait printing(codepage865)
+
+NORDAN    SOR - Dictionary sort order for Norway and Denmark for Paradox
+                3.5
+NORDAN4   SOR - Dictionary sort order for Norway and Denmark for Paradox
+                4.5
+NOVELL        - Network Information file for Novell Network
+README    COM - Readme Utility
+SAMPAPP   PAK - 
+   CARRIERS   DB - Sample Application - Carriers table
+   CUSTOMER   DB - Sample Application - Customer table
+   CUSTOMER    F - Sample Application - Customer table - default form
+   CUSTOMER   PX - Sample Application - Customer table - primary index
+   CUSTOMER  VAL - Sample Application - Customer table - val checks
+   INVOICE    DB - Sample Application - Invoice table
+   INVOICE     F - Sample Application - Invoice table - default form
+   INVOICE    MB - Sample Application - Invoice table - memo file
+   INVOICE    PX - Sample Application - Invoice table - primary index
+   INVOICE   VAL - Sample Application - Invoice table - val checks
+   ORDERS     DB - Sample Application - Orders table
+   ORDERS      F - Sample Application - Orders table - default form
+   ORDERS     PX - Sample Application - Orders table - primary index
+   ORDERS    VAL - Sample Application - Orders table - val checks
+   PAYMENT    DB - Sample Application - Payment table
+   RPTALL     SC - Sample Application - Script
+   SAMPLE     SC - Sample Application - Main Script
+   STOCK      DB - Sample Application - Stock table
+   STOCK      PX - Sample Application - Stock table - primary index
+
+SAMPLE    PAK - 
+   BOOKORD    DB - Sample Book orders table
+   BOOKORD    F1 - Sample Book orders table - form 1
+   BOOKORD    PX - Sample Book orders table - primary index
+   BOOKORD   SET - Settings for bookord
+   CUSTOMER   DB - Sample Customer table
+   CUSTOMER   F1 - Sample Customer table - form 1
+   CUSTOMER   F2 - Sample Customer table - form 2
+   CUSTOMER   F3 - Sample Customer table - form 3
+   CUSTOMER   MB - Sample Customer table - memo file
+   CUSTOMER   PX - Sample Customer table - primary index
+   CUSTOMER   R1 - Sample Customer table - report 1
+   CUSTOMER   R2 - Sample Customer table - report 2
+   CUSTOMER   R3 - Sample Customer table - report 3
+   CUSTOMER  SET - Sample Customer table - image settings
+   DEBUGTST   SC - Sample PAL code (with intentional errors)
+   DISTRICT  WQ1 - Sample Quattro PRO worksheet
+   EMPLOYEE   DB - Sample Employee table
+   EMPLOYEE   F1 - Sample Employee table - form 1
+   EMPLOYEE   F2 - Sample Employee table - form 3
+   EMPLOYEE   PX - Sample Employee table - primary index
+   EMPLOYEE  SET - Sample Employee table - image settings
+   HOMEGRP    DB - Sample Home Group table
+   MAIL       DB - Sample Mail table
+   MAIL       PX - Sample Mail table - primary index
+   MAIL       R1 - Sample Mail table - report 1
+   MASTERBK   DB - Sample Master book table
+   NEWRECS    DB - Sample New records table
+   PIES       SC - Recorded script to create sample graphs
+   PRODUCTS   DB - Sample Products table
+   PRODUCTS  SET - Sample Products table - image settings
+   PROMO      DB - Sample Promotion table
+   PROMO      PX - Sample Promotion table - primary index
+   RECAP      SC - Script to do work done manually during tutorial
+   REPPERF    DB - Sample Repperf table
+   REPPERF    PX - Sample Repperf table - primary index
+   SOURCES    DB - Sample Sources table
+   SOURCES    F1 - Sample Sources table - form 1
+   SOURCES    PX - Sample Sources table - primary index
+   SUBGROUP   DB - Sample Subgroup table
+   VOLS       DB - Sample Volumes table
+   VOLS       MB - Sample Volumes table - memo file
+   VOLS       PX - Sample Volumes table - primary index
+   XCHANGE    DB - Sample Xchange table
+
+SWEDFIN   PAK - 
+   PDOXLAND   PS - Postscript setup file for Landscape printing(codepage437)
+   PDOXPORT   PS - Postscript setup file for Portrait printing(codepage437)
+   PARADOX   CFG - CFG file with defaults for Sweden & Finland
+   PARADOX   SOM - SOM file with defaults for Sweden & Finland
+   PARADOX   SOR - Dictionary sort order for Sweden & Finland
+
+SWEDFIN   SOR - Dictionary sort order for Sweden & Finland
+SYSTEM    CA2 - Split File of SYSTEM.PAK
+UK        PAK - 
+   PDOXLAND   PS - Postscript setup file for Landscape printing(codepage437)
+   PDOXPORT   PS - Postscript setup file for Portrait printing(codepage437)
+   PARADOX   CFG - CFG file with defaults for the U.K.
+   PARADOX   SOM - SOM file with defaults for the U.K.
+   PARADOX   SOR - Dictionary sort order for the U.K.
+
+US        PAK - 
+   PDOXLAND   PS - Postscript setup file for Landscape printing(codepage437)
+   PDOXPORT   PS - Postscript setup file for Portrait printing(codepage437)
+   PARADOX   CFG - CFG file with defaults for the U.S.
+   PARADOX   SOM - SOM file with defaults for the U.S.
+   PARADOX   SOR - Dictionary sort order for the U.S.
+
+VIDEO     PAK - 
+   CUSTOMER   DB - Video Application - Customer table
+   CUSTOMER   F1 - Video Application - Customer table - form 1
+   CUSTOMER   F2 - Video Application - Customer table - form 2
+   CUSTOMER   F3 - Video Application - Customer table - form 3
+   CUSTOMER   F4 - Video Application - Customer table - form 4
+   CUSTOMER   PX - Video Application - Customer table - primary index
+   CUSTOMER    R - Video Application - Customer table - default report
+   CUSTOMER   R1 - Video Application - Customer table - report 1
+   CUSTOMER  VAL - Video Application - Customer table - val checks
+   FILMCAT    DB - Video Application - Filmcat table
+   FILMCAT    PX - Video Application - Filmcat table - primary index
+   FILMS      DB - Video Application - Films table
+   FILMS       F - Video Application - Films table - default form
+   FILMS      F1 - Video Application - Films table - form 1
+   FILMS      PX - Video Application - Films table - primary index
+   FILMS      R1 - Video Application - Films table - report 1
+   FILMS     SET - Video Application - Films table - settings
+   FILMS     VAL - Video Application - Films table - val checks
+   OPEN       DB - Video Application - Open table
+   OPEN       F1 - Video Application - Open table - form 1
+   OPEN       PX - Video Application - Open table - primary index
+   ORDERS     DB - Video Application - Orders table
+   ORDERS     F1 - Video Application - Orders table - form 1
+   ORDERS     F2 - Video Application - Orders table - form 2
+   ORDERS     PX - Video Application - Orders table - primary index
+   ORDERS    VAL - Video Application - Orders table - val checks
+   OVERSRC    DB - Video Application - Oversrc table
+   OVERSRC    R2 - Video Application - Oversrc table - report 2
+   RECEIPTS   DB - Video Application - Receipts table
+   RECEIPTS   R1 - Video Application - Receipts table - report 1
+   SORT-CNT   SC - Script for Video Application
+   UTILIZE    DB - Empty Table to attach utilization report to
+   UTILIZE    R1 - Video Application  - Utilization Report
+   VID-PAL    SC - Video Application script
+   VIDEO     LIB - Video Application procedure library
+
+VIDEOCFG  PAK - 
+   APPLIC     DB - Video Application - configuration file
+   APPLIC     MB - Video Application - configuration file
+   APPLIC     PX - Video Application - configuration file
+   V-MENU     DB - Menu Table used in Tutorial
+   V-MENU     PX - Index for Menu Table
+   VIDMENU    DB - Video Application - configuration file
+   VIDMENU    PX - Video Application - configuration file
+   VIDOBJ     DB - Video Application - configuration file
+   VIDOBJ     MB - Video Application - configuration file
+   VIDOBJ     PX - Video Application - configuration file
+
+WORKSHOP  PAK - 
+   MSTROBJ    DB - Workshop Master Object Table
+   MSTROBJ    PX - Workshop Master Object Table - primary index
+   PPRPT     EXE - Workshop Support program for form/report lists
+   WORKSHOP  LIB - Workshop Procedure Library
+   WSRUN     LIB - Workshop Procedure Library
+
+WSSTART    SC - Startup Script for Paradox Application Workshop
+
+DISK 2
+------
+SYSTEM    CA1 - 
+   ATT       BGI - Graphic font file for graphing
+   BOLD      CHR - Character font file for graphing
+   CGA       BGI - Graphic font file for graphing
+   CONFIG    BGI - Graphic font file for graphing
+   CPUTEST   EXE - CPU Test executable
+   CUSTOM    LIB - Custom Configuration - Main Procedure Library
+   CUSTOM    OV1 - Custom system file
+   CUSTOM     SC - Custom Configuration - Main Script
+   DPMI16BI  OVL - Borland DPMI server
+   DPMI1ALT  OVL - Alternate DPMI Server
+   DPMIINST  EXE - Standalone Tune executable
+   DPMILOAD  EXE - Borland DPMI loader
+   EGAVGA    BGI - Graphic font file for graphing
+   EMSTEST   COM - EMS Memory Test executable
+   EURO      CHR - Character font file for graphing
+   GOTH      CHR - Character font file for graphing
+   HERC      BGI - Graphic font file for graphing
+   IBM8514   BGI - Graphic font file for graphing
+   LCOM      CHR - Character font file for graphing
+   LITT      CHR - Character font file for graphing
+   NUPDATE   EXE - Program to update serial numbers, net type
+   NUPDATE   ICO - Windows Icon for NUPDATE
+   NUPDATE   PIF - Windows PIF file for NUPDATE
+   NUPDTOS2  ICO - Windows Icon file for NUPDATE OS/2
+   PARADOX   ADD - Add in utility definition file
+   PARADOX   AUX - Paradox System file
+   PARADOX   EXE - Paradox Main Executable
+   PARADOX   HLP - Paradox Help file
+   PARADOX   IDX - Paradox Help file
+   PARADOX   MSG - Paradox System file
+   PARADOX   OV1 - Paradox System file
+   PARADOX   OV2 - Paradox System file
+   PARADOX   VID - Paradox System file
+   PATCH     COM - Hex patch utility
+   PATCH     DOC - Documentation for hex patch utility
+   PC3270    BGI - Graphic font file for graphing
+   PDOXDOS   ICO - Windows Icon file for Paradox
+   PDOXDOS   PIF - Windows PIF file for Paradox
+   PDOXOS2   CMD - OS/2 Installation file
+   PDOXOS2   ICO - OS/2 Icon file for Paradox
+   SANS      CHR - Character font file for graphing
+   SCRI      CHR - Character font file for graphing
+   SIMP      CHR - Character font file for graphing
+   T1000     BGI - Graphic font file for graphing
+   TECHINFO  LIB - Technical information - library
+   TECHINFO   SC - Technical information - startup script
+   TRIP      CHR - Character font file for graphing
+   TSCR      CHR - Character font file for graphing
+   TUTILITY  DOC - Documentation file for Tutility
+   TUTILITY  EXE - Table Repair Utility
+   TUTILITY  HLP - Help file for Tutility
+   TUTILITY  ICO - Windows Icon for TUTILITY
+   TUTILITY  PIF - Windows PIF file for TUTILITY
+   TUTILOS2  CMD - OS/2 installation file
+   TUTILOS2  ICO - Windows Icon for TUTILITY
+   VOUCH     EXE - Checksum executable
+   YOMDP     DLL - Paradox System file
+

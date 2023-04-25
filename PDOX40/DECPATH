@@ -1,0 +1,309 @@
+           INSTALLING PARADOX ON A DEC PATHWORKS NETWORK
+           ---------------------------------------------
+
+This file contains instructions for installing Paradox on a DEC Pathworks
+network. These instructions were verified using Pathworks, version 4.1a, on
+a Dell 486P/33.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Assumptions
+2. Installation Steps
+3. Linking Users and Setting User Paths
+
+
+1. ASSUMPTIONS
+--------------
+
+These instructions assume the following about your Pathworks installation:
+
+- You use DEC Pathworks version 4.1a or higher.
+
+- Every network user has a home directory.
+
+- Your network has a shared applications directory named APPS.
+
+- You perform all installation and configuration operations from a
+  DOS-based workstation.
+
+
+2. INSTALLATION STEPS
+---------------------
+
+1)  Boot your 100%-compatible PC computer with DEC Pathworks configuration.
+
+2)  Enter the SETHOST program to access your VAX by typing
+
+    SETHOST nodename
+    
+    (where "nodename" is the name of your VAX Pathworks Server)
+
+3)  Log on to Node as SYSTEM.
+
+4)  Enter PCSA_MANAGER by typing
+
+    PCSA
+
+5)  Add a file service to the node for system files by typing
+
+    PCSA_MANAGER > ADD SERVICE/DIRECTORY PARADOX/ROOT=diskname:[PARADOX]
+
+    where "diskname" is an actual VAX disk name. This creates the specified
+    directory and the VAX service name (PARADOX).
+
+6)  Grant rights to the new PARADOX service.
+
+    a. Grant user SYSTEM read/write/create rights to the PARADOX service
+       by typing
+
+       PCSA_MANAGER > GRANT SYSTEM PARADOX/ACCESS=(R,W,C)
+
+    b. Grant group PUBLIC (and/or other allowed groups) read-only rights to
+       the PARADOX service by typing
+
+       PCSA_MANAGER > GRANT/GROUP PUBLIC PARADOX/ACCESS=R
+
+       If you want to limit Paradox access to a single user or to a 
+       group other than PUBLIC, replace PUBLIC with the appropriate
+       VAX USERNAME.
+
+7)  Add a file service to the node for data files by typing
+
+    PCSA_MANAGER > ADD SERVICE/DIRECTORY PDOXDATA/ROOT=diskname:[PDOXDATA]
+
+    where "diskname" is an actual VAX disk name. This creates the specified
+    directory and the VAX service name (PDOXDATA).
+
+8)  Grant access rights to the new PDOXDATA service.
+
+    a. Grant user SYSTEM read/write/create rights to the new PDOXDATA service
+       by typing
+
+       PCSA_MANAGER > GRANT SYSTEM PDOXDATA/ACCESS=(R,W,C)
+
+       This gives user SYSTEM read/write/create rights to the PDOXDATA service.
+
+    b. Grant the group PUBLIC (and/or other allowed groups) access rights
+       to the new PDOXDATA service by typing
+
+       PCSA_MANAGER > GRANT/GROUP PUBLIC PDOXDATA/ACCESS=(R,W,C)
+
+       If you want to limit Paradox access to a single user or to a 
+       group other than PUBLIC, replace PUBLIC with the appropriate
+       VAX USERNAME.
+
+9)  View the new services and the rights associated with them.
+
+    a. To view available services, type
+
+       PCSA_MANAGER > SHOW FILE SERVICES/REGISTER
+
+    b. To view available rights, type
+
+       PCSA_MANAGER > SHOW FILE SERVICES/AUTHORIZE
+
+10) Change or create either the AUTOUSER.BAT or STARTUP.BAT file in each
+    user's boot directory.
+
+    a. From the VAX, edit AUTOUSER.BAT.
+
+       - Select an unused logical drive letter for the PARADOX service and
+         add the following line to the file:
+
+         USE F: \\nodename\\PARADOX
+
+         (where "F:" is the logical drive and "nodename" is the VAX node).
+
+       - Select an unused logical drive letter for the PDOXDATA service and
+         add the following line to the file:
+
+         USE G: \\nodename\\PDOXDATA
+
+         (where "G:" is the logical drive and "nodename" is the VAX node).
+
+
+    b. From DOS, edit STARTUP.BAT.
+
+       - Select an unused logical drive letter for the PARADOX service and
+         add the following line to the file:
+
+         USE F: \\nodename\\PARADOX
+
+         (where "F:" is the logical drive and "nodename" is the VAX node).
+
+       - Select an unused logical drive letter for the PDOXDATA service and
+         add the following line to the file:
+
+         USE G: \\nodename\\PDOXDATA
+
+         (where "G:" is the logical drive and "nodename" is the VAX node).
+
+11) Log out of the SETHOST program and return to DOS.
+
+12) Attach the logical drives from user SYSTEM. When prompted, type the
+    Username SYSTEM, and then enter the password:
+
+    C> USE F: \\nodename\\PARADOX *
+    Username: (Enter SYSTEM)
+    Password: (Enter the SYSTEM password)
+    
+    C> USE G: \\nodename\\PDOXDATA *
+    Username: (Enter SYSTEM)
+    Password: (Enter the SYSTEM password)
+
+    PARADOX is the system file service; PDOXDATA is the shared data
+    service.
+
+13) Change to the new system drive. Type
+
+    F:
+
+14) Install the Paradox system files and optional software on the new file
+    service. Follow the instructions in NETWORK.TXT (found on your Paradox
+    installation disks). The Paradox INSTALL program copies your Paradox
+    system files and optional software from the program disks into the system
+    files directory, PDOX45 on logical drive F.
+
+15) Create or modify the CONFIG.SYS file of each workstation to set at least 
+    the minimum number of buffers and files needed by Paradox:
+
+    FILES=40
+    BUFFERS=40
+
+    A workstation's CONFIG.SYS file must be stored in the root directory of
+    the workstation's hard disk (or on the boot disk if the workstation is
+    started from a floppy disk). See NETWORK.TXT for details on CONFIG.SYS.
+
+    NOTE: After editing the CONFIG.SYS file, you must reboot the workstation
+    before you can run Paradox. To reboot, press [Ctrl][Alt][Del].
+
+16) Create a private directory for each user. The private directory must be
+    either a network read/write directory or a directory on a local hard
+    disk. For information, see "Linking Users and Setting User Paths" later
+    in this file. For information about private directories, see NETWORK.TXT.
+
+    Normally, each user on a Pathworks network has a home directory (and
+    associated subdirectories), which can be used for Paradox tables.
+
+    In most cases, a single user has rights to a particular home directory.
+    Only that user can use Paradox tables stored in his or her home
+    directory. Other directories on the network may grant rights to more than
+    one person. Paradox tables stored in these multiuser directories can be
+    accessed by anyone who has rights to them. These are called shared
+    directories.
+
+17) Link each user to the Paradox system files directory, PDOX45. For
+    information, see "Linking Users and Setting User Paths" later in this
+    file.
+
+18) Link each user to the directory containing PDOXUSRS.NET, PDOXDATA. For
+    information, see "Linking Users and Setting User Paths" later in this
+    file.
+
+19) Change each Paradox user's path to search for the user's private
+    directory and the Paradox system files directory, IN THAT ORDER. The
+    user's private directory must precede all other Paradox-related
+    directories in the path, since Paradox searches for PARADOX.CFG in the
+    private directory to determine the user's private directory and other
+    default settings. See NETWORK.TXT for details about the PARADOX.CFG file.
+
+    - Make sure no PARADOX.CFG files are in any of the network directories
+      listed in a user's search path and then search the local private
+      directory immediately after the last network directory. If you used a
+      default PARADOX.CFG file in the PDOX45 directory as NETWORK.TXT
+      explains, you will have to delete that file before users begin running
+      Paradox.
+
+    - Use the DOS PATH command to set up each user's search path. You must
+      use this method if Paradox system files will be downloaded to a local
+      hard disk as NETWORK.TXT describes.
+
+20) Create PARADOX.CFG files for each user. See NETWORK.TXT for details.
+
+
+3. LINKING USERS AND SETTING USER PATHS
+---------------------------------------
+
+You can establish the necessary links and paths for each workstation (steps
+17, 18, and 19) in different ways. In theory, network users can enter them
+manually from their keyboards when they want to use Paradox, but this isn't
+recommended, because a mistake can cause problems for network Paradox users.
+You should set up a system that automatically establishes the proper DOS
+path for each user instead. You can use two methods:
+
+- A login batch file that automatically sets up every user to run Paradox
+  when he or she logs in to the network. Use this method for networks where
+  Paradox is used frequently.
+
+- A Paradox batch file that sets up the correct links and path when a user
+  starts Paradox. Use this method for networks where Paradox is used
+  infrequently.
+
+To use a login batch file
+-------------------------
+- The user's private directory is either on the local hard disk (for example,
+  C:\PDOX45) or on the user's network read/write directory (if there is no
+  local hard disk), and the user's PARADOX.CFG file is stored in the private
+  directory.
+
+- No default PARADOX.CFG file is present in the PDOX45 directory on the file
+  server.
+
+- The workstation has a local hard disk, and therefore has a DOS path that
+  includes the Paradox private directory, C:\PDOX45.
+
+- Each user always has the file service, PDOXDATA, containing the network
+  control file PDOXUSRS.NET, mapped to the same logical drive.
+
+To use a Paradox batch file
+---------------------------
+Give the batch file an appropriate name, such as PDOX45.BAT, and store it in
+a shared applications directory. The following batch file assumes that the
+user's network read/write directory is \APPS\PDOX45 on the PDOXDATA file
+service.
+
+USE F: \\nodename\\PARADOX
+USE G: \\nodename\\PDOXDATA
+G:
+CD \APPS\PDOX45
+SET OLDPATH=%PATH%
+SET PATH=G:\APPS\PDOX45;F:\PDOX45;%OLDPATH%
+F:\PDOX45\PARADOX
+SET PATH=%OLDPATH%
+USE F:/D
+USE G:/D
+
+Here are descriptions of the individual lines:
+
+- The first line maps the read-only PARADOX file service to logical drive F. If
+  some other file service is already mapped to the drive letter you pick, the
+  new USE command will fail.  You must choose an unused drive letter or
+  disconnect the current service before the USE command will work correctly.
+
+- The second line maps the PDOXDATA file service to logical drive G, assuming
+  this service contains the directory with the PDOXUSRS.NET file and that G:\
+  is what you specified as the location of this file when you installed
+  Paradox.
+
+- The third and fourth lines change the current directory to the user's
+  read/write home directory where the databases are stored.
+  
+- The fifth line saves the current path before changing it.
+
+- The sixth line adds the current user's personal directory and the
+  directory containing the PDOXUSRS.NET file into the path. Note that the
+  user directory is listed before the system directory so that the PARADOX.CFG
+  file will be found first in the user's directory.
+  
+- The seventh line starts and runs Paradox.
+
+- The eighth line resets the user's path to the value it had before
+  Paradox was run.
+  
+- The ninth and tenth lines are invoked when the user exits Paradox; they
+  delete the mapping for the PARADOX and the PDOXDATA file services,
+  respectively, and make drives F and G available for other uses.
+
+

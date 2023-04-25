@@ -1,0 +1,527 @@
+%!
+% Copyright (c) 1985, Adobe Systems Incorporated, Palo Alto, CA.
+% "Used with permission."
+% This program may be reproduced, used, and sold, as long as the above
+% copyright notice appears in all copies (in any media) and on labels of
+% machine-readable media.
+% Definitions for program "Daisyprint".
+% Last revision: MJF Tue Apr 22 11:40:34 1986
+% ADOBE FORUM DL4   PS-DEM.TXT  10/7/87
+
+% Modifications Copyright (c) 1991, Borland International
+% "Used with permission."
+
+% Revised for Borland: MTA 8/9/91
+
+% The following section allows Daisyprint to be downloaded "persistently",
+% i.e., remaining in the printer until it is turned off, instead of
+% disappearing at the end of the job.
+% Default behavior is to be NON-persistent.
+
+/persistent? false def       % Change this if you want.
+/passwd 0 def                % The sysmgr may change this.
+persistent? {
+    /Courier findfont 10 scalefont setfont
+    /Daisyprint where
+    { pop (Emulator in place - not loaded again) 100 100 moveto
+	    show showpage stop }
+    { serverdict begin statusdict begin passwd checkpassword
+	{ (Emulator downloaded.)100 100 moveto show showpage
+	    passwd exitserver }
+	{ (Bad Password on loading emulator!!!)100 100 moveto show
+	    showpage stop }
+	ifelse }
+    ifelse
+} if
+
+% Generic daisy-wheel emulator. Current parameters are set up for Vanilla.
+% None of the following defs should be changed.  Procs and defs that can
+% be safely changed are those in the second half of this program,
+% following the second double bar line.  Instructions for use are at the
+% end of this listing.
+% ========================================================================
+
+/DaisyEmDict 50 dict def
+/Daisyprint  {DaisyEmDict begin printfile end} def
+
+DaisyEmDict begin
+% ---------
+
+/printfile             % Main job loop
+  { reentry? not{ initjob }if
+    /CmdDictBase countdictstack 1 add def
+    CmdDict begin
+    {currentfile read  % Read one byte at a time.
+                       % Be sure not to send ^c,^d,^t,^s,^q.
+      {printchar}{showpage terminate} ifelse
+    }loop
+    popCmdStack end    % CmdDict
+  }def
+
+/initjob
+  {  RomanFont setfont
+     /linect 1 def
+     /charct 0 def
+     initpage
+  }def
+
+/initpage
+  { orientpage
+    LeftMargin FirstLine moveto
+    /linect 1 store
+    /charct 0 store
+  }def
+% Caution - This program stacks dictionaries.  It is therefore wise to use
+% "store" rather than "def" to assign new values to old variables.
+
+/printchar    % ( n  --  )   This routine actually does the emulation.
+  { dup cmd?
+      {doCmd}{emit}ifelse
+  }def
+
+/cmd?         % ( n -- b )    Looks for command only in topmost dictionary
+  { currentdict exch known }def
+
+/doCmd        % As per the topmost dictionary, since doCmd is only invoked
+              % if cmd? finds the command in the topmost dict.
+              % default top dict:  CmdDict
+
+  {load exec} def
+
+/emit    % ( n --  )    convert char code to printable char, and show it.
+  { charct MaxCharCt  ge
+      { CR LF }if
+    workstring  dup 0 4 -1 roll put show
+    /charct charct 1 add store
+  }def
+
+/CmdError   % To handle errors during multi-character command sequences,
+            % "emit" is redefined, thanks to dictionary stacking and
+            % late-binding.  See /EscDict later on in this listing.
+
+  { popCmdStack printchar }def
+
+/popCmdStack   % Clean up dict stack after completion or interruption of
+               % multi-character command sequences.
+               % CmdDictBase was defined in initjob.
+               % CmdDict is never popped off the dict stack.
+
+  { countdictstack CmdDictBase sub  {end}  repeat }def
+
+/terminate { /reentry? false store exit }def
+                        % Exits the printfile job loop.
+                        % Does not print the current page.
+
+/interrupt { /reentry? true store exit }def
+                        % Same as 'terminate', but sets flag
+                        % for potential reentry.  Flag is used
+                        % at beginning of 'printfile' to prevent
+                        % job and page initialization.
+
+/reentry?  false def    % Initialize within DaisyEmDict
+
+% Routines to assist page handling
+% --------
+
+/orientpage
+  { setlandscape?
+      { 8.5 72 mul 0 translate 90 rotate }
+      {}
+    ifelse
+  }def
+
+/workstring 1 string def
+
+/CR    % cr only (no linefeed)
+
+  { LeftMargin currentpoint exch pop moveto
+    /charct 0 store
+  }def
+
+/LF                           % Linefeed without cr  --  ff if needed.
+                              % Linect was def'ed in initjob.
+
+  { linect MaxLineCt  lt
+      { /linect linect 1 add store
+        currentpoint LnHt sub moveto }
+      { currentpoint pop FirstLine
+        FF  moveto }
+      ifelse
+  }def
+
+/FF                           % showpage and formfeed
+
+  { showpage initpage }def
+
+%% utility to re-encode a PostScript font producing a
+%% new font given a base font name, new font name, and
+%% encoding vector on the stack:
+
+/encodefont
+{
+    0 begin					% local storage placeholder
+
+    /encodevect exch def			% new encoding vector
+    /newfontname exch def			% new font name
+    /basefontname exch def			% base font name
+
+    /basefont basefontname findfont def
+    /newfont basefont maxlength dict def
+
+    basefont {
+	exch
+	dup dup /FID ne exch /Encoding ne and	% don't copy FID or Encoding
+	{ exch newfont 3 1 roll put }
+	{ pop pop }
+	ifelse
+    } forall
+
+    newfont /FontName newfontname put
+    newfont /Encoding encodevect put
+    newfontname newfont definefont pop
+
+    end						% encodedict
+} def
+
+/encodefont load 0 5 dict put			% provide local storage
+
+%% create an encoding vector for the IBM PC code page 437
+%% symbol set.  Not all symbols are available in an Adobe Type 1
+%% font--we map those that are and leave the others undefined.
+%% We start by initializing the encoding vector and copying the
+%% ASCII portion of the standard encoding:
+
+/ibm437vect 256 array def
+  0 1  31 { ibm437vect exch /.notdef put } for
+ 32 1 127 { dup StandardEncoding exch get ibm437vect 3 1 roll put } for
+128 1 255 { ibm437vect exch /.notdef put } for
+
+ibm437vect
+ % dup 16#01 /.notdef		put	% "white face"
+ % dup 16#02 /.notdef		put	% "black face"
+ % dup 16#03 /.notdef		put	% heart
+ % dup 16#04 /.notdef		put	% diamond
+ % dup 16#05 /.notdef		put	% club
+ % dup 16#06 /.notdef		put	% spade
+ dup 16#07 /bullet		put	% bullet
+ % dup 16#08 /.notdef		put	% "square hole"
+ % dup 16#09 /.notdef		put	% "ring"
+ % dup 16#0a /.notdef		put	% "square ring"
+ % dup 16#0b /.notdef		put	% "male symbol"
+ % dup 16#0c /.notdef		put	% "female symbol"
+ % dup 16#0d /.notdef		put	% "note"
+ % dup 16#0e /.notdef		put	% "double note"
+ dup 16#0f /currency		put	% 
+ % dup 16#10 /.notdef		put	% "right caret"
+ % dup 16#11 /.notdef		put	% "left caret"
+ % dup 16#12 /.notdef		put	% "up/down arrow"
+ % dup 16#13 /.notdef		put	% "double exclaim"
+ dup 16#14 /paragraph		put	% 
+ dup 16#15 /section		put	% 
+ % dup 16#16 /.notdef		put	% "bar"
+ % dup 16#17 /.notdef		put	% "up/down arrow w/underbar"
+ % dup 16#18 /.notdef		put	% arrowup
+ % dup 16#19 /.notdef		put	% arrowdown
+ % dup 16#1a /.notdef		put	% arrowright
+ % dup 16#1b /.notdef		put	% arrowleft
+ % dup 16#1c /.notdef		put	% "inverted not symbol"
+ % dup 16#1d /.notdef		put	% arrowboth
+ % dup 16#1e /.notdef		put	% "up caret"
+ % dup 16#1f /.notdef		put	% "down caret"
+
+ dup 16#80 /Ccedilla		put	% 
+ dup 16#81 /udieresis		put	% 
+ dup 16#82 /eacute		put	% 
+ dup 16#83 /acircumflex		put	% 
+ dup 16#84 /adieresis		put	% 
+ dup 16#85 /agrave		put	% 
+ dup 16#86 /aring		put	% 
+ dup 16#87 /ccedilla		put	% 
+ dup 16#88 /ecircumflex		put	% 
+ dup 16#89 /edieresis		put	% 
+ dup 16#8a /egrave		put	% 
+ dup 16#8b /idieresis		put	% 
+ dup 16#8c /icircumflex		put	% 
+ dup 16#8d /igrave		put	% 
+ dup 16#8e /Adieresis		put	% 
+ dup 16#8f /Aring		put	% 
+ dup 16#90 /Eacute		put	% 
+ dup 16#91 /ae			put	% 
+ dup 16#92 /AE			put	% 
+ dup 16#93 /ocircumflex		put	% 
+ dup 16#94 /odieresis		put	% 
+ dup 16#95 /ograve		put	% 
+ dup 16#96 /ucircumflex		put	% 
+ dup 16#97 /ugrave		put	% 
+ dup 16#98 /ydieresis		put	% 
+ dup 16#99 /Odieresis		put	% 
+ dup 16#9a /Udieresis		put	% 
+ dup 16#9b /cent		put	% 
+ dup 16#9c /sterling		put	% 
+ dup 16#9d /yen			put	% 
+ % dup 16#9e /.notdef		put	% "printers point"
+ dup 16#9f /florin		put	% 
+ dup 16#a0 /aacute		put	% 
+ dup 16#a1 /iacute		put	% 
+ dup 16#a2 /oacute		put	% 
+ dup 16#a3 /uacute		put	% 
+ dup 16#a4 /ntilde		put	% 
+ dup 16#a5 /Ntilde		put	% 
+ dup 16#a6 /ordfeminine		put	% 
+ dup 16#a7 /ordmasculine	put	% 
+ dup 16#a8 /questiondown	put	% 
+ % dup 16#a9 /.notdef		put	% "reversed logical not"
+ dup 16#aa /logicalnot		put	% 
+ dup 16#ab /onehalf		put	% 
+ dup 16#ac /onequarter		put	% 
+ dup 16#ad /exclamdown		put	% 
+ dup 16#ae /guillemotleft	put	% 
+ dup 16#af /guillemotright	put	% 
+ % dup 16#b0 /.notdef		put	% "25% gray screen"
+ % dup 16#b1 /.notdef		put	% "50% gray screen"
+ % dup 16#b2 /.notdef		put	% "75% gray screen"
+
+ % dup 16#b3 /.notdef		put	% "Line Drawing Symbols b3-da"
+ % dup 16#b4 /.notdef		put	% 
+ % dup 16#b5 /.notdef		put	% 
+ % dup 16#b6 /.notdef		put	% 
+ % dup 16#b7 /.notdef		put	% 
+ % dup 16#b8 /.notdef		put	% 
+ % dup 16#b9 /.notdef		put	% 
+ % dup 16#ba /.notdef		put	% 
+ % dup 16#bb /.notdef		put	% 
+ % dup 16#bc /.notdef		put	% 
+ % dup 16#bd /.notdef		put	% 
+ % dup 16#be /.notdef		put	% 
+ % dup 16#bf /.notdef		put	% 
+ % dup 16#c0 /.notdef		put	% 
+ % dup 16#c1 /.notdef		put	% 
+ % dup 16#c2 /.notdef		put	% 
+ % dup 16#c3 /.notdef		put	% 
+ % dup 16#c4 /.notdef		put	% 
+ % dup 16#c5 /.notdef		put	% 
+ % dup 16#c6 /.notdef		put	% 
+ % dup 16#c7 /.notdef		put	% 
+ % dup 16#c8 /.notdef		put	% 
+ % dup 16#c9 /.notdef		put	% 
+ % dup 16#ca /.notdef		put	% 
+ % dup 16#cb /.notdef		put	% 
+ % dup 16#cc /.notdef		put	% 
+ % dup 16#cd /.notdef		put	% 
+ % dup 16#ce /.notdef		put	% 
+ % dup 16#cf /.notdef		put	% 
+ % dup 16#d0 /.notdef		put	% 
+ % dup 16#d1 /.notdef		put	% 
+ % dup 16#d2 /.notdef		put	% 
+ % dup 16#d3 /.notdef		put	% 
+ % dup 16#d4 /.notdef		put	% 
+ % dup 16#d5 /.notdef		put	% 
+ % dup 16#d6 /.notdef		put	% 
+ % dup 16#d7 /.notdef		put	% 
+ % dup 16#d8 /.notdef		put	% 
+ % dup 16#d9 /.notdef		put	% 
+ % dup 16#da /.notdef		put	% 
+
+ % dup 16#db /.notdef		put	% "full cell tile -- 100% grey screen"
+ % dup 16#dc /.notdef		put	% "top half tile"
+ % dup 16#dd /.notdef		put	% "left half tile"
+ % dup 16#de /.notdef		put	% "right half tile"
+ % dup 16#df /.notdef		put	% "bottom half tile"
+
+ % dup 16#e0 /.notdef		put	% alpha
+ % dup 16#e1 /.notdef		put	% beta
+ % dup 16#e2 /.notdef		put	% Gamma
+ % dup 16#e3 /.notdef		put	% pi
+ % dup 16#e4 /.notdef		put	% Sigma
+ % dup 16#e5 /.notdef		put	% sigma
+ % dup 16#e6 /.notdef		put	% mu
+ % dup 16#e7 /.notdef		put	% tao
+ % dup 16#e8 /.notdef		put	% Phi
+ % dup 16#e9 /.notdef		put	% theta
+ % dup 16#ea /.notdef		put	% Omega
+ % dup 16#eb /.notdef		put	% delta
+ % dup 16#ec /.notdef		put	% infinity
+ % dup 16#ed /.notdef		put	% emptyset
+ % dup 16#ee /.notdef		put	% epsilon
+ % dup 16#ef /.notdef		put	% intersection
+ % dup 16#f0 /.notdef		put	% equivalence
+ % dup 16#f1 /.notdef		put	% plusminus
+ % dup 16#f2 /.notdef		put	% greaterequal
+ % dup 16#f3 /.notdef		put	% lessequal
+ % dup 16#f4 /.notdef		put	% integraltp
+ % dup 16#f5 /.notdef		put	% integralbt
+ % dup 16#f6 /.notdef		put	% divide
+ % dup 16#f7 /.notdef		put	% approxequal
+ dup 16#f8 /degree		put	%
+ % dup 16#f9 /.notdef		put	% "small bullet"
+ % dup 16#fa /.notdef		put	% dotmath
+ % dup 16#fb /.notdef		put	% radical
+ % dup 16#fc /.notdef		put	% eta
+ dup 16#fd /twosuperior		put	%
+ % dup 16#fe /.notdef		put	% "square bullet"
+ % dup 16#ff /.notdef		put	% 
+pop
+
+%% create a Nordic encoding based on the standard
+%% IBM PC encoding:
+
+/ibm865vect 256 array def
+0 1 255 { dup ibm437vect exch get ibm865vect 3 1 roll put } for
+
+ibm865vect
+ dup 16#9b /oslash		put	% 
+ dup 16#9d /Oslash		put	% 
+ dup 16#af /currency		put	% 
+
+%% save the encoding vectors in a dictionary keyed by their
+%% code page number:
+
+/CodePageEncoding 2 dict def
+  CodePageEncoding 437 ibm437vect put
+  CodePageEncoding 865 ibm865vect put
+
+%% =====================================================================
+%% Parameters and procedures defined after this point may be customized
+%% without harm (?) to the program.
+
+/setlandscape?  false  def
+
+/RomanFontName  /Courier         def        % names of the three base fonts
+/BoldFontName   /Courier-Bold    def
+/ItalicFontName /Courier-Oblique def
+
+/CodePage   437  def                        % IBM PC code page (set to 0 to
+                                            % disable re-encoding of fonts)
+
+/TopOfPage   10.50 72 mul def
+/LeftMargin   0.25 72 mul def
+/fsize       11           def               % font size (in points)
+/LnHt        11           def               % line leading (in points)
+/MaxLineCt   66           def               % lines per page
+/MaxCharCt   80           def               % characters per line
+
+/FirstLine   TopOfPage fsize sub  def
+
+
+%% Produce roman, bold, and italic fonts.  First retrieve the proper
+%% encoding vector and re-encode the base fonts.  If code page is not
+%% supported, simply use the base fonts without reencoding.  Finally,
+%% find and scale the fonts:
+
+CodePageEncoding CodePage known
+    {
+	%% If code page is defined in the code page encoding dictionary,
+	%% re-encode the three base fonts to produce the working fonts:
+
+	/eVect CodePageEncoding CodePage get  def
+
+	RomanFontName   /PDOXIBM        eVect  encodefont
+	BoldFontName    /PDOXIBM-Bold   eVect  encodefont
+	ItalicFontName  /PDOXIBM-Italic eVect  encodefont
+
+	/RomanFontName  /PDOXIBM         def
+	/BoldFontName   /PDOXIBM-Bold    def
+	/ItalicFontName /PDOXIBM-Italic  def
+    }
+    if
+
+/RomanFont   RomanFontName   findfont fsize scalefont  def
+/BoldFont    BoldFontName    findfont fsize scalefont  def
+/ItalicFont  ItalicFontName  findfont fsize scalefont  def
+
+%% Horizontal tab -- typical implementation,
+%% tabs set every 8 spaces, fixed:
+
+/HT {
+	8 charct 8 mod sub
+	{ 32 emit }
+	repeat
+    } def
+
+% ------------
+% The following parameters define CmdDict and its sub-dictionaries.
+% They can be customized to any extent.
+
+/CmdDict  30 dict  def   % May need to be enlarged if you add a lot to it.
+CmdDict begin            % Store the defs in CmdDict, rather than clutter
+                         % DaisyEmDict with all this stuff.
+
+ 12  {FF} def
+  9  {HT} def
+
+ 10  {CR LF} def    % Note:  The serial ports in pure PostScript printers
+		    % have a "feature" at this time which forces all
+		    % Linefeeds, CR-LF pairs, and CR's to appear as simple
+		    % LF's to the "read" operator.  The HP LJ PostScript
+		    % Cartridge relies on the LJ processor for
+		    % communications and doesn't seem to have this
+		    % problem.  The HP cartridge therefore "sees" CR's
+		    % while other PS printers don't.
+
+ 13  {CR} def       % Carriage return (see note above)
+
+ 26  {interrupt} def      % ^Z will terminate emulation w/o ending the job
+                          % (and without printing the current page).
+                          % This may be useful for inserting
+                          % PostScript illustrations, etc.
+
+ 27  {ESC} def
+
+/EscDict  10 dict def    % May need to be enlarged if you add a lot to it.
+
+/ESC                     % Handle two-character "escape" sequences.
+  { EscDict begin }def
+
+% Rules for creating Command sub-dictionaries:
+% Sub-dictionaries of CmdDict may be nested to handle multi-character
+% command sequences of arbitrary length.  EscDict is an example, which
+% handles 2-char sequences beginning with "escape".  Note that EscDict
+% is created entirely within the dictionary (CmdDict) which may invoke it.
+% Each sub-dictionary must contain the re-definition of "emit" shown
+% below. This takes care of invoking popCmdStack when a multi-char command
+% becomes unrecognizable in the middle of the sequence.  That's all the
+% error-handling there is, folks!
+% Each leaf in any command sub-dictionary (i.e., the procedure def for
+% any command character that ends a command sequence) must end with
+% an invocation of popCmdStack.
+% That probably isn't clear, so please observe the use of "popCmdStack"
+% in the following defs, and do likewise!
+% Defs that do NOT need to popCmdStack:
+% -- words like ESC which are not "leafs" because they lead on to
+% further sub-dict nesting.
+% -- words in the root command dict, "CmdDict".
+
+
+EscDict begin
+% -----------
+
+    /emit  { CmdError }def
+    34  { RomanFont setfont popCmdStack }def
+    33  { BoldFont  setfont popCmdStack }def
+    88  { ItalicFont setfont popCmdStack }def
+    89  { RomanFont setfont popCmdStack }def
+
+end  % EscDict
+% -------------
+
+
+
+end  % CmdDict
+end  % DaisyEmDict    % End of program "Daisyprint".
+
+% ******** ADDITIONAL NOTES ********
+
+% Proper format for use:
+%
+%  Daisyprint CR
+%  data data data data .....
+%  ...data data  ^D
+%
+% Emulation can also be interrupted with a ^Z.  In this case
+% the printer will revert to PostScript mode without ending the
+% current job.  This could be useful for including diagrams,
+% etc.  Emulation can be reinvoked just by saying "Daisyprint"
+% again.  For further info, see definitions of 'terminate',
+% 'interrupt', and code 26 in CmdDict.
+
+Daisyprint

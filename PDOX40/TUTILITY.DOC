@@ -1,0 +1,584 @@
+                           TUTILITY - Version 4.0
+      Copyright, 1985-1992 - Borland International, ALL RIGHTS RESERVED
+      -----------------------------------------------------------------
+
+
+TABLE OF CONTENTS
+-----------------
+
+1.  Introduction
+2.  TUTILITY Essentials
+3.  Compatibility
+4.  Loading TUTILITY
+5.  Main Menu commands
+6.  Command-line options
+7.  Using TUTILITY with SQL Replicas
+
+1. INTRODUCTION
+---------------
+
+TUTILITY checks a Paradox table for damage and rebuilds it if
+necessary. Paradox tables can be damaged by power failures, hardware
+failures, bad network cards or connections, removing a floppy disk
+that Paradox is accessing, or rebooting the system while Paradox is
+active in memory. You should always make regular backups of your
+important data.
+
+Paradox tables consist of two sections, the header and the data blocks.
+The header contains information about the number of fields, the
+primary key, passwords, write protection, sort order, and the version
+of Paradox that created the table. Indexes and memos are stored in
+separate files, which belong to the table as part of its "family."
+(For more information on the Paradox family, see the Paradox "User's
+Guide.")
+
+If the table header is intact, but there is damage to the data blocks,
+TUTILITY rebuilds the table automatically. If the header is damaged,
+however, you must provide additional information about the header so
+TUTILITY can reconstruct the table.
+
+
+2. TUTILITY ESSENTIALS
+----------------------
+
+The following information is essential to your understanding of
+TUTILITY. Even if you are familiar with a previous version of
+TUTILITY, you should read this section for important information
+on version 4.0.
+
+Limitations of the Verify Option
+--------------------------------
+When TUTILITY verifies a table, it does not verify the primary index.
+If a table exhibits unusual behavior in Paradox and TUTILITY reports
+no problems, try to rebuild the primary index in Paradox or in
+TUTILITY.
+
+Enforcing Validity Checks on Rebuilt Tables and Keys
+----------------------------------------------------
+When TUTILITY rebuilds a primary key, it doesn't preserve existing
+validity checks on the table. Restructure the table in Paradox to
+force Paradox to recognize the .VAL file and enforce validity checks
+on the table.
+
+Rebuilding a Table vs. Restructuring a Table
+--------------------------------------------
+When you rebuild a table with the Manual option, you must supply
+information about the damaged table's original structure. DO NOT
+attempt to modify the original structure of the damaged table in
+TUTILITY. Rebuild the table as it was originally then use
+Modify|Restructure in Paradox if you want to alter the table's
+structure.
+
+How TUTILITY Creates Backup Tables
+----------------------------------
+When you rebuild a table, TUTILITY prompts you for a table name of up
+to seven characters to use for a backup table. This ensures that if
+something occurs during the rebuild (for example, a power failure),
+the original table will still exist.
+
+For example, if you want to rebuild a table ORIGINAL.DB, you can
+rename the table as BACKUP1.DB. If TUTILITY is unable to rebuild the
+table correctly, you can use the backup table, BACKUP1.DB, to try
+again.
+
+When TUTILITY creates a copy of the original table, it also
+creates a copy of all of the table's family members.
+
+Restoring Image Settings and Table Views After a Rebuild
+--------------------------------------------------------
+When TUTILITY rebuilds a table, it doesn't preserve existing Image
+Settings (.SET files in Paradox for DOS) or Table Views (.TV files in
+Paradox for Windows). TUTILITY copies these files to the same name as
+the backup table (with the appropriate extension) prior to rebuilding
+the table. If you want to restore Image Settings or Table Views on a
+table, you must use Tools|Copy|JustFamily in Paradox (or the DOS COPY
+command) to copy the files to the same directory and name as the
+table. Then you must restructure the table in Paradox to force Paradox
+to recognize the .SET or .TV file.
+
+Backward Compatibility Note
+---------------------------
+Do not use this version of TUTILITY with Paradox 2.0 tables. If you have
+tables created with Paradox 2.0, use the previous version of TUTILITY or
+restructure your tables in Paradox 4.0.
+
+Rebuilding Large Tables and Tables with Large Memos
+---------------------------------------------------
+TUTILITY can rebuild large tables with large memo fields. This process
+takes a long time, however, and it may appear that TUTILITY is frozen
+during the rebuild. For very large tables or tables with very large
+memos, you should allow a few hours for the rebuild.
+
+Disk Space Considerations for Rebuild Operations
+------------------------------------------------
+When TUTILITY rebuilds a table it creates a backup copy of the table
+and its family. This means that at the start of a rebuild, the disk
+space used by these files doubles. In most cases, the rebuilt table
+will increase in size.  This size increase can be as large as the
+table itself. Therefore, you should allow for at least two times the
+amount of disk space required by the original table (and its family)
+for a rebuild.
+
+You can reclaim some of this disk space after the table is rebuilt by
+deleting the backup table and its family. You can also restructure the
+table in Paradox to reclaim additional space. See the note following
+the section on Rebuild for more information.
+
+Paradox 4.0
+-----------
+When you shell to DOS from Paradox (using [Ctrl][O] DOS or [Alt][O]
+DOSBig) or your application, Paradox may be tracking a table
+internally, even if it is not visible on the workspace. Rebuilding
+this table can result in further damage. If you are using Paradox
+interactively, you should exit Paradox completely before loading
+TUTILITY.
+
+If you are a PAL developer, you can use a PAL script to run TUTILITY.
+See the discussion on "Running TUTILITY from a PAL script" in section
+6 of this document.
+
+Microsoft Windows
+-----------------
+To run TUTILITY from Windows, enable local table
+sharing from the TUTILITY Setup dialog box and ensure that DOS
+file sharing is enabled. To enable DOS file sharing, use
+SHARE.EXE, which shipped with DOS. These steps ensure that
+Paradox files are correctly shared and that the proper locking
+protocol is followed. To run TUTILITY at the same time as Paradox for
+Windows, you must enable local share in Paradox for Windows, as well.
+
+
+3. COMPATIBILITY
+----------------
+
+TUTILITY refers to tables as having Paradox 3.5 or Paradox 4.0
+formats only. TUTILITY works with Paradox tables created by the
+following applications:
+
+Application                               Table formats
+-------------------------------------------------------------
+Paradox SE, Paradox 3.0 and 3.5            3.5
+Paradox 4.0                                3.5/4.0
+Paradox for Windows                        4.0
+ObjectVision 1.0 and 2.0                   3.5
+ObjectVision 2.1                           3.5/4.0
+Quattro Pro 3.0                            3.5
+Quattro Pro 4.0                            4.0
+Quattro Pro for Windows                    4.0
+Sidekick 2.0                               3.5
+Paradox Engine 1.0 and 2.0                 3.5
+Paradox Engine 3.0                         3.5/4.0
+-------------------------------------------------------------
+
+TUTILITY can rebuild tables with memo fields and composite
+secondary indexes or keys (available in Paradox 4.0 and
+Paradox for Windows).
+
+This version of TUTILITY doesn't work with Paradox 2.0 tables. You
+can use the previous version of TUTILITY with Paradox 2.0 tables or
+you can update the format of your tables by restructuring them in
+Paradox 4.0.
+
+
+4. LOADING TUTILITY
+-------------------
+
+To load TUTILITY, type TUTILITY at the DOS prompt, then press
+Enter. (Optional command-line switches and arguments are described
+later.) A menu of choices appears:
+
+ð  Table  Directory  Setup  Exit
+
+Choose any one of these commands with the mouse, or choose a command
+with the keyboard by using the Right and Left arrow keys to move the
+highlight bar, then press Enter. Alternatively, type the highlighted
+letter for each menu command. Press [Alt][Spacebar] to access the System
+menu (ð).
+
+Press [F1] for help anywhere in the program.
+
+If a menu is not highlighted, press [F10] to activate it.
+
+
+5. MAIN MENU COMMANDS
+---------------------
+
+System menu ð
+-------------
+This menu contains one command, About, which displays copyright
+and version information for TUTILITY.
+
+Table
+-----
+When you choose Table, the Select Table dialog box appears,
+which allows you to select a Paradox table to verify or
+rebuild.
+
+In a network or shared environment, TUTILITY places a full lock
+on the selected table for verification or rebuilding. If someone
+else is accessing the table, you will not be able to load the
+table into TUTILITY.
+
+When you select a table, TUTILITY performs initial tests to ensure
+that it can read the table header. If TUTILITY is unable to read
+the table header, TUTILITY asks if you want to perform a manual
+rebuild (described later).
+
+If the header passes the initial tests, the Table Info dialog box
+appears. If you press [Esc] or click Cancel, you activate a menu
+with the FamilyObjects menu and the Return command.
+
+Choose Return to go back to the main menu.
+
+The FamilyObjects menu contains three commands that rebuild
+different parts of the table automatically. The commands are
+Data, PrimaryKey, and SecondaryKey.
+
+1)  Data: If you choose Data from the FamilyObjects menu, the Table
+    Info dialog box appears. From the Table Info dialog box you can
+    either Verify, or Rebuild automatically or in Manual mode.
+
+    a. Verify - Choose Verify to check the table and determine if
+       the table descriptor is consistent with the data, and if the
+       internal links between records are unbroken. If the table
+       is damaged, you are given the option to rebuild it.
+
+       NOTE: When TUTILITY verifies a table, it does not
+       verify the primary index. If a table exhibits unusual
+       behavior in Paradox and TUTILITY reports no problems,
+       try to rebuild the primary index in Paradox or in
+       TUTILITY.
+
+    b. Rebuild - Choose Rebuild to automatically reconstruct a
+       table whose record links have been severed. If the table has
+       not been damaged beyond repair, Rebuild links the records back
+       together. Rebuild will prompt you for a table name of up to
+       seven characters to use for a backup table.
+
+       It is possible that TUTILITY will not be able to recover all
+       data. If it cannot, TUTILITY attempts to save records it cannot
+       recover to a Problems table. This table will have the same name
+       as the backup table, with the letter P appended to the end of
+       the table name (Note that backup table names cannot be longer
+       than seven characters to allow for this). For example, if you
+       want to rebuild a table ORIGINAL.DB and you rename the table as
+       BACKUP1.DB, TUTILITY names the Problems table BACKUP1P.DB. If
+       there are any problem records, TUTILITY displays the number of
+       problem records when it completes the rebuild.
+
+       If a table has been damaged beyond recovery, you'll see a
+       message saying the rebuild was unsuccessful.
+
+       NOTE: When TUTILITY rebuilds a table, it may change the size
+       of the table. If the table was loosely packed before the
+       rebuild, it may decrease in size. Conversely, if the table
+       was tightly packed, as is the case with a recently
+       restructured table, the table size may increase.
+
+       If TUTILITY increases the size of a table and you want to
+       recover the disk space, you can use the Modify|Restructure
+       command in Paradox to pack the table. Before you choose to
+       restructure the table, you should be aware of the following
+       performance disadvantage:
+
+       When you INSERT records into a tightly-packed table, Paradox
+       must create a new space to accommodate the record. This
+       degrades the performance of data entry. This also causes
+       newly-added records to reside in non-contiguous blocks,
+       thereby degrading the performance of queries.
+
+       If disk space is a concern, you may choose to restructure the
+       table. This reduces the overall size of the table and closes
+       up the space between records.
+
+    c. Manual - Choose Manual if TUTILITY is unable to rebuild the
+       table automatically. For TUTILITY to successfully rebuild
+       the table, you will need to provide additional information.
+
+       The first screen you see allows you to reconstruct the table's
+       original structure. (This screen is similar to the
+       Create/Restructure mode in Paradox.) TUTILITY also allows you to
+       borrow the structure of an existing table, which you know to be
+       undamaged, or to compare the structure you enter against another
+       table on disk.
+
+       When you have reconstructed the original table structure, choose
+       Do-It! to display a dialog box where you must specify additional
+       information:
+
+       - the Paradox table format
+       - the table's sort order
+       - if the table is write-protected
+       - if referential integrity should be enforced for this table
+       - if the table is password-protected
+       - the maximum table size
+       - the number of auxiliary passwords
+       - the DOS code page in use when the table was created
+         (if different than the active DOS code page)
+
+       Select OK to proceed with the Manual rebuild. If you indicated
+       that the table is password-protected, TUTILITY prompts you
+       for the password.
+
+       WARNING: If some of the information you specify is incorrect,
+       TUTILITY may not rebuild the table correctly. Use the backup
+       table created by TUTILITY to try again.
+
+       If you specify a password on a table that is not
+       password-protected or if you specify the incorrect password
+       for the table, TUTILITY will not be able to successfully
+       rebuild the table.
+
+       When you reconstruct the table, DO NOT modify the original
+       structure of the damaged table. If you want to modify the
+       table's structure, rebuild the table as it was originally
+       then use Modify|Restructure in Paradox to alter the
+       structure.
+
+2)  Primary Key:
+
+    If Paradox reports that your primary key is out of date or
+    corrupt, and the table passes the verification tests, you can
+    rebuild just the key information by choosing Primary Key.
+    This option rebuilds all primary keys and secondary indexes or
+    keys.
+
+    NOTE: When TUTILITY verifies a table, it does not verify
+    the primary index. If a table exhibits unusual behavior in
+    Paradox and TUTILITY reports no problems, try to rebuild
+    the primary index in Paradox or in TUTILITY.
+
+    When TUTILITY rebuilds a primary key, it doesn't preserve
+    existing validity checks on the table. Restructure the table
+    in Paradox to force Paradox to recognize the .VAL file and
+    enforce validity checks on the table.
+
+3)  Secondary Key:
+
+    If Paradox reports that a secondary index or key is out of
+    date or corrupt, and the table passes the verification
+    tests, you can rebuild just the index or key information by
+    choosing Secondary Key. You will be prompted to select
+    which index to rebuild; only one index can be rebuilt at a
+    time.
+
+    If a secondary index header is corrupt, TUTILITY will not be
+    able to rebuild the index; you must delete it with DOS,
+    then regenerate it with Paradox.
+
+Directory
+---------
+To verify or rebuild a table that is not in the current working
+directory, you can first choose Directory to change your
+directory path. You can change your working directory to any
+directory on your system.
+
+Setup
+-----
+Setup configures TUTILITY to work in your environment. You can
+change the following settings:
+
+-  Local share enables table sharing on a local drive. This
+   can be useful for multi-tasking operating systems. To use
+   this feature, DOS file-sharing must be enabled. Consult your
+   Paradox manual or DOS reference guide for more information
+   about SHARE. Network sharing enables the use of SHARE only
+   for files located on a network. No sharing disables all
+   file sharing. The default is Network share.
+
+-  US numbers specifies the number format to be used by
+   TUTILITY when displaying numbers. The default display is U.S.
+   numbers. If U.S. numbers is not selected, TUTILITY uses
+   international number formats.
+
+-  B&W mode changes the display from color to black
+   and white. This can be useful, for example, on portables
+   or computers with monochrome monitors that emulate color monitors.
+   The default is Color.
+
+-  The 4.0-style locks checkbox allows you to indicate that
+   TUTILITY should use file locking compatible with Paradox
+   4.0. Disable this option when running on networks that use
+   3.5-style file locking.
+
+-  The PARADOX.NET or PDOXUSRS.NET path type-in box allows you to
+   specify the directory where the PARADOX.NET file is located
+   for network or multi-tasking systems for Paradox 3.5 tables, and
+   where the PDOXUSRS.NET file is located for Paradox 4.0 tables.
+   This directory should be the same as that specified in NUPDATE
+   (for Paradox for DOS) or ODAPI.CFG (for Paradox for Windows).
+   For more information, consult your Paradox manual. The default
+   is to use the current directory.
+
+Exit
+----
+When you are finished, choose Exit to exit TUTILITY.
+
+
+6. COMMAND-LINE OPTIONS
+-----------------------
+
+TUTILITY supports a number of command-line options:
+
+TUTILITY [options]
+
+Where [options] are one or more of the following:
+
+-help
+-rebuild <table> <backup>
+-verify <table>
+-netpath = <path>
+-nettype = <type>
+-b&w
+-pdox35
+-pdox40
+-share
+-password="<password>"
+
+These options are described below.
+
+-help
+-----
+Displays a help screen showing these options.
+
+-rebuild
+--------
+Rebuilds <table> and creates <backup>, which is an exact copy of the
+original table and its family members. You must specify names for
+<table> and <backup>. TUTILITY returns an error code of 0 if the
+table was rebuilt successfully, or 255 if the table header is
+corrupt or another problem exists that prevents TUTILITY from
+successfully rebuilding this table.
+
+You can specify the path to <table> but you must use the same path
+for <backup>. If you do not specify a path, TUTILITY assumes that
+<table> exists in and <backup> should be created in the current
+directory.
+
+-verify
+-------
+Verifies <table>, which must be specified. TUTILITY returns an error
+code of 0 if the table is not corrupt, or 255 if the table is
+corrupt.
+
+-netpath=<path>
+-----------------
+Specifies the <path> where the PARADOX.NET and PDOXUSRS.NET files
+are stored.
+
+nettype=<type>
+----------------
+Specifies the network type. You must use either LOCALSHARE, NETSHARE,
+or NOSHARE as the <type>.
+
+- LOCALSHARE     enables file sharing on local and network drives
+- NETSHARE       enables file sharing only on files located on a network
+- NOSHARE        disables file sharing
+
+-b&w
+----
+Changes the display from color to black and white.
+
+-pdox35
+-------
+Uses Paradox 3.5-style locking.
+
+-pdox40
+-------
+Uses Paradox 4.0-style locking.
+
+-share
+------
+Enables Paradox file and record sharing.
+
+-password="<password>"
+----------------------
+Uses <password> as the password. The -password parameter must
+follow the table name in the parameter list.
+
+NOTE: Use the password option ONLY if you are certain that
+the table is password-protected. If you specify this option on
+a table that is not password-protected or if you specify the
+incorrect password for the table, TUTILITY will not be able to
+successfully rebuild the table.
+
+For example, to rebuild the Customer table (which is encrypted with
+the password "mags") automatically with Paradox 3.5-style record
+locking and create a backup of the original table named Custback, you
+would type:
+
+TUTILITY -rebuild customer custback -password="mags" -pdox35
+
+then press Enter. The .DB table extension is optional for table
+names.
+
+Running TUTILITY from a PAL script
+----------------------------------
+Developers can include table verification and rebuilding in their
+applications using these command-line options and the Paradox RUN BIG
+command. To interpret DOS error codes, you must use the NOSHELL option.
+For example,
+
+SAVETABLES
+RESET
+RUN BIG NOSHELL "TUTILITY -verify Customer"
+IF Retval=255 THEN
+   DAMAGED_TABLE_ROUTINE()     ; procedure to rebuild
+ENDIF
+
+Use the SAVETABLES and RESET commands prior to running TUTILITY
+from within Paradox to ensure that all internal references
+to your tables are written to disk and that the workspace is cleared.
+
+A successful rebuild with the -rebuild command line option returns an
+error code of 0. Any other error code implies that TUTILITY was
+unable to rebuild the original table. This may occur, for example,
+if there is insufficient disk space or if a manual rebuild is required.
+
+
+7. USING TUTILITY WITH SQL REPLICAS
+-----------------------------------
+
+TUTILITY cannot repair or rebuild replicas created
+with Paradox SQL Link, but TUTILITY can verify the
+table header in SQL replicas.
+
+If you select a SQL replica from the Select Table dialog box,
+TUTILITY performs initial tests to ensure that it can read the
+table header. If TUTILITY is able to read the header, the
+Table Info dialog box appears.
+
+- If you choose Verify, TUTILITY verifies the Paradox
+  header information. If TUTILITY detects any problems, it
+  checks the replica's size to ensure that it is not larger
+  than 4K and it checks the header for information that
+  indicates the presence of records. Since SQL replicas are
+  never larger than 4K and contain no records, then it is
+  possible that the selected .DB file is not a SQL replica as
+  the header reports. If the .DB file is larger than 4K or
+  contains records, TUTILITY displays a Table Inconsistent
+  dialog box with the message "Table header incorrectly
+  reports that this is a SQL replica". You can select OK
+  to rebuild the table or Cancel to cancel the rebuild.
+
+- If you choose Rebuild, TUTILITY checks the replica's size
+  and header for information indicating the presence of
+  records before attempting to rebuild the table. If
+  TUTILITY determines that the .DB file is a table,
+  TUTILITY rebuilds the table. If TUTILITY determines that
+  the .DB file is a SQL replica (because it is less than 4K
+  in size and appears to contain no records), you receive
+  the message "Cannot rebuild SQL replica".
+
+- If you choose Manual, TUTILITY treats the replica as a
+  corrupt table and will attempt to rebuild the .DB file as
+  a table. If the .DB file is a SQL replica, you will need
+  to regenerate it with SQL Setup.
+
+If a replica is damaged or out of date (the structure
+of the remote table has changed since you created the replica),
+you can regenerate the replica with SQL Setup.
+
+
+               --------- End of TUTILITY.DOC ---------
+

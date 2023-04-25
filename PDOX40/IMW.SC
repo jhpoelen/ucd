@@ -1,0 +1,1 @@
+{Tools} {More} {Directory} SELECT "C:\\ENTDB"

@@ -1,0 +1,59 @@
+; You can edit this file to add options to the Utilities, Report, and
+; Forms menus. Each menu option you add runs a specific PAL script. By
+; default, this file already already contains commands that define
+; Utilities|Custom and Utilities|Workshop (two additional commands--
+; SQLSetup and UseSQL--appear if SQL is enabled, along with a line
+; separating them from any commands you add). The Utilities menu can
+; hold up to 16 menu options (including Custom and Workshop). The
+; Report and Forms menus can each take one additional option. To add
+; commands to Paradox using PARADOX.ADD,
+;
+;    1.  Make a backup copy of this file.
+;
+;    2.  Choose Alt-Space|Editor|Open.
+;
+;    3.  At the file prompt, enter PARADOX.ADD. Each line of text in
+;        PARADOX.ADD that doesn't begin with a semicolon (;) defines
+;        one command, and consists of four arguments, separated by
+;        vertical bars (|). The arguments are
+;
+;            *  The location of the command in the menu system:
+;               UTILITY, FORM, or REPORT.
+;
+;            *  The name of the command. By default, the first
+;               character of the command is the menu hot key. You can
+;               change this by placing tilde characters (~) around the
+;               desired hot key. For example, F~i~le makes i the menu
+;               hot key.
+;
+;            *  A brief description that appears in the status bar
+;               when the command is highlighted.
+;
+;            *  The name of the script to invoke when the user chooses
+;               this command. The script can contain any valid PAL
+;               action, including shelling to DOS to run another
+;               program. The script name can't contain file extensions
+;               or path information. Paradox searches the following
+;               directories in the following order for the script: the
+;               current directory, the startup directory (before any
+;               SETDIR), all the directories in the DOS path, then
+;               the directory containing PARADOX.EXE.
+;
+;        For example, the following line defines the Utilities|Custom
+;        command:
+;
+;         UTILITY | Custom | Customize Paradox configuration. | CUSTOM
+;
+;    4.  To add a separator line to the Utilities menu, insert a new
+;        line in PARADOX.ADD (between the commands you want to
+;        separate), then enter the word LINE.
+;
+;    5.  Choose Do-It! to save the file, and restart Paradox to add
+;        the new menu commands.
+;
+; In PARADOX.ADD, lines that start with a semicolon (;), blank lines,
+; and lines containing errors are ignored.
+
+UTILITY | Custom | Customize Paradox configuration. | CUSTOM
+UTILITY | Workshop | Run the Paradox Application Workshop. | WSSTART
+

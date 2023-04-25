@@ -1,0 +1,305 @@
+              INSTALLING PARADOX ON AN IBM PC LAN NETWORK
+              -------------------------------------------
+
+This file contains instructions for installing Paradox on the IBM PC Local
+Area Network (LAN). It also contains special instructions for installing
+the extended version of PC LAN 1.31. These instructions were verified
+using PC LAN 1.31 on a Compaq 386/25 using DOS 3.31 and DOS 4.0.
+
+Because the PC LAN software runs on either the IBM Token Ring hardware/
+software combination or the IBM PC Net hardware, PC LANs are often
+called Token Ring networks.
+
+
+TABLE OF CONTENTS
+-----------------
+
+1. Assumptions
+2. Requirements
+3. Installation Steps
+4. Linking Users and Setting User Paths
+
+
+1. ASSUMPTIONS
+--------------
+
+These instructions assume the following about your PC LAN installation:
+
+- You use PC LAN version 1.12 or higher and DOS 3.1 or higher on PC Net
+  hardware, or DOS 3.2 or higher with Token Ring hardware/software.
+
+- Your network is configured as recommended in the IBM PC Local Area
+  Network Program documentation.
+
+- All shared applications' software is stored in subdirectories of the
+  APPS directory.
+
+- Each person who is going to use Paradox on the network has a private
+  directory.
+
+- You're familiar with the PC LAN commands NET SHARE and NET USE.
+
+- You're installing Paradox on a dedicated server.
+
+  NOTE: A computer running as a PC LAN server can be either dedicated (used
+  only as a file server) or non-dedicated (also used as a workstation to run
+  Paradox or other application programs). To ensure both good performance and
+  maximum data integrity, use a dedicated server. If you must use a
+  non-dedicated PC LAN server, be sure to read section 2.
+
+- You perform all installation and configuration operations from a
+  workstation.
+
+
+2. REQUIREMENTS
+---------------
+
+Paradox requires at least 200K of conventional free memory to load. A
+minimally configured PC LAN server has only 172K of free memory; thus, you
+can't run Paradox from a PC LAN server.
+
+
+3. INSTALLATION STEPS
+---------------------
+
+NOTE: PC LAN provides an Installation Aid for installing IBM-supplied
+software. Since Paradox isn't supplied by IBM, you can't use the Installation
+Aid to install Paradox.
+
+1)  Create the Paradox system files directory, PDOX45, as a subdirectory of
+    the shared applications directory APPS. From the server's DOS prompt and
+    the root directory, type
+
+    MD \APPS\PDOX45
+
+2)  Give yourself, the network administrator, read/write/create rights to
+    this directory but all other users read-only rights to it.
+
+3)  Create a shared first-level directory, PDOXDATA, that will contain
+    shared Paradox data and the network control file PDOXUSRS.NET.
+
+    If you have more than one server, or if your server has more than one
+    hard disk, your choice of which server disk drive to use for the
+    PDOXDATA directory should depend on how heavily Paradox will be used.
+    Estimate the probable growth of your shared data and pick a drive with
+    enough available storage space.
+
+    As your network users become familiar with Paradox , they will probably
+    create new Paradox tables and applications. When in doubt, overestimate
+    the amount of space you'll need.
+
+    a. Make the server's root directory your current directory. Type
+
+       CD\
+
+    b. Create the PDOXDATA directory. Type
+
+       MD PDOXDATA.
+
+4)  Give all users read/write/create rights to the PDOXDATA directory.
+
+5)  Install the Paradox system files and optional software. Follow the
+    instructions in NETWORK.TXT (found on your Paradox installation disks).
+    The Paradox INSTALL program copies your Paradox system files and optional
+    software from the program disks into the system files directory, PDOX45.
+
+6)  Create or modify the CONFIG.SYS file of each workstation to set the
+    number of buffers and files needed by Paradox :
+
+    FILES=40
+    BUFFERS=40
+
+    A workstation's CONFIG.SYS file must be stored in the root directory of
+    the workstation's hard disk (or on the boot disk if the workstation is
+    started from a floppy disk). See NETWORK.TXT for details on CONFIG.SYS.
+
+    NOTE: After editing the CONFIG.SYS file, you must reboot the workstation
+    before you can run Paradox . To reboot, press [Ctrl][Alt][Del].
+
+7)  Link each user to a private directory. The private directory must be
+    either a network home directory or a private directory on a local hard
+    disk. For information, see "Linking Users and Setting User Paths" later
+    in this file. For information about private directories, see NETWORK.TXT.
+
+8)  Set workstation net use by issuing NET SHARE commands on the server for:
+
+    - the Paradox system files directory, PDOX45
+
+    - the shared data directory containing the PDOXUSRS.NET file, PDOXDATA
+
+      IMPORTANT: The logical drive you assign to this directory must match
+      the drive you specified for the PDOXUSRS.NET file when you installed
+      Paradox on the network. All Paradox users must always have this
+      directory linked to the same logical drive.
+
+    - the users' network home directories
+
+    For information, see "Linking Users and Setting User Paths" later in this
+    file.
+
+9)  Change each Paradox user's path to search for the user's private
+    directory and the Paradox system files directory, IN THAT ORDER. The
+    user's private directory must precede all other Paradox -related
+    directories in the path, since Paradox searches for PARADOX.CFG in the
+    private directory to determine the user's private directory and other
+    default settings. For information, see "Linking Users and Setting
+    User Paths" later in this file.
+
+10) Create PARADOX.CFG files. See NETWORK.TXT for details.
+
+
+4. LINKING USERS AND SETTING USER PATHS
+---------------------------------------
+
+You can establish workstation NET USE commands and individual paths (steps 7,
+8, and 9) in different ways. In theory, network users can enter them manually
+from their keyboards when they want to use Paradox , but this isn't
+recommended, because a mistake can cause problems for network Paradox users.
+You should automatically make the correct NET USE commands and path available
+to each user instead. You can use two methods:
+
+- An AUTOEXEC.BAT file that automatically sets up every user to run Paradox 
+  when he or she boots his or her machine. Use this method for networks where
+  Paradox is used frequently.
+
+- A Paradox batch file that issues the correct NET USE commands and defines
+  the path when a user starts Paradox . Use this method for networks where
+  Paradox is used infrequently.
+
+To use an AUTOEXEC.BAT file
+---------------------------
+Include the necessary NET USE commands and path in each workstation's
+AUTOEXEC.BAT file. Insert the NET USE and PATH commands in each workstation's
+AUTOEXEC.BAT file above the AUTOUSER line.
+
+- If the workstation has a local hard disk, create a directory on the local
+  hard disk named PDOXPRIV, which will contain the PARADOX.CFG file and be
+  used by Paradox as the user's private directory.
+
+- If the workstation has no local hard disk, users must use their network
+  home directories as their private directories and to store the PARADOX.CFG
+  file.
+
+Assuming that the directory PDOX45 is a subdirectory of APPS on a workstation
+with a local hard disk, insert the following lines in the workstation's
+AUTOEXEC.BAT file above the AUTOUSER line:
+
+NET USE K: \\COMPUTERNAME\APPS
+NET USE H: \\COMPUTERNAME\PDOXDATA
+PATH=C:\PDOXPRIV; K:\PDOX45; K:\
+
+Here are descriptions of the individual lines:
+
+- The first line links the network short name APPS (the shared applications
+  directory) to the workstation's logical drive K. COMPUTERNAME" is the
+  machine name of the server.
+
+- The second line links the network short name PDOXDATA (the PDOXDATA
+  directory that contains PDOXUSRS.NET) to drive H.
+
+- The third line sets the correct path so the local hard disk private
+  directory C:\PDOX45 (containing the PARADOX.CFG file) is searched before
+  any other directories.
+
+  You can also use this method for a single-user workstation without a local
+  hard disk. For example, if this were Lincoln's workstation, the
+  AUTOEXEC.BAT file would have these lines:
+
+  NET USE E: \\COMPUTERNAME\LINCOLN
+  NET USE K: \\COMPUTERNAME\APPS
+  NET USE H: \\COMPUTERNAME\PDOXDATA
+  PATH=E:\; K:\PDOX45; K:\
+
+  The first line links the network short name LINCOLN to the workstation
+  logical drive E. "COMPUTERNAME" is the server machine name.
+
+  On the network server, a NET SHARE command links the short name LINCOLN to
+  Lincoln's network home directory. Thus, this line in the batch file links
+  Lincoln's network home directory on the server to logical drive E on the
+  workstation. Lincoln will use his network home directory as his private
+  directory.
+
+- The fourth line sets the correct path with Lincoln's network home
+  directory E, containing his PARADOX.CFG file, which is searched before any
+  other directories.
+
+To use a Paradox batch file
+---------------------------
+Create a special Paradox batch file called PDOX.BAT that is run when a user
+starts Paradox . This batch file establishes the correct NET USE commands and
+sets the correct path when Paradox is called. Use this method for workstations
+without local hard disks that are used by more than one person.
+
+Store this batch file in a directory already on everyone's search path, such
+as the shared applications directory. Since everyone who uses Paradox will
+run the same Paradox batch file, write the path so that Paradox finds the
+correct PARADOX.CFG file for each user.
+
+The following sample Paradox batch file makes these assumptions:
+
+- Everyone who runs the batch file is already logged in to the network.
+
+- A NET USE command has already linked the shared applications directory APPS
+  to logical drive K. This could have been done from a workstation
+  AUTOEXEC.BAT file or from a user login batch file.
+
+- PDOX.BAT is stored in a subdirectory BATCH of the shared applications
+  directory APPS, and APPS\BATCH is already on each user's path.
+
+- The PDOX45 directory is a subdirectory of the shared applications directory
+  APPS.
+
+- Each user's network home directory is always linked with NET USE to his or
+  her logical drive E. This can be done from the keyboard, from a workstation
+  AUTOEXEC.BAT file, or from a user login batch file.
+
+Here is the batch file. (If your network doesn't conform to the previous
+assumptions, you might need to modify it.)
+
+PATH>E:\SAVEPATH.BAT
+NET USE H:\\COMPUTERNAME\PDOXDATA
+PATH=C:\PDOX45;K:\PDOX45;K:\;K:\BATCH;
+Paradox 
+NET USE H:/D
+COMMAND/C E:\SAVEPATH
+DEL E:\SAVEPATH.BAT
+
+Here are descriptions of the individual lines:
+
+- The first line saves the user's current path as a separate batch file for
+  later restoration. Save this batch file in the user's home directory, E:,
+  so it won't be confused with anyone else's SAVEPATH.BAT.
+
+- The second line links the network short name PDOXDATA (for the PDOXDATA
+  directory that contains PDOXUSRS.NET) to drive H. "COMPUTERNAME" is the
+  server machine name.
+
+- The third line sets the correct path. The statement C:\PDOX45 refers to the
+  local hard disk directory containing PARADOX.CFG. Since C:\PDOX45 comes
+  before the other Paradox -related path statements, this ensures the correct
+  PARADOX.CFG file is found.
+
+- The statement K:\PDOX45 refers to the directory containing the Paradox 
+  system files, which is a subdirectory of APPS. The statement K:\BATCH
+  refers to the directory containing this batch file.
+
+  NOTE: If some workstations on the network don't have hard disks, their
+  users must use their network home directory as their private directory
+  (containing a PARADOX.CFG file). In this case, the third line would be
+
+  PATH = E:\; K:\PDOX45; K:\; K:\BATCH
+
+  With this path, Paradox looks for the PARADOX.CFG file in the user's
+  network home directory, E:.
+
+- The fourth line starts Paradox .
+
+- The fifth line is invoked when the user exits Paradox; it unlinks the
+  PDOXDATA directory.
+
+- The sixth line restores the user's original path by running the
+  SAVEPATH.BAT batch file, which was created by the first line.
+
+- The seventh line deletes the file SAVEPATH.BAT from the user's home
+  directory.
+
